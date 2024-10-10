@@ -7,8 +7,12 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
+import android.widget.ListView;
+import com.example.duan_android.Model.cinema;
+import com.example.duan_android.Adapter.AdapterCinema;
 import com.example.duan_android.R;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -16,6 +20,10 @@ import com.example.duan_android.R;
  * create an instance of this fragment.
  */
 public class CinemaFragment extends Fragment {
+
+    private ListView lv;
+    private ArrayList<cinema> arrayList;
+    private AdapterCinema adapter;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -61,6 +69,17 @@ public class CinemaFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_cinema, container, false);
+        View mview =inflater.inflate(R.layout.fragment_cinema, container, false);
+        lv=mview.findViewById(R.id.lviewcinema);
+        arrayList=new ArrayList<>();
+        arrayList.add(new cinema(R.drawable.nguyendu, "Galaxy Nguyễn Du", "116 Nguyễn Du, Quận 1, Tp.HCM", "1900 2224"));
+        arrayList.add(new cinema(R.drawable.sala, "Galaxy SaLa", "Tầng 3, Thiaso Mall SaLa", "1900 2224"));
+        arrayList.add(new cinema(R.drawable.tanbinh, "Galaxy Tân Bình", "246 Nguyễn Hồng Đào, Quận Tân Bình, Tp.HCM", "1900 2224"));
+        arrayList.add(new cinema(R.drawable.kdv, "Galaxy Kinh Dương Vương", "Galaxy Kinh Dương Vương", "1900 2224"));
+        arrayList.add(new cinema(R.drawable.quangtrung, "Galaxy Quang trung", "Lầu 3, TTTM CoopMart Foodcosa ", "1900 2224"));
+        adapter = new AdapterCinema(getContext(),R.layout.layout_cinema,arrayList);
+        lv.setAdapter(adapter);
+
+        return mview;
     }
 }
