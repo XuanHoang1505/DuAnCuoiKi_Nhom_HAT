@@ -108,7 +108,7 @@ public class HomeFragment extends Fragment {
 
         tabLayout = mView.findViewById(R.id.tab_layout);
         viewPager = mView.findViewById(R.id.movie_viewpager);
-        MovieViewPagerAdapter viewPagerAdapter= new MovieViewPagerAdapter(getChildFragmentManager(), FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT );
+        MovieViewPagerAdapter viewPagerAdapter= new MovieViewPagerAdapter(getChildFragmentManager(), FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT ,false);
         viewPager.setAdapter(viewPagerAdapter);
         viewPager.setPagingEnable(false);
         tabLayout.setupWithViewPager(viewPager);

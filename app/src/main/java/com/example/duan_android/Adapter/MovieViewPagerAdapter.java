@@ -8,23 +8,41 @@ import androidx.fragment.app.FragmentPagerAdapter;
 
 import com.example.duan_android.Fragment.ComingSoonFragment;
 import com.example.duan_android.Fragment.ShowingFragment;
+import com.example.duan_android.Fragment.ViewMoreComingSoonFragment;
+import com.example.duan_android.Fragment.ViewMoreShowingFragment;
 
 public class MovieViewPagerAdapter extends FragmentPagerAdapter {
+    private boolean isForViewMore;
 
-    public MovieViewPagerAdapter(@NonNull FragmentManager fm, int behavior) {
+    public MovieViewPagerAdapter(@NonNull FragmentManager fm, int behavior, boolean isForViewMore) {
         super(fm, behavior);
+        this.isForViewMore = isForViewMore;
     }
 
     @NonNull
     @Override
     public Fragment getItem(int position) {
-         switch (position){
-             case 0:
-                 return new ShowingFragment();
-             case 1:
-                 return new ComingSoonFragment();
-         }
-         return new ShowingFragment();
+        if (isForViewMore) {
+            // Fragment cho ViewMoreActivity
+            switch (position) {
+                case 0:
+                    return new ViewMoreShowingFragment(); // Fragment riêng cho ViewMoreActivity
+                case 1:
+                    return new ViewMoreComingSoonFragment();
+                default:
+                    return new ViewMoreShowingFragment();
+            }
+        } else {
+            // Fragment cho HomeFragment
+            switch (position) {
+                case 0:
+                    return new ShowingFragment();
+                case 1:
+                    return new ComingSoonFragment();
+                default:
+                    return new ShowingFragment();
+            }
+        }
     }
 
     @Override
