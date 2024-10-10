@@ -1,7 +1,9 @@
 package com.example.duan_android.Activity;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.Button;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
@@ -26,7 +28,9 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
     private ViewPager2 view_pager;
     private BottomNavigationView bottom_nav;
+
     private ArrayList<Fragment> fragmentArrayList = new ArrayList<>();
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
