@@ -37,7 +37,7 @@
 
         <!-- TextView to align next to TabLayout -->
         <TextView
-            android:id="@+id/tab_extra_text"
+            android:id="@+id/tv_location_vm"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
