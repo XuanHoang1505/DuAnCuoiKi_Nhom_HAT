@@ -35,14 +35,13 @@
         <!-- TabLayout -->
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tab_layout"
-            app:tabMode="scrollable"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1" />
 
         <!-- TextView to align next to TabLayout -->
         <TextView
-            android:id="@+id/tab_extra_text"
+            android:id="@+id/tv_location"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
@@ -55,5 +54,5 @@
     <com.example.duan_android.Widget.CustomViewPager
         android:id="@+id/movie_viewpager"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+            android:layout_height="match_parent" />
 </LinearLayout>

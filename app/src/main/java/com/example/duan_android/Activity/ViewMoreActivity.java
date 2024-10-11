@@ -1,8 +1,11 @@
 package com.example.duan_android.Activity;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,6 +23,8 @@ public class ViewMoreActivity extends AppCompatActivity {
     private TabLayout VM_tabLayout;
     private CustomViewPager VM_viewPager;
     private ImageView imageViewBack;
+    private TextView tvLocation;
+    private String selectedLocation = "Toàn quốc";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,5 +53,55 @@ public class ViewMoreActivity extends AppCompatActivity {
                 finish();
             }
         });
+
+        tvLocation = (TextView)findViewById(R.id.tv_location_vm);
+        tvLocation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showLocationDialog(); // Gọi phương thức để hiển thị hộp thoại chọn vị trí
+            }
+        });
     }
+    private void showLocationDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Vị trí");
+
+        // Tạo một danh sách các địa điểm
+        String[] locations = {"Toàn quốc", "TP Hồ Chí Minh", "Hà Nội", "Đà Nẵng", "An Giang",
+                "Bà Rịa - Vũng Tàu", "Bến Tre", "Cà Mau", "Đắk Lắk", "Hải Phòng",
+                "Khánh Hòa", "Nghệ An"};
+
+        // Tạo một mảng boolean để lưu trữ trạng thái chọn
+        int checkedItem = -1; // Mặc định là không có lựa chọn
+
+        builder.setSingleChoiceItems(locations, checkedItem, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // Cập nhật TextView với lựa chọn mới
+                selectedLocation = locations[which];
+            }
+        });
+
+        // Thêm nút "Xác nhận" vào dialog
+        builder.setPositiveButton("Xác nhận", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // Xử lý khi nhấn nút xác nhận
+                tvLocation.setText(selectedLocation);
+            }
+        });
+
+        // Thêm nút "Đóng"
+        builder.setNegativeButton("Đóng", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss(); // Đóng dialog khi nhấn nút "Đóng"
+            }
+        });
+
+        // Hiển thị dialog
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
 }
