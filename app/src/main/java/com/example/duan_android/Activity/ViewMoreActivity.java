@@ -34,7 +34,7 @@ public class ViewMoreActivity extends AppCompatActivity {
         VM_viewPager = findViewById(R.id.vm_movie_viewpager);
         imageViewBack = findViewById(R.id.img_view_back);
 
-        MovieViewPagerAdapter viewPagerAdapter= new MovieViewPagerAdapter(getSupportFragmentManager(), FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT,true);
+        MovieViewPagerAdapter viewPagerAdapter= new MovieViewPagerAdapter(getSupportFragmentManager(), FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT,true,false);
         VM_viewPager.setAdapter(viewPagerAdapter);
         VM_viewPager.setPagingEnable(false);
         VM_tabLayout.setupWithViewPager(VM_viewPager);
