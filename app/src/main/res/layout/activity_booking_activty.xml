@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".Activity.BookingActivty">
+
+    <LinearLayout
+        android:id="@+id/layout_1st"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="horizontal"
+        android:padding="5dp"
+        >
+
+        <ImageButton
+            android:id="@+id/btn_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:src="@drawable/ic_back">
+
+        </ImageButton>
+        <TextView
+            android:id="@+id/txt_pay"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="15dp"
+            android:text="Cám"
+            android:textSize="25dp"
+            android:textStyle="bold"
+            android:layout_marginStart="30dp"
+            >
+
+        </TextView>
+    </LinearLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/seathold"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/layout_1st"
+        android:gravity="center"
+        android:background="#FF6F00"
+        android:padding="10dp"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Thời gian dữ ghế: 6:11"
+            android:textColor="@color/white"
+            android:textSize="16dp"
+            android:textStyle="bold"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/option"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/seathold"
+        android:background="@color/white"
+        android:padding="7dp"
+        >
+        <TextView
+            android:id="@+id/movie_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cám"
+            android:textSize="16dp"
+            android:layout_marginBottom="5dp"
+            android:textStyle="bold"
+
+            />
+        <TextView
+            android:id="@+id/dimention"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/movie_name"
+            android:text="2D Phụ đề"
+            android:textSize="16dp"
+            android:textStyle="bold"
+            android:textColor="@color/gray"
+            />
+
+        <TextView
+            android:id="@+id/age"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_toRightOf="@+id/dimention"
+            android:text="T18"
+            android:textSize="16dp"
+            android:layout_marginLeft="15dp"
+            android:textStyle="bold"
+            android:background="#FF6F00"
+            android:padding="5dp"
+            android:textColor="@color/white"
+            />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:backgroundTint="@color/gray"
+            android:layout_alignParentEnd="true"
+            android:text="21:25"
+            android:textColor="@color/black"
+            android:drawableRight="@drawable/baseline_arrow_drop_down_24"
+            android:padding="5dp"
+
+            />
+    </RelativeLayout>
+
+
+
+
+    <RelativeLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="3dp"
+        android:background="@color/white"
+        android:orientation="horizontal"
+        android:paddingTop="10dp"
+        android:paddingLeft="10dp">
+
+        <TextView
+            android:id="@+id/countSeat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="x2"
+            android:textSize="16sp"
+            android:textStyle="bold"
+
+            />
+        <TextView
+            android:id="@+id/seat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ghế:"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_toRightOf="@id/countSeat"
+            android:layout_marginLeft="10dp"
+            android:textColor="#B7B7B7"
+            />
+
+        <TextView
+            android:id="@+id/seatid"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="J1,J2"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_toRightOf="@id/seat"
+            android:layout_marginLeft="10dp"
+            />
+
+        <TextView
+            android:id="@+id/totalPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tổng cộng: "
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_marginTop="25dp"
+            />
+
+        <TextView
+            android:id="@+id/price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="120,000đ"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_toRightOf="@id/totalPrice"
+            android:textColor="#FF6F00"
+            android:layout_marginTop="25dp"
+            />
+
+        <Button
+            android:id="@+id/continueButton"
+            android:layout_width="119dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="0dp"
+            android:layout_marginEnd="12dp"
+            android:backgroundTint="#FF6F00"
+            android:text="Tiếp tục"
+            android:textColor="#FFFFFF"
+            android:layout_marginBottom="12dp"
+            />
+    </RelativeLayout>
+
+
+
+
+</RelativeLayout>
