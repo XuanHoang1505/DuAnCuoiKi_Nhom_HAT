@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activity.MainActivity"
+    android:background="@color/gray">
+
+    <RelativeLayout
+        android:id="@+id/layout1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:padding="10dp">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            android:text="tài khoản"
+            android:textSize="22dp"
+            android:textStyle="bold" />
+
+        <Button
+            android:layout_width="25dp"
+            android:layout_height="30dp"
+            android:layout_alignParentEnd="true"
+            android:backgroundTint="@color/white"/>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/baseline_settings_24"
+            android:layout_alignParentEnd="true"
+            />
+
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/infoBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/layout1"
+        android:background="@color/white"
+        android:layout_marginTop="1dp"
+        >
+        <ImageView
+            android:id="@+id/acount_img"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/baseline_account_circle_24"
+            android:layout_margin="10dp"
+            />
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Lê Văn A"
+            android:textSize="18dp"
+            android:textStyle="bold"
+            android:layout_toRightOf="@id/medal"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            />
+        <ImageView
+            android:id="@id/gift"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/baseline_card_giftcard_24"
+            android:layout_toRightOf="@id/acount_img"
+            android:layout_below="@id/name"
+            android:layout_marginTop="15dp"
+            />
+        <ImageView
+            android:id="@+id/medal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/medal"
+            android:layout_marginTop="15dp"
+            android:layout_toRightOf="@id/acount_img"
+            />
+        <TextView
+            android:id="@+id/star"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0 Stars"
+            android:textSize="15dp"
+            android:textStyle="bold"
+            android:layout_marginTop="10dp"
+            android:layout_toRightOf="@+id/gift"
+            android:layout_below="@id/name"
+            android:layout_marginLeft="10dp"
+            />
+
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="70dp"
+            android:layout_alignParentEnd="true"
+            android:backgroundTint="@color/white"
+            android:layout_margin="15dp"
+            />
+        <ImageView
+            android:id="@+id/barcode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/barcode"
+            android:layout_alignParentEnd="true"
+            android:layout_marginRight="30dp"
+            android:layout_marginTop="10dp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/orange"
+            android:text="Mã thành viên"
+            android:layout_below="@id/barcode"
+            android:layout_alignParentEnd="true"
+            android:layout_marginRight="20dp"
+            />
+
+
+
+    </RelativeLayout>
+    <LinearLayout
+        android:id="@+id/bar2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/infoBar"
+        android:background="@color/white"
+        >
+        <Button
+            android:id="@+id/i4"
+            style="@style/Widget.Material3.Button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/acount_img"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:backgroundTint="@color/white"
+            android:drawableLeft="@drawable/pencil16"
+            android:padding="5dp"
+            android:text="Thông tin"
+            android:textColor="@color/black"
+            android:textSize="17dp"
+            android:textStyle="bold"/>
+        <Button
+            android:id="@+id/trade"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Giao dịch"
+            android:textSize="17dp"
+            android:textStyle="bold"
+            android:layout_marginTop="10dp"
+            android:layout_below="@id/acount_img"
+            android:layout_toRightOf="@+id/i4"
+            android:backgroundTint="@color/white"
+            android:textColor="@color/black"
+            android:layout_marginLeft="20dp"
+            android:padding="5dp"
+            android:drawableLeft="@drawable/line"
+            />
+        <Button
+            android:id="@+id/notif"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="thông báo"
+            android:textSize="17dp"
+            android:textStyle="bold"
+            android:layout_marginTop="10dp"
+            android:layout_below="@id/acount_img"
+            android:layout_toRightOf="@+id/trade"
+            android:backgroundTint="@color/white"
+            android:textColor="@color/black"
+            android:layout_marginLeft="20dp"
+            android:padding="5dp"
+            android:drawableLeft="@drawable/baseline_notifications_24"
+            />
+
+    </LinearLayout>
+    <RelativeLayout
+        android:id="@id/bar3"
+        android:layout_marginTop="5dp"
+        android:layout_below="@id/bar2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/gray"
+        >
+        <TextView
+            android:id="@+id/hotline"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Gọi đường dây nóng: 0988898888"
+            android:textSize="17dp"
+            android:padding="20dp"
+            android:background="@color/white"
+
+            />
+        <TextView
+            android:id="@+id/email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:text="Email: rapphim@gmail.com"
+            android:textSize="17dp"
+            android:padding="20dp"
+            android:layout_below="@id/hotline"
+            android:layout_marginTop="1dp"
+            />
+        <TextView
+            android:id="@+id/policy"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:text="Chính sách thanh toán  "
+            android:textSize="17dp"
+            android:padding="20dp"
+            android:layout_below="@id/email"
+            android:layout_marginTop="1dp"
+            />
+        <TextView
+            android:id="@+id/agm"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:text="Điều khoản sử dụng"
+            android:textSize="17dp"
+            android:padding="20dp"
+            android:layout_below="@id/policy"
+            android:layout_marginTop="1dp"
+
+            />
+
+        <Button
+            android:layout_width="47dp"
+            android:layout_height="41dp"
+            android:layout_alignBottom="@+id/policy"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="9dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/baseline_keyboard_arrow_right_24"
+            android:padding="1px"
+            android:textSize="50dp" />
+
+        <Button
+            android:layout_width="44dp"
+            android:layout_height="49dp"
+            android:layout_alignBottom="@+id/policy"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="11dp"
+            android:layout_marginBottom="-62dp"
+            android:background="@drawable/baseline_keyboard_arrow_right_24"
+            android:padding="1px"
+            android:textSize="50dp" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:layout_below="@+id/bar3"
+        android:layout_marginTop="10dp"
+        android:background="@color/white"
+        >
+
+        <Button
+            android:id="@+id/logout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="57dp"
+            android:layout_marginEnd="144dp"
+            android:background="@color/white"
+            android:text="Đăng xuất">
+        </Button>
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

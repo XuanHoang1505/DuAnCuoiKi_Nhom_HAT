@@ -26,7 +26,6 @@
             android:textSize="22dp"
             android:layout_marginLeft="15dp"
             android:textStyle="bold">
-
         </TextView>
     </LinearLayout>
     <LinearLayout
@@ -352,16 +351,18 @@
         android:id="@+id/layout_6th"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_below="@+id/layout_5th">
+        android:layout_below="@+id/layout_5th"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="15dp"
-            android:textSize="17dp"
-            android:text="(*) Nhấn thanh toán để xác nhận hoàn thành giao dịch trực tuyến ">
-        </TextView>
+            android:text="(*) Nhấn thanh toán để xác nhận hoàn thành giao dịch trực tuyến "
+            android:textSize="17dp"></TextView>
     </LinearLayout>
+
     <LinearLayout
         android:id="@+id/layout_7th"
         android:layout_below="@+id/layout_6th"
