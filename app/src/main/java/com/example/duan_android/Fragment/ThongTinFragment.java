@@ -1,29 +1,21 @@
 package com.example.duan_android.Fragment;
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
-import com.example.duan_android.Model.cinema;
-import com.example.duan_android.Adapter.AdapterCinema;
+
+import androidx.fragment.app.Fragment;
+
 import com.example.duan_android.R;
 
-import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link CinemaFragment#newInstance} factory method to
+ * Use the {@link ThongTinFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class CinemaFragment extends Fragment {
-
-    private ListView lv;
-    private ArrayList<cinema> arrayList;
-    private AdapterCinema adapter;
+public class ThongTinFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -34,7 +26,7 @@ public class CinemaFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public CinemaFragment() {
+    public ThongTinFragment() {
         // Required empty public constructor
     }
 
@@ -44,11 +36,11 @@ public class CinemaFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment CinemaFragment.
+     * @return A new instance of fragment ThongTinFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static CinemaFragment newInstance(String param1, String param2) {
-        CinemaFragment fragment = new CinemaFragment();
+    public static ThongTinFragment newInstance(String param1, String param2) {
+        ThongTinFragment fragment = new ThongTinFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -69,17 +61,6 @@ public class CinemaFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View mview =inflater.inflate(R.layout.fragment_cinema, container, false);
-        lv=mview.findViewById(R.id.lviewcinema);
-        arrayList=new ArrayList<>();
-        arrayList.add(new cinema(R.drawable.nguyendu, "Galaxy Nguyễn Du", "116 Nguyễn Du, Quận 1, Tp.HCM", "1900 2224"));
-        arrayList.add(new cinema(R.drawable.sala, "Galaxy SaLa", "Tầng 3, Thiaso Mall SaLa", "1900 2224"));
-        arrayList.add(new cinema(R.drawable.tanbinh, "Galaxy Tân Bình", "246 Nguyễn Hồng Đào, Quận Tân Bình, Tp.HCM", "1900 2224"));
-        arrayList.add(new cinema(R.drawable.kdv, "Galaxy Kinh Dương Vương", "Galaxy Kinh Dương Vương", "1900 2224"));
-        arrayList.add(new cinema(R.drawable.quangtrung, "Galaxy Quang trung", "Lầu 3, TTTM CoopMart Foodcosa ", "1900 2224"));
-        adapter = new AdapterCinema(getContext(),R.layout.layout_cinema,arrayList);
-        lv.setAdapter(adapter);
-
-        return mview;
+        return inflater.inflate(R.layout.fragment_thong_tin, container, false);
     }
 }
