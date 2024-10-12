@@ -134,7 +134,6 @@
         <Button
             android:id="@+id/btnInfor"
             style="@style/Widget.Material3.Button"
-            android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:layout_marginTop="10dp"
@@ -251,7 +250,10 @@
             android:layout_marginBottom="8dp"
             android:background="@drawable/baseline_keyboard_arrow_right_24"
             android:padding="1px"
-            android:textSize="50dp" />
+            android:textSize="50dp"
+
+            />
+
 
         <Button
             android:layout_width="44dp"
