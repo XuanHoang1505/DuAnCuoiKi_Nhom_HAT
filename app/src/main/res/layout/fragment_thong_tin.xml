@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Fragment.ThongTinFragment">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/ttnd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="34dp"
+            android:layout_marginTop="24dp"
+            android:text="Nội dung"
+            android:textStyle="bold"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/txtnoidung"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/ttnd"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="0dp"
+            android:text="Câu chuyện phim là dị bản kinh dị đẫm máu lấy cảm hứng từ truyện cổ tích nổi tiếng Tấm Cám, nội dung chính của phim xoay quanh Cám - em gái cùng cha khác mẹ của Tấm đồng thời sẽ có nhiều nhân vật và chi tiết sáng tạo, gợi cảm giác vừa lạ vừa quen cho khán giả." />
+
+        <TextView
+            android:id="@+id/txtxemtiep"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/txtnoidung"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="1dp"
+            android:layout_marginEnd="0dp"
+            android:gravity="center"
+            android:text="Xem tiếp"
+            android:textColor="@android:color/holo_orange_dark" />
+
+        <View
+            android:id="@+id/thanhngang"
+            android:layout_width="match_parent"
+            android:layout_height="8dp"
+            android:layout_below="@id/txtxemtiep"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="42dp"
+            android:layout_marginEnd="0dp"
+            android:background="#998E8E" />
+
+        <TextView
+            android:id="@+id/ttdaodien"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/thanhngang"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="56dp"
+            android:layout_marginTop="29dp"
+            android:text="Đạo diễn" />
+
+        <ImageView
+            android:id="@+id/imgactor"
+            android:layout_width="83dp"
+            android:layout_height="51dp"
+            android:layout_below="@id/ttdaodien"
+            android:src="@drawable/user"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="44dp"
+            android:layout_marginTop="13dp" />
+
+        <TextView
+            android:id="@+id/txtdaodien"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/imgactor"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="43dp"
+            android:layout_marginTop="25dp"
+            android:text="Trần Hữu Tấn" />
+    </RelativeLayout>
+</ScrollView>

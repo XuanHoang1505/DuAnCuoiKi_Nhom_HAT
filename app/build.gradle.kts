@@ -48,4 +48,5 @@ dependencies {
     androidTestImplementation(libs.espresso.core)
 
     implementation("me.relex:circleindicator:2.1.6")
+    implementation("com.pierfrancescosoffritti.androidyoutubeplayer:core:12.1.1")
 }

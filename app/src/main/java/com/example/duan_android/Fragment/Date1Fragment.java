@@ -1,0 +1,90 @@
+package com.example.duan_android.Fragment;
+
+import android.os.Bundle;
+
+import androidx.fragment.app.Fragment;
+
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.widget.Spinner;
+
+import com.example.duan_android.Adapter.AdapterLichChieu;
+import com.example.duan_android.Model.lichchieu;
+import com.example.duan_android.R;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+/**
+ * A simple {@link Fragment} subclass.
+ * Use the {@link Date1Fragment#newInstance} factory method to
+ * create an instance of this fragment.
+ */
+public class Date1Fragment extends Fragment {
+
+    private ListView lv;
+    private AdapterLichChieu adapter;
+    private List<lichchieu> lichChieuList;
+
+    // TODO: Rename parameter arguments, choose names that match
+    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+    private static final String ARG_PARAM1 = "param1";
+    private static final String ARG_PARAM2 = "param2";
+
+    // TODO: Rename and change types of parameters
+    private String mParam1;
+    private String mParam2;
+
+    public Date1Fragment() {
+        // Required empty public constructor
+    }
+
+    /**
+     * Use this factory method to create a new instance of
+     * this fragment using the provided parameters.
+     *
+     * @param param1 Parameter 1.
+     * @param param2 Parameter 2.
+     * @return A new instance of fragment Date1Fragment.
+     */
+    // TODO: Rename and change types and number of parameters
+    public static Date1Fragment newInstance(String param1, String param2) {
+        Date1Fragment fragment = new Date1Fragment();
+        Bundle args = new Bundle();
+        args.putString(ARG_PARAM1, param1);
+        args.putString(ARG_PARAM2, param2);
+        fragment.setArguments(args);
+        return fragment;
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (getArguments() != null) {
+            mParam1 = getArguments().getString(ARG_PARAM1);
+            mParam2 = getArguments().getString(ARG_PARAM2);
+        }
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        View mview = inflater.inflate(R.layout.fragment_date1, container, false);
+        lv = mview.findViewById(R.id.lvgiochieu);
+
+        lichChieuList = new ArrayList<>();
+        lichChieuList.add(new lichchieu("Galaxy Nguyễn Du", Arrays.asList("10:00", "12:00", "14:00")));
+        lichChieuList.add(new lichchieu("Galaxy Sala", Arrays.asList("11:00", "13:00", "15:00", "16:30")));
+        lichChieuList.add(new lichchieu("Galaxy Tân Bình", Arrays.asList("09:30", "11:30", "13:30")));
+
+        adapter = new AdapterLichChieu(getContext(), R.layout.layout_lichchieu, lichChieuList);
+        lv.setAdapter(adapter);
+
+        return mview;
+    }
+}

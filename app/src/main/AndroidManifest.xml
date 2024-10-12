@@ -34,6 +34,9 @@
             android:name=".Activity.ComboActivity"
             android:exported="true" />
 
+        <activity
+            android:name=".Activity.LC_TT_Activity"
+            android:exported="true" />
     </application>
 
 </manifest>

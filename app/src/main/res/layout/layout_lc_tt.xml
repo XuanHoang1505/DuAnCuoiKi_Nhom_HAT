@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
+        android:id="@+id/trallercinema"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        app:videoId="wssKoyc5XuE"
+      />
+
+
+    <ImageView
+        android:id="@+id/imgcinema"
+        android:layout_width="93dp"
+        android:layout_height="116dp"
+        android:layout_below="@id/trallercinema"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="21dp"
+        android:layout_marginTop="18dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/cam" />
+
+    <TextView
+        android:id="@+id/txtstar"
+        android:layout_width="54dp"
+        android:layout_height="30dp"
+        android:layout_below="@id/trallercinema"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="48dp"
+        android:layout_marginTop="27dp"
+        android:layout_marginEnd="212dp"
+        android:drawableLeft="@drawable/star"
+        android:gravity="center_vertical"
+        android:text="7.2"
+        android:textColor="#E2B220"
+        android:textSize="20dp" />
+
+    <TextView
+        android:id="@+id/txtMovieTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/return_white"
+        android:padding="16dp"
+        android:gravity="center_vertical"
+        android:text="Cám"
+        android:textSize="24sp"
+        android:textColor="@android:color/white"/>
+
+    <LinearLayout
+        android:id="@+id/lninfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txtstar"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="10dp"
+        android:padding="8dp">
+
+        <TextView
+            android:id="@+id/txtMovieCode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/btn_next"
+            android:padding="8dp"
+            android:text="T18"
+            android:textColor="@android:color/white"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/txtDuration"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:drawableLeft="@drawable/clock"
+            android:gravity="center_vertical"
+            android:text="112 phút" />
+
+        <TextView
+            android:id="@+id/txtDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:drawableLeft="@drawable/calendar"
+            android:gravity="center_vertical"
+            android:text="19/09/2024" />
+
+    </LinearLayout>
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tab"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/imgcinema"/>
+
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/viewpage_lc_tt"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/tab"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="1dp"
+        android:layout_marginEnd="0dp" />
+
+</RelativeLayout>
