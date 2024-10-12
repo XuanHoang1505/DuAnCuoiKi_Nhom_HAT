@@ -13,10 +13,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 
 import com.example.duan_android.Activity.ViewMoreActivity;
 import com.example.duan_android.Adapter.MovieAdapter;
+import com.example.duan_android.Model.Comment;
 import com.example.duan_android.Model.Movie;
 import com.example.duan_android.R;
 
@@ -25,12 +25,12 @@ import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link ComingSoonFragment#newInstance} factory method to
+ * Use the {@link CommentFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ComingSoonFragment extends Fragment {
-    private RecyclerView rcvMovieCS;
-    private MovieAdapter mMovieAdapter;
+public class CommentFragment extends Fragment {
+    private RecyclerView rcvComment;
+    private MovieAdapter mCommentAdapter;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -40,9 +40,8 @@ public class ComingSoonFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-    private Button btnShowingVMCS;
 
-    public ComingSoonFragment() {
+    public CommentFragment() {
         // Required empty public constructor
     }
 
@@ -52,11 +51,11 @@ public class ComingSoonFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment ComingSoonFragment.
+     * @return A new instance of fragment CommentFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static ComingSoonFragment newInstance(String param1, String param2) {
-        ComingSoonFragment fragment = new ComingSoonFragment();
+    public static CommentFragment newInstance(String param1, String param2) {
+        CommentFragment fragment = new CommentFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -72,47 +71,38 @@ public class ComingSoonFragment extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
-    public List<Movie> getListMovie(){
-        List<Movie> list = new ArrayList<>();
-        list.add(new Movie("Qủy ăn tạng Phần 2",R.drawable.image_item10));
-        list.add(new Movie("Lối thoát cuối cùng",R.drawable.image_item11));
-        list.add(new Movie("Fantomat",R.drawable.image_item12));
-        list.add(new Movie("Cô dâu hào môn",R.drawable.image_item13));
-        list.add(new Movie("Đố anh còng được tôi",R.drawable.image_item14));
-        list.add(new Movie("Hẹn hò với sát nhân",R.drawable.image_item15));
-        list.add(new Movie("Cậu bé cá heo",R.drawable.image_item9));
 
-        return list;
-    }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_coming_soon, container, false);
+        return inflater.inflate(R.layout.fragment_comment, container, false);
     }
 
-    @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         Context context = getContext();
-        rcvMovieCS = view.findViewById(R.id.rcv_moiveCS);
-        mMovieAdapter = new MovieAdapter(context);
-        btnShowingVMCS = view.findViewById(R.id.btnXemTiepCS);
+        rcvComment = view.findViewById(R.id.rcv_comment);
+        mCommentAdapter = new MovieAdapter(context);
 
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(context,2);
-        rcvMovieCS.setLayoutManager(gridLayoutManager);
-        mMovieAdapter.setData(getListMovie());
-        rcvMovieCS.setAdapter(mMovieAdapter);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(context,1);
+
+        rcvComment.setLayoutManager(gridLayoutManager);
+
+        mCommentAdapter.setDataC(getListComment());
+
+        rcvComment.setAdapter(mCommentAdapter);
 
 
-        btnShowingVMCS.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), ViewMoreActivity.class);
-                intent.putExtra("selected_tab", 1);
-                startActivity(intent);
 
-            }
-        });
+    }
+    private List<Comment> getListComment() {
+        List<Comment> list = new ArrayList<>();
+        list.add(new Comment(R.drawable.image_cmt1,"[Preview] Venom The Last Dance: Sony Có Lấy Lại Lòng Tin Sau Morbius & Madame Web?"));
+        list.add(new Comment(R.drawable.image_cmt2,"[Review] Transformers One: Xuất Sắc Ngoài Mong Đợi"));
+        list.add(new Comment(R.drawable.image_cmt3,"[Review] Joker Folie À Deux: Gã Hề Hay Hoàng Tử Tội Phạm?"));
+        list.add(new Comment(R.drawable.image_cmt4,"[Review] Cám: Phiên Bản Lạnh Gáy Chưa Từng Có Từ Cổ Tích Quen Thuộc!/"));
+        list.add(new Comment(R.drawable.image_cmt5,"[Preview] Joker: Folie à Deux: Có Chấn Động Thế Giới Như Phần Trước?"));
+        return list;
     }
 }

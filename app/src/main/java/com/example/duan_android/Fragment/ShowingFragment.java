@@ -1,6 +1,7 @@
 package com.example.duan_android.Fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -13,8 +14,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
+import com.example.duan_android.Activity.ViewMoreActivity;
 import com.example.duan_android.Adapter.MovieAdapter;
+import com.example.duan_android.Adapter.MovieViewPagerAdapter;
 import com.example.duan_android.Model.Movie;
 import com.example.duan_android.R;
 
@@ -29,6 +33,7 @@ import java.util.List;
 public class ShowingFragment extends Fragment {
     private RecyclerView rcvMovie;
     private MovieAdapter mMovieAdapter;
+    private Button btnShowingVM;
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -94,15 +99,25 @@ public class ShowingFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         Context context = getContext();
         rcvMovie = view.findViewById(R.id.rcv_moive);
+        btnShowingVM = view.findViewById(R.id.btnXemTiep);
         mMovieAdapter = new MovieAdapter(context);
 
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(context,3);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(context,2);
 
         rcvMovie.setLayoutManager(gridLayoutManager);
 
         mMovieAdapter.setData(getListMovie());
 
         rcvMovie.setAdapter(mMovieAdapter);
+
+        btnShowingVM.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), ViewMoreActivity.class);
+                startActivity(intent);
+
+            }
+        });
 
     }
 }

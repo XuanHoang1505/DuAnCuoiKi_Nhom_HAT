@@ -14,7 +14,7 @@
         <ImageView
             android:id="@+id/img_movie"
             android:layout_width="match_parent"
-            android:layout_height="150dp"
+            android:layout_height="200dp"
             android:src="@drawable/image_item1"
             android:scaleType="centerCrop">
         </ImageView>

@@ -1,5 +1,7 @@
 package com.example.duan_android.Fragment;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -18,6 +20,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.example.duan_android.Adapter.MovieViewPagerAdapter;
 import com.example.duan_android.Adapter.PhotoAdapter;
@@ -44,7 +47,9 @@ public class HomeFragment extends Fragment {
     private TabLayout tabLayout;
     private CustomViewPager viewPager;
     private View mView;
+    private TextView tvLocation;
     private Button btnXemTiep;
+    private String selectedLocation = "Toàn quốc";
     private Handler mHandler= new Handler(Looper.getMainLooper());
     private Runnable mRunnable = new Runnable() {
         @Override
@@ -105,16 +110,66 @@ public class HomeFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         mView = inflater.inflate(R.layout.fragment_home, container, false);
-
         tabLayout = mView.findViewById(R.id.tab_layout);
         viewPager = mView.findViewById(R.id.movie_viewpager);
-        MovieViewPagerAdapter viewPagerAdapter= new MovieViewPagerAdapter(getChildFragmentManager(), FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT );
+        MovieViewPagerAdapter viewPagerAdapter= new MovieViewPagerAdapter(getChildFragmentManager(), FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT ,false,false);
         viewPager.setAdapter(viewPagerAdapter);
         viewPager.setPagingEnable(false);
         tabLayout.setupWithViewPager(viewPager);
 
+        tvLocation = mView.findViewById(R.id.tv_location);
+        tvLocation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showLocationDialog(); // Gọi phương thức để hiển thị hộp thoại chọn vị trí
+            }
+        });
         return mView;
     }
+
+    private void showLocationDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        builder.setTitle("Vị trí");
+
+        // Tạo danh sách các địa điểm
+        String[] locations = {"Toàn quốc", "TP Hồ Chí Minh", "Hà Nội", "Đà Nẵng", "An Giang",
+                "Bà Rịa - Vũng Tàu", "Bến Tre", "Cà Mau", "Đắk Lắk", "Hải Phòng",
+                "Khánh Hòa", "Nghệ An"};
+
+        // Mảng boolean lưu trạng thái chọn
+        int checkedItem = -1; // Không có lựa chọn mặc định
+
+        // Set danh sách radio button
+        builder.setSingleChoiceItems(locations, checkedItem, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // Lưu vị trí được chọn vào biến selectedLocation
+                selectedLocation = locations[which];
+            }
+        });
+
+        // Thêm nút Xác nhận
+        builder.setPositiveButton("Xác nhận", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // Cập nhật TextView với địa điểm đã chọn
+                tvLocation.setText(selectedLocation);
+            }
+        });
+
+        // Thêm nút Đóng
+        builder.setNegativeButton("Đóng", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+
+        // Hiển thị dialog
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
     private List<Photo> getListPhoto(){
         List<Photo> list = new ArrayList<>();
         list.add(new Photo(R.drawable.image_run_1));
