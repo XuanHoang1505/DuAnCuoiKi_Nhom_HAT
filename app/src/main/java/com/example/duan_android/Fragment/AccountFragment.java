@@ -11,7 +11,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.example.duan_android.Activity.InformationActivity;
-import com.example.duan_android.Activity.ViewMoreActivity;
 import com.example.duan_android.R;
 
 /**
