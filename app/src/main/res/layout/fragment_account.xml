@@ -14,7 +14,6 @@
         android:layout_height="wrap_content"
         android:background="@color/white"
         android:padding="10dp">
-
         <TextView
             android:id="@+id/textView"
             android:layout_width="wrap_content"
@@ -30,7 +29,6 @@
             android:src="@drawable/baseline_settings_24"
             android:layout_alignParentEnd="true"
             />
-
     </RelativeLayout>
     <RelativeLayout
         android:id="@+id/infoBar"
@@ -87,8 +85,6 @@
             android:layout_below="@id/name"
             android:layout_marginLeft="10dp"
             />
-
-
         <ImageView
             android:id="@+id/barcode"
             android:layout_width="wrap_content"
@@ -107,9 +103,6 @@
             android:layout_alignParentEnd="true"
             android:layout_marginRight="20dp"
             />
-
-
-
     </RelativeLayout>
     <LinearLayout
         android:id="@+id/bar2"
@@ -118,9 +111,11 @@
         android:layout_below="@id/infoBar"
         android:background="@color/white"
         >
+
         <Button
             android:id="@+id/btnInfor"
             style="@style/Widget.Material3.Button"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:layout_marginTop="10dp"
@@ -153,6 +148,7 @@
             android:padding="5dp"
             android:drawableLeft="@drawable/line"
             />
+
         <Button
             android:id="@+id/notif"
             android:layout_width="0dp"
@@ -167,7 +163,6 @@
             android:textColor="@color/black"
             android:textSize="12dp"
        />
-
 
     </LinearLayout>
     <RelativeLayout
@@ -186,7 +181,6 @@
             android:textSize="17dp"
             android:padding="20dp"
             android:background="@color/white"
-
             />
         <TextView
             android:id="@+id/email"
@@ -220,9 +214,7 @@
             android:padding="20dp"
             android:layout_below="@id/policy"
             android:layout_marginTop="1dp"
-
             />
-
         <Button
             android:layout_width="47dp"
             android:layout_height="41dp"
@@ -232,11 +224,7 @@
             android:layout_marginBottom="8dp"
             android:background="@drawable/baseline_keyboard_arrow_right_24"
             android:padding="1px"
-            android:textSize="50dp"
-
-            />
-
-
+            android:textSize="50dp" />
         <Button
             android:layout_width="44dp"
             android:layout_height="49dp"
@@ -247,9 +235,7 @@
             android:background="@drawable/baseline_keyboard_arrow_right_24"
             android:padding="1px"
             android:textSize="50dp" />
-
     </RelativeLayout>
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="300dp"
@@ -258,7 +244,6 @@
         android:gravity="center"
         android:background="@color/white"
         >
-
         <Button
             android:id="@+id/logout"
             android:layout_width="wrap_content"
@@ -271,3 +256,4 @@
         </Button>
     </RelativeLayout>
 </RelativeLayout>
+
