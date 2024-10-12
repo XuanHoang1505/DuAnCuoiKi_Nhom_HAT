@@ -114,7 +114,6 @@ public class ShowingFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), ViewMoreActivity.class);
-
                 startActivity(intent);
 
             }
