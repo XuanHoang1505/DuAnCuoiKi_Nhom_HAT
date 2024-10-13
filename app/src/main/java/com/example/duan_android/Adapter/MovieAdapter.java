@@ -24,9 +24,21 @@ public class MovieAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     private List<Movie> mListMovie;
     private List<Comment> mListComment;
 
-    public MovieAdapter(Context mContext) {
-        this.mContext = mContext;
+    public interface OnItemClickListener {
+        void onMovieClick(Movie movie);
+
+
     }
+    private OnItemClickListener onItemClickListener;
+
+    // Constructor nhận vào OnItemClickListener
+    public MovieAdapter(Context mContext, OnItemClickListener onItemClickListener) {
+        this.mContext = mContext;
+        this.onItemClickListener = onItemClickListener;
+    }
+
+
+
 
     public void setData(List<Movie> list) {
         this.mListMovie = list;
@@ -67,6 +79,13 @@ public class MovieAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                 MovieViewHolder movieHolder = (MovieViewHolder) holder;
                 movieHolder.imgMovie.setImageResource(movie.getResourceImage());
                 movieHolder.tvName.setText(movie.getName());
+
+                holder.itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        onItemClickListener.onMovieClick(movie); // Gọi sự kiện click
+                    }
+                });
             }
         } else {
             Comment comment = mListComment.get(position - (mListMovie != null ? mListMovie.size() : 0)); // Adjust index for comments

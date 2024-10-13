@@ -136,12 +136,13 @@
             android:layout_marginTop="5dp"
             android:layout_height="35dp"
             android:layout_gravity="center"
-            android:background="@color/gray">
+            android:background="@color/gray"/>
 
         <Button
             android:id="@+id/trade"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:text="Giao dịch"
             android:textSize="12dp"
             android:layout_marginTop="10dp"
@@ -155,10 +156,10 @@
             />
         <Button
             android:id="@+id/notif"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:text="thông báo"
-            android:textSize="17dp"
             android:textStyle="bold"
             android:layout_marginTop="10dp"
             android:layout_below="@id/acount_img"
@@ -255,6 +256,7 @@
         android:layout_height="300dp"
         android:layout_below="@+id/bar3"
         android:layout_marginTop="10dp"
+        android:gravity="center"
         android:background="@color/white"
         >
 
@@ -264,12 +266,9 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
-            android:layout_marginTop="57dp"
-            android:layout_marginEnd="144dp"
             android:background="@color/white"
             android:textColor="@color/orange"
             android:text="Đăng xuất">
         </Button>
-
     </RelativeLayout>
 </RelativeLayout>

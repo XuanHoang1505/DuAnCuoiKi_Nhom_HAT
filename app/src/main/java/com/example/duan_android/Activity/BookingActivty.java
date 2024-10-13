@@ -1,6 +1,10 @@
 package com.example.duan_android.Activity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -19,6 +23,8 @@ public class BookingActivty extends AppCompatActivity {
     private SeatAdapter seatAdapter;
     private List<Seat> seatList;
     private int totalPrice = 0;
+    private ImageView btn_back;
+    private Button continueButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,7 +33,22 @@ public class BookingActivty extends AppCompatActivity {
 
         totalPriceTextView = findViewById(R.id.totalPrice);
         recyclerView = findViewById(R.id.recyclerViewSeats);
+        btn_back = findViewById(R.id.btn_back);
+        continueButton = findViewById(R.id.continueButton);
 
+        btn_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+               finish();
+            }
+        });
+        continueButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(BookingActivty.this, ComboActivity.class);
+                startActivity(intent);
+            }
+        });
         // Danh sách ghế với vị trí cụ thể và trạng thái (available hoặc sold)
         seatList = new ArrayList<>();
         // Giả lập danh sách ghế từ A1 tới K12 (khoảng 120 ghế)

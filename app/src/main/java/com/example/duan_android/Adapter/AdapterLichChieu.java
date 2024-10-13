@@ -1,6 +1,7 @@
 package com.example.duan_android.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,6 +9,9 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.GridLayout;
 import android.widget.TextView;
+
+import com.example.duan_android.Activity.BookingActivty;
+import com.example.duan_android.Activity.LC_TT_Activity;
 import com.example.duan_android.Model.lichchieu;
 
 import com.example.duan_android.R;
@@ -58,6 +62,14 @@ public class AdapterLichChieu extends BaseAdapter {
             btntime.setPadding(16, 8, 16, 8);
 
             btntime.setBackgroundResource(R.drawable.btn_giochieu);
+
+            btntime.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(context, BookingActivty.class);
+                    context.startActivity(intent);
+                }
+            });
 
             GridLayout.LayoutParams params = new GridLayout.LayoutParams();
             params.width = 0;

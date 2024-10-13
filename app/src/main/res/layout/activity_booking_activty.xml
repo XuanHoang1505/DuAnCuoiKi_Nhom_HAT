@@ -150,7 +150,7 @@
             android:layout_height="368dp"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:layout_marginStart="39dp"
+            android:layout_marginStart="38dp"
             android:layout_marginTop="154dp"
             android:layout_weight="1"
             android:padding="1dp"
@@ -173,19 +173,19 @@
         android:layout_height="wrap_content"
         android:text="Màn Hình"
         android:textStyle="bold"
-        android:textSize="17"
+        android:textSize="17dp"
         />
 
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="60"
+        android:layout_height="60dp"
         android:layout_above="@+id/purchase"
         >
         <Button
             android:id="@+id/availableBtn"
             android:layout_width="17dp"
-            android:layout_height="17"
+            android:layout_height="17dp"
             android:background="@drawable/seat_available"
             android:layout_marginLeft="50dp"
             android:layout_centerVertical="true"

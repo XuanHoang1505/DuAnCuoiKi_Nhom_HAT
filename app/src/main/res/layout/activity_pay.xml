@@ -1,403 +1,406 @@
-<?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/main"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/gray"
-    >
-    <LinearLayout
-        android:id="@+id/layout_1st"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/white"
-        android:orientation="horizontal">
-        <ImageButton
-            android:id="@+id/btn_back"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_back"
-            android:background="@color/white">
-        </ImageButton>
-        <TextView
-            android:id="@+id/txt_pay"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:text="Thanh toán"
-            android:textSize="22dp"
-            android:layout_marginLeft="15dp"
-            android:textStyle="bold">
-        </TextView>
-    </LinearLayout>
-    <LinearLayout
-        android:id="@+id/layout_2nd"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/orange"
-        android:orientation="horizontal"
-        android:gravity="center"
-        android:textAlignment="center"
-        android:layout_below="@+id/layout_1st"
-        >
-        <TextView
-            android:id="@+id/txt_time"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Thời gian giữ ghế:"
-            android:textSize="16dp"
-            android:padding="7dp"
-            android:textColor="@color/white">
-        </TextView>
-    </LinearLayout>
+    android:layout_height="match_parent">
+
     <RelativeLayout
-        android:id="@+id/layout_3rd"
+        android:id="@+id/main"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/layout_2nd"
-        android:background="@color/white"
-        android:layout_marginTop="10dp">
+        android:background="@color/gray">
 
-        <!-- ImageView nằm bên trái -->
-        <ImageView
-            android:id="@+id/image_movie"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/image_cam"
-            android:paddingTop="20dp"
-            android:paddingRight="10dp"
-            android:paddingBottom="20dp"
-            android:paddingLeft="30dp" />
-
-        <!-- TextView đầu tiên (Tên phim) nằm bên phải của ImageView -->
-        <TextView
-            android:id="@+id/text_movie"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Cám"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            android:layout_marginTop="20dp"
-            android:layout_toEndOf="@id/image_movie"
-            android:layout_toRightOf="@id/image_movie"
-            android:layout_alignParentTop="true" />
-
-        <!-- TextView thứ hai (Loại phim) nằm dưới TextView đầu tiên -->
-        <TextView
-            android:id="@+id/text_typeMovie"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="2D PHỤ ĐỀ"
-            android:textSize="16sp"
-            android:layout_below="@id/text_movie"
-            android:layout_toEndOf="@id/image_movie"
-            android:layout_toRightOf="@id/image_movie"
-            android:layout_marginTop="6dp" />
-        <TextView
-            android:id="@+id/text_movieAddress"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Galaxy Đà Nẵng"
-            android:textSize="16sp"
-            android:layout_below="@id/text_typeMovie"
-            android:layout_toEndOf="@id/image_movie"
-            android:layout_toRightOf="@id/image_movie"
-            android:layout_marginTop="6dp" />
-        <TextView
-            android:id="@+id/text_room"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Rạp 5"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            android:layout_marginLeft="10dp"
-            android:layout_toEndOf="@id/text_movieAddress"
-            android:layout_toRightOf="@id/text_movieAddress"
-            android:layout_below="@id/text_typeMovie"
-            android:layout_marginTop="6dp" />
-        <TextView
-            android:id="@+id/text_time"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="21:15"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            android:layout_below="@id/text_movieAddress"
-            android:layout_toEndOf="@id/image_movie"
-            android:layout_toRightOf="@id/image_movie"
-            android:layout_marginTop="6dp" />
-        <TextView
-            android:id="@+id/text_date"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Hôm nay, 10/04/2024"
-            android:textSize="16sp"
-            android:layout_marginLeft="20dp"
-            android:layout_toEndOf="@id/text_time"
-            android:layout_toRightOf="@id/text_time"
-            android:layout_below="@id/text_movieAddress"
-            android:layout_marginTop="6dp" />
-    </RelativeLayout>
-    <LinearLayout
-        android:id="@+id/layout_4th"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/white"
-        android:layout_below="@+id/layout_3rd"
-        android:layout_marginTop="10dp"
-        android:orientation="vertical">
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Thông tin giao dịch"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="4dp">
-        </TextView>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text=".........................................................................................."
-            android:layout_marginLeft="2dp"
-            android:textAlignment="center"
-            android:layout_gravity="center"
-            android:textStyle="bold"
-            android:layout_marginRight="10dp">
-        </TextView>
         <LinearLayout
+            android:id="@+id/layout_1st"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:paddingTop="10dp">
-            <TextView
+            android:background="@color/white"
+            android:orientation="horizontal">
+            <ImageButton
+                android:id="@+id/btn_back"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="2x người lớn - Member - D1,D2"
-                android:layout_marginLeft="10dp"
-                >
-            </TextView>
-            <View
-                android:layout_width="0dp"
+                android:src="@drawable/ic_back"
+                android:background="@color/white">
+            </ImageButton>
+            <TextView
+                android:id="@+id/txt_pay"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_weight="1" />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="120,000đ"
-                android:layout_marginRight="35dp">
+                android:text="Thanh toán"
+                android:textSize="22dp"
+                android:layout_marginLeft="15dp"
+                android:textStyle="bold">
             </TextView>
         </LinearLayout>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text=".........................................................................................."
-            android:layout_marginLeft="2dp"
-            android:textAlignment="center"
-            android:layout_gravity="center"
-            android:textStyle="bold"
-            android:layout_marginRight="10dp">
-        </TextView>
         <LinearLayout
+            android:id="@+id/layout_2nd"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/orange"
             android:orientation="horizontal"
-            android:paddingTop="10dp">
+            android:gravity="center"
+            android:textAlignment="center"
+            android:layout_below="@+id/layout_1st"
+            >
             <TextView
+                android:id="@+id/txt_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="1x iCombo 1 Big Extra STD"
-                android:layout_marginLeft="10dp"
-                >
-            </TextView>
-            <View
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1" />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="109,000đ"
-                android:layout_marginRight="35dp">
+                android:text="Thời gian giữ ghế:"
+                android:textSize="16dp"
+                android:padding="7dp"
+                android:textColor="@color/white">
             </TextView>
         </LinearLayout>
-        <TextView
+        <RelativeLayout
+            android:id="@+id/layout_3rd"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text=".........................................................................................."
-            android:layout_marginLeft="2dp"
-            android:textAlignment="center"
-            android:layout_gravity="center"
-            android:textStyle="bold"
-            android:layout_marginRight="10dp">
-        </TextView>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:paddingTop="10dp"
-            android:paddingBottom="10dp">
+            android:layout_below="@+id/layout_2nd"
+            android:background="@color/white"
+            android:layout_marginTop="10dp">
 
-            <Button
-                android:id="@+id/btn_khuyenmai"
+            <!-- ImageView nằm bên trái -->
+            <ImageView
+                android:id="@+id/image_movie"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:src="@drawable/image_cam"
+                android:paddingTop="20dp"
+                android:paddingRight="10dp"
+                android:paddingBottom="20dp"
+                android:paddingLeft="30dp" />
+
+            <!-- TextView đầu tiên (Tên phim) nằm bên phải của ImageView -->
+            <TextView
+                android:id="@+id/text_movie"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Cám"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:layout_marginTop="20dp"
+                android:layout_toEndOf="@id/image_movie"
+                android:layout_toRightOf="@id/image_movie"
+                android:layout_alignParentTop="true" />
+
+            <!-- TextView thứ hai (Loại phim) nằm dưới TextView đầu tiên -->
+            <TextView
+                android:id="@+id/text_typeMovie"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2D PHỤ ĐỀ"
+                android:textSize="16sp"
+                android:layout_below="@id/text_movie"
+                android:layout_toEndOf="@id/image_movie"
+                android:layout_toRightOf="@id/image_movie"
+                android:layout_marginTop="6dp" />
+            <TextView
+                android:id="@+id/text_movieAddress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Galaxy Đà Nẵng"
+                android:textSize="16sp"
+                android:layout_below="@id/text_typeMovie"
+                android:layout_toEndOf="@id/image_movie"
+                android:layout_toRightOf="@id/image_movie"
+                android:layout_marginTop="6dp" />
+            <TextView
+                android:id="@+id/text_room"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Rạp 5"
+                android:textSize="16sp"
+                android:textStyle="bold"
                 android:layout_marginLeft="10dp"
-                android:background="@color/white"
-                android:text="Khuyến mãi  >">
+                android:layout_toEndOf="@id/text_movieAddress"
+                android:layout_toRightOf="@id/text_movieAddress"
+                android:layout_below="@id/text_typeMovie"
+                android:layout_marginTop="6dp" />
+            <TextView
+                android:id="@+id/text_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="21:15"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:layout_below="@id/text_movieAddress"
+                android:layout_toEndOf="@id/image_movie"
+                android:layout_toRightOf="@id/image_movie"
+                android:layout_marginTop="6dp" />
+            <TextView
+                android:id="@+id/text_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Hôm nay, 10/04/2024"
+                android:textSize="16sp"
+                android:layout_marginLeft="20dp"
+                android:layout_toEndOf="@id/text_time"
+                android:layout_toRightOf="@id/text_time"
+                android:layout_below="@id/text_movieAddress"
+                android:layout_marginTop="6dp" />
+        </RelativeLayout>
+        <LinearLayout
+            android:id="@+id/layout_4th"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:layout_below="@+id/layout_3rd"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Thông tin giao dịch"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="4dp">
+            </TextView>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=".........................................................................................."
+                android:layout_marginLeft="2dp"
+                android:textAlignment="center"
+                android:layout_gravity="center"
+                android:textStyle="bold"
+                android:layout_marginRight="10dp">
+            </TextView>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingTop="10dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="2x người lớn - Member - D1,D2"
+                    android:layout_marginLeft="10dp"
+                    >
+                </TextView>
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="120,000đ"
+                    android:layout_marginRight="35dp">
+                </TextView>
+            </LinearLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=".........................................................................................."
+                android:layout_marginLeft="2dp"
+                android:textAlignment="center"
+                android:layout_gravity="center"
+                android:textStyle="bold"
+                android:layout_marginRight="10dp">
+            </TextView>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingTop="10dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="1x iCombo 1 Big Extra STD"
+                    android:layout_marginLeft="10dp"
+                    >
+                </TextView>
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="109,000đ"
+                    android:layout_marginRight="35dp">
+                </TextView>
+            </LinearLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=".........................................................................................."
+                android:layout_marginLeft="2dp"
+                android:textAlignment="center"
+                android:layout_gravity="center"
+                android:textStyle="bold"
+                android:layout_marginRight="10dp">
+            </TextView>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp">
 
-            </Button>
+                <Button
+                    android:id="@+id/btn_khuyenmai"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:background="@color/white"
+                    android:text="Khuyến mãi  >">
 
-            <View
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1" />
+                </Button>
 
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="35dp"
+                    android:text="Tổng cộng:"
+                    android:textSize="18dp">
+
+                </TextView>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="35dp"
+                    android:text="229,000đ"
+                    android:textColor="@color/orange"
+                    android:textSize="18dp">
+                </TextView>
+            </LinearLayout>
+
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/layout_5th"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@color/white"
+            android:layout_below="@id/layout_4th"
+            android:layout_marginTop="10dp">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Phương thức giao dịch"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="4dp">
+            </TextView>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:background="@color/white"
+                    android:src="@drawable/ic_shopee" />
+
+                <TextView
+                    android:layout_width="200dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="10dp"
+                    android:text="Ví ShopeePay - Nhập mã: SPPCINE09 giảm 10k" />
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1" />
+                <CheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="35dp"
+                    android:background="@drawable/cb_bg" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:paddingBottom="10dp"
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:background="@color/white"
+                    android:layout_gravity="start"
+                    android:src="@drawable/ic_momo" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="10dp"
+                    android:text="Ví Momo" />
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1" />
+                <CheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:layout_marginRight="33dp"
+                    android:background="@drawable/cb_bg" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layout_6th"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/layout_5th"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="15dp"
+                android:text="(*) Nhấn thanh toán để xác nhận hoàn thành giao dịch trực tuyến "
+                android:textSize="17dp">
+            </TextView>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layout_7th"
+            android:layout_below="@+id/layout_6th"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:paddingTop="30dp"
+            android:paddingBottom="30dp"
+            android:orientation="horizontal">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="35dp"
                 android:text="Tổng cộng:"
-                android:textSize="18dp">
-
-            </TextView>
-
+                android:textSize="18dp"
+                android:layout_marginLeft="20dp"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="35dp"
                 android:text="229,000đ"
+                android:textSize="18dp"
                 android:textColor="@color/orange"
-                android:textSize="18dp">
-            </TextView>
-        </LinearLayout>
-
-    </LinearLayout>
-    <LinearLayout
-        android:id="@+id/layout_5th"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:background="@color/white"
-        android:layout_below="@id/layout_4th"
-        android:layout_marginTop="10dp">
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Phương thức giao dịch"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="4dp">
-        </TextView>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:orientation="horizontal">
-
-            <ImageButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:background="@color/white"
-                android:src="@drawable/ic_shopee" />
-
-            <TextView
-                android:layout_width="200dp"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="10dp"
-                android:text="Ví ShopeePay - Nhập mã: SPPCINE09 giảm 10k" />
+                android:layout_marginLeft="20dp"/>
             <View
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1" />
-            <CheckBox
+                android:layout_weight="1"/>
+            <Button
+                android:id="@+id/btnPay"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="35dp"
-                android:background="@drawable/cb_bg" />
+                android:layout_marginRight="20dp"
+                android:background="@color/orange"
+                android:text="Thanh toán"/>
         </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:paddingBottom="10dp"
-            android:orientation="horizontal">
-
-            <ImageButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:background="@color/white"
-                android:layout_gravity="start"
-                android:src="@drawable/ic_momo" />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="10dp"
-                android:text="Ví Momo" />
-            <View
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1" />
-            <CheckBox
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="end"
-                android:layout_marginRight="33dp"
-                android:background="@drawable/cb_bg" />
-        </LinearLayout>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/layout_6th"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/layout_5th"
-        android:layout_marginTop="10dp"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="15dp"
-            android:text="(*) Nhấn thanh toán để xác nhận hoàn thành giao dịch trực tuyến "
-            android:textSize="17dp"></TextView>
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/layout_7th"
-        android:layout_below="@+id/layout_6th"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/white"
-        android:paddingTop="30dp"
-        android:paddingBottom="30dp"
-        android:orientation="horizontal">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Tổng cộng:"
-            android:textSize="18dp"
-            android:layout_marginLeft="20dp">
-
-        </TextView>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="229,000đ"
-            android:textSize="18dp"
-            android:textColor="@color/orange"
-            android:layout_marginLeft="20dp">
-        </TextView>
-        <View
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1" />
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Thanh toán"
-            android:layout_marginRight="20dp"
-            android:background="@color/orange">
-        </Button>
-    </LinearLayout>
-</RelativeLayout>
+    </RelativeLayout>
+</ScrollView>
