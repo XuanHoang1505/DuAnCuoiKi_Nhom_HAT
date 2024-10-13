@@ -37,11 +37,11 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Activity.ComboActivity"
+            android:name=".Activity.LC_TT_Activity"
             android:exported="true" />
 
         <activity
-            android:name=".Activity.LC_TT_Activity"
+            android:name=".Activity.ComboActivity"
             android:exported="true" />
     </application>
 

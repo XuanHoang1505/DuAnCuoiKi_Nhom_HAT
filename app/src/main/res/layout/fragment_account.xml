@@ -131,8 +131,7 @@
             android:padding="1dp"
             android:text="THÔNG TIN"
             android:textColor="@color/black"
-            android:textSize="15dp"
-            android:textStyle="bold" />
+            android:textSize="12dp" />
         <View
             android:layout_width="1dp"
             android:layout_marginTop="5dp"
@@ -146,8 +145,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Giao dịch"
-            android:textSize="15dp"
-            android:textStyle="bold"
+            android:textSize="12dp"
             android:layout_marginTop="10dp"
             android:backgroundTint="@color/white"
             android:textColor="@color/black"
@@ -172,7 +170,7 @@
             android:padding="5dp"
             android:text="Thông báo"
             android:textColor="@color/black"
-            android:textSize="15dp"
+            android:textSize="12dp"
        />
 
     </LinearLayout>
