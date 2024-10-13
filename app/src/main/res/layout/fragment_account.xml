@@ -21,14 +21,9 @@
             android:layout_height="wrap_content"
             android:gravity="start"
             android:text="Tài khoản"
+            android:textColor="@color/black"
             android:textSize="22dp"
             android:textStyle="bold" />
-
-        <Button
-            android:layout_width="25dp"
-            android:layout_height="30dp"
-            android:layout_alignParentEnd="true"
-            android:backgroundTint="@color/white"/>
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -94,13 +89,6 @@
             />
 
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="70dp"
-            android:layout_alignParentEnd="true"
-            android:backgroundTint="@color/white"
-            android:layout_margin="15dp"
-            />
         <ImageView
             android:id="@+id/barcode"
             android:layout_width="wrap_content"
@@ -141,7 +129,7 @@
             android:backgroundTint="@color/white"
             android:drawableLeft="@drawable/pencil16"
             android:padding="1dp"
-            android:text="Thông tin"
+            android:text="THÔNG TIN"
             android:textColor="@color/black"
             android:textSize="15dp"
             android:textStyle="bold" />
@@ -185,7 +173,7 @@
             android:text="Thông báo"
             android:textColor="@color/black"
             android:textSize="15dp"
-            android:textStyle="bold" />
+       />
 
     </LinearLayout>
 
@@ -283,6 +271,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@color/white"
+            android:textColor="@color/orange"
             android:text="Đăng xuất">
         </Button>
 
