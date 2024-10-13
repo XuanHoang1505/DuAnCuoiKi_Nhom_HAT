@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activity.MainActivity"
-    android:background="@color/gray">
+    android:background="@color/gray"
+    tools:context=".Fragment.AccountFragment">
 
     <RelativeLayout
         android:id="@+id/layout1"
@@ -20,15 +20,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="start"
-            android:text="tài khoản"
+            android:text="Tài khoản"
+            android:textColor="@color/black"
             android:textSize="22dp"
             android:textStyle="bold" />
-
-        <Button
-            android:layout_width="25dp"
-            android:layout_height="30dp"
-            android:layout_alignParentEnd="true"
-            android:backgroundTint="@color/white"/>
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -94,13 +89,6 @@
             />
 
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="70dp"
-            android:layout_alignParentEnd="true"
-            android:backgroundTint="@color/white"
-            android:layout_margin="15dp"
-            />
         <ImageView
             android:id="@+id/barcode"
             android:layout_width="wrap_content"
@@ -131,27 +119,31 @@
         android:background="@color/white"
         >
         <Button
-            android:id="@+id/i4"
+            android:id="@+id/btnInfor"
             style="@style/Widget.Material3.Button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/acount_img"
-            android:layout_marginLeft="20dp"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
             android:layout_marginTop="10dp"
             android:backgroundTint="@color/white"
             android:drawableLeft="@drawable/pencil16"
-            android:padding="5dp"
-            android:text="Thông tin"
+            android:padding="1dp"
+            android:text="THÔNG TIN"
             android:textColor="@color/black"
-            android:textSize="17dp"
-            android:textStyle="bold"/>
+            android:textSize="12dp" />
+        <View
+            android:layout_width="1dp"
+            android:layout_marginTop="5dp"
+            android:layout_height="35dp"
+            android:layout_gravity="center"
+            android:background="@color/gray">
+
         <Button
             android:id="@+id/trade"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Giao dịch"
-            android:textSize="17dp"
-            android:textStyle="bold"
+            android:textSize="12dp"
             android:layout_marginTop="10dp"
             android:layout_below="@id/acount_img"
             android:layout_toRightOf="@+id/i4"
@@ -173,10 +165,9 @@
             android:layout_toRightOf="@+id/trade"
             android:backgroundTint="@color/white"
             android:textColor="@color/black"
-            android:layout_marginLeft="20dp"
-            android:padding="5dp"
-            android:drawableLeft="@drawable/baseline_notifications_24"
-            />
+            android:textSize="12dp"
+       />
+
 
     </LinearLayout>
     <RelativeLayout
@@ -241,7 +232,10 @@
             android:layout_marginBottom="8dp"
             android:background="@drawable/baseline_keyboard_arrow_right_24"
             android:padding="1px"
-            android:textSize="50dp" />
+            android:textSize="50dp"
+
+            />
+
 
         <Button
             android:layout_width="44dp"
@@ -273,10 +267,9 @@
             android:layout_marginTop="57dp"
             android:layout_marginEnd="144dp"
             android:background="@color/white"
+            android:textColor="@color/orange"
             android:text="Đăng xuất">
         </Button>
 
     </RelativeLayout>
-
-
 </RelativeLayout>

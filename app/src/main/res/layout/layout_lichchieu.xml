@@ -1,0 +1,44 @@
+<!-- layout_lichchieu.xml -->
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="4dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/txttenrap"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Galaxy Nguyễn Du"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:paddingBottom="8dp" />
+
+        <TextView
+            android:id="@+id/txthinhthuc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="8dp"
+            android:text="2D Phụ đề"
+            android:textColor="#B1ABAB"
+            android:textSize="10sp" />
+
+        <GridLayout
+            android:id="@+id/giochieu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:columnCount="3"
+            android:layout_gravity="center"
+            android:layout_marginTop="8dp" />
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

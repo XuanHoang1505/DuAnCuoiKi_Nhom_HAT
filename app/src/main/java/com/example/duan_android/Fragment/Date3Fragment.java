@@ -1,27 +1,32 @@
 package com.example.duan_android.Fragment;
 
-import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.ListView;
 
-import com.example.duan_android.Activity.InformationActivity;
-import com.example.duan_android.Activity.ViewMoreActivity;
+import androidx.fragment.app.Fragment;
+
+import com.example.duan_android.Adapter.AdapterLichChieu;
+import com.example.duan_android.Model.lichchieu;
 import com.example.duan_android.R;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link AccountFragment#newInstance} factory method to
+ * Use the {@link Date3Fragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class AccountFragment extends Fragment {
-    private Button btnInfor;
-    private View mView;
+public class Date3Fragment extends Fragment {
+
+    private ListView lv;
+    private AdapterLichChieu adapter;
+    private List<lichchieu> lichChieuList;
+
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -31,7 +36,7 @@ public class AccountFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public AccountFragment() {
+    public Date3Fragment() {
         // Required empty public constructor
     }
 
@@ -41,11 +46,11 @@ public class AccountFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment AccountFragment.
+     * @return A new instance of fragment Date1Fragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static AccountFragment newInstance(String param1, String param2) {
-        AccountFragment fragment = new AccountFragment();
+    public static Date3Fragment newInstance(String param1, String param2) {
+        Date3Fragment fragment = new Date3Fragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -66,16 +71,17 @@ public class AccountFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        mView = inflater.inflate(R.layout.fragment_account, container, false);
-        btnInfor =mView.findViewById(R.id.btnInfor);
+        View mview = inflater.inflate(R.layout.fragment_date3, container, false);
+        lv = mview.findViewById(R.id.lvgiochieu);
+        
+        lichChieuList = new ArrayList<>();
+        lichChieuList.add(new lichchieu("Galaxy Nguyễn Du", Arrays.asList("10:00", "12:00", "14:00","16:30")));
+        lichChieuList.add(new lichchieu("Galaxy Sala", Arrays.asList("11:00", "13:00", "15:00", "16:30")));
+        lichChieuList.add(new lichchieu("Galaxy Tân Bình", Arrays.asList("09:30", "11:30", "13:30")));
 
-        btnInfor.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), InformationActivity.class);
-                startActivity(intent);
-            }
-        });
-        return mView;
+        adapter = new AdapterLichChieu(getContext(), R.layout.layout_lichchieu, lichChieuList);
+        lv.setAdapter(adapter);
+
+        return mview;
     }
 }
