@@ -115,11 +115,110 @@
             />
     </RelativeLayout>
 
+    <RelativeLayout
+        android:id="@+id/seatSheet"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
 
+        <TextView
+            android:id="@+id/letter1"
+            android:layout_width="15dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="155dp"
+            android:layout_marginLeft="5dp"
+            android:lineHeight="22dp"
+            android:text="A B C D E F G H I J K L "
+            android:textSize="15dp" />
+        <TextView
+            android:id="@+id/letter2"
+            android:layout_width="15dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="155dp"
+            android:layout_marginEnd="5dp"
+            android:lineHeight="22dp"
+            android:text="A B C D E F G H I J K L "
+            android:textSize="15dp" />
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewSeats"
+            android:layout_width="335dp"
+            android:layout_height="368dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="39dp"
+            android:layout_marginTop="154dp"
+            android:layout_weight="1"
+            android:padding="1dp"
+            android:scrollbars="horizontal" />
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="300dp"
+        android:layout_height="10dp"
+        android:layout_below="@+id/screen"
+        android:layout_centerInParent="true"
+        android:background="#FF6F00"
+        >
+
+    </RelativeLayout>
+    <TextView
+        android:id="@+id/screen"
+        android:layout_centerInParent="true"
+        android:layout_below="@+id/seatSheet"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Màn Hình"
+        android:textStyle="bold"
+        android:textSize="17"
+        />
 
 
     <RelativeLayout
-        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="60"
+        android:layout_above="@+id/purchase"
+        >
+        <Button
+            android:id="@+id/availableBtn"
+            android:layout_width="17dp"
+            android:layout_height="17"
+            android:background="@drawable/seat_available"
+            android:layout_marginLeft="50dp"
+            android:layout_centerVertical="true"
+            />
+        <Button
+            android:id="@+id/soldBtn"
+            android:layout_width="17dp"
+            android:layout_height="20dp"
+            android:layout_centerVertical="true"
+            android:allowClickWhenDisabled="true"
+            android:backgroundTint="@color/gray"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="150dp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="270dp"
+            android:text="Đã bán"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/availableBtn"
+            android:layout_marginLeft="10dp"
+            android:text="Trống"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/purchase"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -154,7 +253,7 @@
             android:id="@+id/seatid"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="J1,J2"
+            android:text="J1,J2..."
             android:textSize="16sp"
             android:textStyle="bold"
             android:layout_toRightOf="@id/seat"
@@ -162,23 +261,24 @@
             />
 
         <TextView
-            android:id="@+id/totalPrice"
+            android:id="@+id/price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Tổng cộng: "
             android:textSize="16sp"
             android:textStyle="bold"
             android:layout_marginTop="25dp"
+
             />
 
         <TextView
-            android:id="@+id/price"
+            android:id="@+id/totalPrice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="120,000đ"
             android:textSize="16sp"
             android:textStyle="bold"
-            android:layout_toRightOf="@id/totalPrice"
+            android:layout_toRightOf="@id/price"
             android:textColor="#FF6F00"
             android:layout_marginTop="25dp"
             />
