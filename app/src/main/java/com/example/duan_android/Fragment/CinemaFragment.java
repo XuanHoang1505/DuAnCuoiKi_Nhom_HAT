@@ -2,6 +2,7 @@ package com.example.duan_android.Fragment;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -9,8 +10,11 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
+
+import com.example.duan_android.Activity.ListMovieActivity;
 import com.example.duan_android.Model.cinema;
 import com.example.duan_android.Adapter.AdapterCinema;
 import com.example.duan_android.R;
@@ -96,7 +100,13 @@ public class CinemaFragment extends Fragment {
                 showLocationDialog();
             }
         });
-
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Intent intent = new Intent(getActivity(), ListMovieActivity.class);
+                startActivity(intent);
+            }
+        });
         return mview;
     }
     private void showLocationDialog() {

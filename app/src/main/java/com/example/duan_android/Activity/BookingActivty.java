@@ -53,7 +53,7 @@ public class BookingActivty extends AppCompatActivity {
         seatList = new ArrayList<>();
         // Giả lập danh sách ghế từ A1 tới K12 (khoảng 120 ghế)
         // Trong đó, bạn có thể tuỳ chỉnh để chỉ định ghế đã bán
-        for (int i = 0; i < 144; i++) {
+        for (int i = 0; i < 108; i++) {
             if (i == 10 || i == 20 || i == 50) {  // Giả sử một số ghế đã bán
                 seatList.add(new Seat("Ghế " + (i + 1), false)); // Ghế đã bán
             } else {
@@ -62,7 +62,7 @@ public class BookingActivty extends AppCompatActivity {
         }
 
         // Set up RecyclerView với GridLayoutManager (12 cột, giống hình ảnh)
-        recyclerView.setLayoutManager(new GridLayoutManager(this, 12));
+        recyclerView.setLayoutManager(new GridLayoutManager(this, 9));
         seatAdapter = new SeatAdapter(this, seatList, new SeatAdapter.OnSeatSelectedListener() {
             @Override
             public void onSeatSelected(int priceChange) {

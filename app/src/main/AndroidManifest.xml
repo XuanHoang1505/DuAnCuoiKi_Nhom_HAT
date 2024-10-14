@@ -13,8 +13,11 @@
         android:theme="@style/Theme.DuAn_Android"
         tools:targetApi="31">
         <activity
+            android:name=".Activity.ListMovieActivity"
+            android:exported="false" />
+        <activity
             android:name=".Activity.BookingActivty"
-            android:exported="false"/>
+            android:exported="false" />
         <activity
             android:name=".Activity.InformationActivity"
             android:exported="false" />
@@ -42,7 +45,6 @@
         <activity
             android:name=".Activity.LC_TT_Activity"
             android:exported="true" />
-
         <activity
             android:name=".Activity.ComboActivity"
             android:exported="true" />
