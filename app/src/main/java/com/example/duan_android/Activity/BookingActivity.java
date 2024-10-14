@@ -16,7 +16,7 @@ import com.example.duan_android.Adapter.SeatAdapter;
 import com.example.duan_android.Model.Seat;
 import com.example.duan_android.R;
 
-public class BookingActivty extends AppCompatActivity {
+public class BookingActivity extends AppCompatActivity {
 
     private TextView totalPriceTextView;
     private RecyclerView recyclerView;
@@ -45,7 +45,7 @@ public class BookingActivty extends AppCompatActivity {
         continueButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(BookingActivty.this, ComboActivity.class);
+                Intent intent = new Intent(BookingActivity.this, ComboActivity.class);
                 startActivity(intent);
             }
         });

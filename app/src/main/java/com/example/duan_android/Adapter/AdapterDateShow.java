@@ -2,7 +2,6 @@ package com.example.duan_android.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.provider.ContactsContract;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,10 +11,8 @@ import android.widget.GridLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.duan_android.Activity.BookingActivty;
-import com.example.duan_android.Activity.LC_TT_Activity;
+import com.example.duan_android.Activity.BookingActivity;
 import com.example.duan_android.Model.Movie;
-import com.example.duan_android.Model.lichchieu;
 import com.example.duan_android.R;
 
 import java.util.List;
@@ -76,7 +73,7 @@ public class AdapterDateShow  extends BaseAdapter {
             btntime.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent intent = new Intent(context, BookingActivty.class);
+                    Intent intent = new Intent(context, BookingActivity.class);
                     context.startActivity(intent);
                 }
             });
