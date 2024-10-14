@@ -15,6 +15,9 @@
             android:name=".Activity.ListMovieActivity"
             android:exported="false" />
         <activity
+            android:name=".Activity.ComboActivity"
+            android:exported="false" />
+        <activity
             android:name=".Activity.BookingActivty"
             android:exported="false" />
         <activity
