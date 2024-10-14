@@ -8,14 +8,15 @@
     tools:context=".Fragment.ShowingFragment">
 
     <!-- RecyclerView for movie content -->
+
+    <!-- Button for navigation -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rcv_moive"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:scrollbars="vertical"/>
+        android:scrollbars="vertical" />
 
-    <!-- Button for navigation -->
     <Button
         android:id="@+id/btnXemTiep"
         android:layout_width="match_parent"

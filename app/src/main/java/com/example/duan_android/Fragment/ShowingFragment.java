@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.example.duan_android.Activity.LC_TT_Activity;
 import com.example.duan_android.Activity.ViewMoreActivity;
 import com.example.duan_android.Adapter.MovieAdapter;
 import com.example.duan_android.Adapter.MovieViewPagerAdapter;
@@ -100,7 +101,15 @@ public class ShowingFragment extends Fragment {
         Context context = getContext();
         rcvMovie = view.findViewById(R.id.rcv_moive);
         btnShowingVM = view.findViewById(R.id.btnXemTiep);
-        mMovieAdapter = new MovieAdapter(context);
+        mMovieAdapter = new MovieAdapter(context, new MovieAdapter.OnItemClickListener() {
+            @Override
+            public void onMovieClick(Movie movie) {
+                // Xử lý sự kiện click vào movie
+                Intent intent = new Intent(getActivity(), LC_TT_Activity.class);
+                intent.putExtra("Cám", movie.getName());
+                startActivity(intent);
+            }
+        });
 
         GridLayoutManager gridLayoutManager = new GridLayoutManager(context,2);
 

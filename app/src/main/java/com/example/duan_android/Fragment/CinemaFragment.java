@@ -1,5 +1,8 @@
 package com.example.duan_android.Fragment;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -7,7 +10,11 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.ListView;
+
+import com.example.duan_android.Activity.ListMovieActivity;
 import com.example.duan_android.Model.cinema;
 import com.example.duan_android.Adapter.AdapterCinema;
 import com.example.duan_android.R;
@@ -20,10 +27,11 @@ import java.util.ArrayList;
  * create an instance of this fragment.
  */
 public class CinemaFragment extends Fragment {
-
+    private EditText location;
     private ListView lv;
     private ArrayList<cinema> arrayList;
     private AdapterCinema adapter;
+    private String selectedLocation = "Toàn quốc";
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -71,6 +79,7 @@ public class CinemaFragment extends Fragment {
         // Inflate the layout for this fragment
         View mview =inflater.inflate(R.layout.fragment_cinema, container, false);
         lv=mview.findViewById(R.id.lviewcinema);
+        location=mview.findViewById(R.id.editTextText);
         arrayList=new ArrayList<>();
         arrayList.add(new cinema(R.drawable.nguyendu, "Galaxy Nguyễn Du", "116 Nguyễn Du, Quận 1, Tp.HCM", "1900 2224"));
         arrayList.add(new cinema(R.drawable.sala, "Galaxy SaLa", "Tầng 3, Thiaso Mall SaLa", "1900 2224"));
@@ -85,6 +94,61 @@ public class CinemaFragment extends Fragment {
         adapter = new AdapterCinema(getContext(),R.layout.layout_cinema,arrayList);
         lv.setAdapter(adapter);
 
+        location.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showLocationDialog();
+            }
+        });
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Intent intent = new Intent(getActivity(), ListMovieActivity.class);
+                startActivity(intent);
+            }
+        });
         return mview;
+    }
+    private void showLocationDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        builder.setTitle("Vị trí");
+
+        // Tạo danh sách các địa điểm
+        String[] locations = {"Toàn quốc", "TP Hồ Chí Minh", "Hà Nội", "Đà Nẵng", "An Giang",
+                "Bà Rịa - Vũng Tàu", "Bến Tre", "Cà Mau", "Đắk Lắk", "Hải Phòng",
+                "Khánh Hòa", "Nghệ An"};
+
+        // Mảng boolean lưu trạng thái chọn
+        int checkedItem = -1; // Không có lựa chọn mặc định
+
+        // Set danh sách radio button
+        builder.setSingleChoiceItems(locations, checkedItem, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // Lưu vị trí được chọn vào biến selectedLocation
+                selectedLocation = locations[which];
+            }
+        });
+
+        // Thêm nút Xác nhận
+        builder.setPositiveButton("Xác nhận", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // Cập nhật TextView với địa điểm đã chọn
+                location.setText(selectedLocation);
+            }
+        });
+
+        // Thêm nút Đóng
+        builder.setNegativeButton("Đóng", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+
+        // Hiển thị dialog
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 }

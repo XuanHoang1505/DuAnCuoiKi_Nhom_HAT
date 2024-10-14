@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.example.duan_android.Activity.LC_TT_Activity;
 import com.example.duan_android.Activity.ViewMoreActivity;
 import com.example.duan_android.Adapter.MovieAdapter;
 import com.example.duan_android.Model.Movie;
@@ -96,7 +97,12 @@ public class ComingSoonFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         Context context = getContext();
         rcvMovieCS = view.findViewById(R.id.rcv_moiveCS);
-        mMovieAdapter = new MovieAdapter(context);
+        mMovieAdapter = new MovieAdapter(context, new MovieAdapter.OnItemClickListener() {
+            @Override
+            public void onMovieClick(Movie movie) {
+               
+            }
+        });
         btnShowingVMCS = view.findViewById(R.id.btnXemTiepCS);
 
         GridLayoutManager gridLayoutManager = new GridLayoutManager(context,2);

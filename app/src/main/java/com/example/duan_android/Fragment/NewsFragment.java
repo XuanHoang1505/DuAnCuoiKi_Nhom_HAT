@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 
 import com.example.duan_android.Adapter.MovieAdapter;
 import com.example.duan_android.Model.Comment;
+import com.example.duan_android.Model.Movie;
 import com.example.duan_android.R;
 
 import java.util.ArrayList;
@@ -79,7 +80,12 @@ public class NewsFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         Context context = getContext();
         rcvNews = view.findViewById(R.id.rcv_news);
-        mNewsAdapter = new MovieAdapter(context);
+        mNewsAdapter = new MovieAdapter(context, new MovieAdapter.OnItemClickListener() {
+            @Override
+            public void onMovieClick(Movie movie) {
+
+            }
+        });
 
         GridLayoutManager gridLayoutManager = new GridLayoutManager(context,1);
 

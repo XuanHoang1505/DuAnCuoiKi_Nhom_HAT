@@ -2,18 +2,17 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/gray"
-    tools:context=".Fragment.AccountFragment">
-
+    tools:context=".Activity.MainActivity"
+    android:background="@color/gray">
     <RelativeLayout
         android:id="@+id/layout1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
         android:padding="10dp">
-
         <TextView
             android:id="@+id/textView"
             android:layout_width="wrap_content"
@@ -22,7 +21,6 @@
             android:text="Tài khoản"
             android:textSize="22dp"
             android:textStyle="bold" />
-
         <Button
             android:layout_width="25dp"
             android:layout_height="30dp"
@@ -34,7 +32,6 @@
             android:src="@drawable/baseline_settings_24"
             android:layout_alignParentEnd="true"
             />
-
     </RelativeLayout>
     <RelativeLayout
         android:id="@+id/infoBar"
@@ -91,8 +88,6 @@
             android:layout_below="@id/name"
             android:layout_marginLeft="10dp"
             />
-
-
         <Button
             android:layout_width="wrap_content"
             android:layout_height="70dp"
@@ -118,9 +113,6 @@
             android:layout_alignParentEnd="true"
             android:layout_marginRight="20dp"
             />
-
-
-
     </RelativeLayout>
     <LinearLayout
         android:id="@+id/bar2"
@@ -129,7 +121,6 @@
         android:layout_below="@id/infoBar"
         android:orientation="horizontal"
         android:background="@color/white">
-
         <Button
             android:id="@+id/btnInfor"
             style="@style/Widget.Material3.Button"
@@ -171,7 +162,6 @@
             android:layout_gravity="center"
             android:background="@color/gray">
         </View>
-
         <Button
             android:id="@+id/notif"
             android:layout_width="0dp"
@@ -185,9 +175,7 @@
             android:textColor="@color/black"
             android:textSize="15dp"
             android:textStyle="bold" />
-
     </LinearLayout>
-
     <RelativeLayout
         android:id="@id/bar3"
         android:layout_marginTop="5dp"
@@ -204,7 +192,6 @@
             android:textSize="17dp"
             android:padding="20dp"
             android:background="@color/white"
-
             />
         <TextView
             android:id="@+id/email"
@@ -238,9 +225,7 @@
             android:padding="20dp"
             android:layout_below="@id/policy"
             android:layout_marginTop="1dp"
-
             />
-
         <Button
             android:layout_width="47dp"
             android:layout_height="41dp"
@@ -250,11 +235,7 @@
             android:layout_marginBottom="8dp"
             android:background="@drawable/baseline_keyboard_arrow_right_24"
             android:padding="1px"
-            android:textSize="50dp"
-
-            />
-
-
+            android:textSize="50dp" />
         <Button
             android:layout_width="44dp"
             android:layout_height="49dp"
@@ -265,9 +246,7 @@
             android:background="@drawable/baseline_keyboard_arrow_right_24"
             android:padding="1px"
             android:textSize="50dp" />
-
     </RelativeLayout>
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="300dp"
@@ -276,7 +255,6 @@
         android:gravity="center"
         android:background="@color/white"
         >
-
         <Button
             android:id="@+id/logout"
             android:layout_width="wrap_content"
@@ -284,8 +262,5 @@
             android:background="@color/white"
             android:text="Đăng xuất">
         </Button>
-
     </RelativeLayout>
-
-
 </RelativeLayout>

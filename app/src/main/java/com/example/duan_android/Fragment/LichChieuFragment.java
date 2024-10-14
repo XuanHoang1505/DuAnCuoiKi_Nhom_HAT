@@ -96,7 +96,7 @@ public class LichChieuFragment extends Fragment {
         spinnerAdapterCinema.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         sprap.setAdapter(spinnerAdapterCinema);
 
-        adapter=new DateAdapter(getChildFragmentManager(), FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
+        adapter=new DateAdapter(getChildFragmentManager(), FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT, false);
         viewPager.setAdapter(adapter);
         tab.setupWithViewPager(viewPager);
 

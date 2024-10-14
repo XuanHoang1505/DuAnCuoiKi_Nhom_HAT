@@ -97,7 +97,12 @@ public class ViewMoreShowingFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         Context context = getContext();
         rcvMovie = view.findViewById(R.id.vm_rcv_moive);
-        mMovieAdapter = new MovieAdapter(context);
+        mMovieAdapter = new MovieAdapter(context, new MovieAdapter.OnItemClickListener() {
+            @Override
+            public void onMovieClick(Movie movie) {
+
+            }
+        });
         GridLayoutManager gridLayoutManager = new GridLayoutManager(context, 2);
         rcvMovie.setLayoutManager(gridLayoutManager);
         mMovieAdapter.setData(getListMovie());

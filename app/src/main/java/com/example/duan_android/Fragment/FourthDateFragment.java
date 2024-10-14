@@ -1,6 +1,6 @@
 package com.example.duan_android.Fragment;
 
-import android.content.Intent;
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -8,19 +8,25 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.ListView;
 
-import com.example.duan_android.Activity.InformationActivity;
+import com.example.duan_android.Adapter.AdapterDateShow;
+import com.example.duan_android.Model.Movie;
 import com.example.duan_android.R;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link AccountFragment#newInstance} factory method to
+ * Use the {@link FourthDateFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class AccountFragment extends Fragment {
-    private Button btnInfor;
-    private View mView;
+public class FourthDateFragment extends Fragment {
+    private ListView lv;
+    private AdapterDateShow adapter;
+    private List<Movie> listMovie;
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -30,7 +36,7 @@ public class AccountFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public AccountFragment() {
+    public FourthDateFragment() {
         // Required empty public constructor
     }
 
@@ -40,11 +46,11 @@ public class AccountFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment AccountFragment.
+     * @return A new instance of fragment FourthDateFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static AccountFragment newInstance(String param1, String param2) {
-        AccountFragment fragment = new AccountFragment();
+    public static FourthDateFragment newInstance(String param1, String param2) {
+        FourthDateFragment fragment = new FourthDateFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -61,20 +67,21 @@ public class AccountFragment extends Fragment {
         }
     }
 
+    @SuppressLint("MissingInflatedId")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        mView = inflater.inflate(R.layout.fragment_account, container, false);
-        btnInfor =mView.findViewById(R.id.btnInfor);
+        View mview = inflater.inflate(R.layout.fragment_fourth_date, container, false);
+        lv = mview.findViewById(R.id.lvMovie_4);
 
-        btnInfor.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), InformationActivity.class);
-                startActivity(intent);
-            }
-        });
-        return mView;
+        listMovie = new ArrayList<>();
+        listMovie.add(new Movie(R.drawable.image_item1, "Cám", "10/10/2024", 111, Arrays.asList("19:30","22:00", "22:30")));
+        listMovie.add(new Movie(R.drawable.image_item3, "Không nói điều dữ", "03/10/2024", 101, Arrays.asList("23:00", "23:30")));
+        listMovie.add(new Movie(R.drawable.image_item7, "Mộ đom đóm", "15/10/2024", 120, Arrays.asList("19:30","20:00", "20:30")));
+        listMovie.add(new Movie(R.drawable.image_item14, "Đố anh còng được tôi", "20/10/2024", 130, Arrays.asList("19:30","21:00", "21:30")));
+
+        adapter = new AdapterDateShow(getContext(),listMovie,R.layout.item_movie_cinema);
+        lv.setAdapter(adapter);
+        return mview;
     }
 }

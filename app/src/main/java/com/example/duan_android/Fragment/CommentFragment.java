@@ -83,7 +83,12 @@ public class CommentFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         Context context = getContext();
         rcvComment = view.findViewById(R.id.rcv_comment);
-        mCommentAdapter = new MovieAdapter(context);
+        mCommentAdapter = new MovieAdapter(context, new MovieAdapter.OnItemClickListener() {
+            @Override
+            public void onMovieClick(Movie movie) {
+
+            }
+        });
 
         GridLayoutManager gridLayoutManager = new GridLayoutManager(context,1);
 
