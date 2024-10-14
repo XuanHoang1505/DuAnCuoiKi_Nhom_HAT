@@ -11,7 +11,7 @@ import android.widget.GridLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.duan_android.Activity.BookingActivity;
+import com.example.duan_android.Activity.BookingActivty;
 import com.example.duan_android.Model.Movie;
 import com.example.duan_android.R;
 
@@ -73,7 +73,7 @@ public class AdapterDateShow  extends BaseAdapter {
             btntime.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent intent = new Intent(context, BookingActivity.class);
+                    Intent intent = new Intent(context, BookingActivty.class);
                     context.startActivity(intent);
                 }
             });
