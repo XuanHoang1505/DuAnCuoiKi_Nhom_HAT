@@ -71,7 +71,7 @@ public class AdapterDateShow  extends BaseAdapter {
             Button btntime = new Button(context);
             btntime.setText(Showtime);
             btntime.setPadding(16, 8, 16, 8);
-            btntime.setBackgroundResource(R.drawable.btn_giochieu);
+            btntime.setBackgroundResource(R.drawable.btn_dateshow);
 
             btntime.setOnClickListener(new View.OnClickListener() {
                 @Override

@@ -9,6 +9,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.example.duan_android.Activity.InformationActivity;
 import com.example.duan_android.R;
@@ -64,9 +66,20 @@ public class AccountFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+
         mView = inflater.inflate(R.layout.fragment_account, container, false);
         btnInfor =mView.findViewById(R.id.btnInfor);
+        ProgressBar progressBar = mView.findViewById(R.id.progressBar);
+        TextView currentSpend = mView.findViewById(R.id.tv_current_spend);
+
+        int currentSpendAmount = 1500000; // Ví dụ: 1.500.000đ
+        int maxSpend = 4000000; // Mốc chi tiêu tối đa là 4.000.000đ
+
+
+        progressBar.setMax(maxSpend);
+        progressBar.setProgress(currentSpendAmount);
+
+        currentSpend.setText(currentSpendAmount + "đ");
 
         btnInfor.setOnClickListener(new View.OnClickListener() {
             @Override
