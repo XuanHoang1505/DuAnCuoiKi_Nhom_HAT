@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.example.duan_android.Activity.DealActivity;
 import com.example.duan_android.Activity.InformationActivity;
 import com.example.duan_android.R;
 
@@ -23,6 +24,7 @@ import com.example.duan_android.R;
 public class AccountFragment extends Fragment {
     private Button btnInfor;
     private View mView;
+    private Button trade;
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -69,6 +71,7 @@ public class AccountFragment extends Fragment {
 
         mView = inflater.inflate(R.layout.fragment_account, container, false);
         btnInfor =mView.findViewById(R.id.btnInfor);
+        trade = mView.findViewById(R.id.trade);
         ProgressBar progressBar = mView.findViewById(R.id.progressBar);
         TextView currentSpend = mView.findViewById(R.id.tv_current_spend);
 
@@ -78,13 +81,19 @@ public class AccountFragment extends Fragment {
 
         progressBar.setMax(maxSpend);
         progressBar.setProgress(currentSpendAmount);
-
         currentSpend.setText(currentSpendAmount + "đ");
 
         btnInfor.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), InformationActivity.class);
+                startActivity(intent);
+            }
+        });
+        trade.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), DealActivity.class);
                 startActivity(intent);
             }
         });
