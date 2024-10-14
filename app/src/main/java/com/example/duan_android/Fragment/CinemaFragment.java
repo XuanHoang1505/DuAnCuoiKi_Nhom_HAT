@@ -86,11 +86,11 @@ public class CinemaFragment extends Fragment {
         arrayList.add(new cinema(R.drawable.tanbinh, "Galaxy Tân Bình", "246 Nguyễn Hồng Đào, Quận Tân Bình, Tp.HCM", "1900 2224"));
         arrayList.add(new cinema(R.drawable.kdv, "Galaxy Kinh Dương Vương", "Galaxy Kinh Dương Vương", "1900 2224"));
         arrayList.add(new cinema(R.drawable.quangtrung, "Galaxy Quang trung", "Lầu 3, TTTM CoopMart Foodcosa ", "1900 2224"));
-        arrayList.add(new cinema(R.drawable.nguyendu, "Galaxy Nguyễn Du", "116 Nguyễn Du, Quận 1, Tp.HCM", "1900 2224"));
-        arrayList.add(new cinema(R.drawable.sala, "Galaxy SaLa", "Tầng 3, Thiaso Mall SaLa", "1900 2224"));
-        arrayList.add(new cinema(R.drawable.tanbinh, "Galaxy Tân Bình", "246 Nguyễn Hồng Đào, Quận Tân Bình, Tp.HCM", "1900 2224"));
-        arrayList.add(new cinema(R.drawable.kdv, "Galaxy Kinh Dương Vương", "Galaxy Kinh Dương Vương", "1900 2224"));
-        arrayList.add(new cinema(R.drawable.quangtrung, "Galaxy Quang trung", "Lầu 3, TTTM CoopMart Foodcosa ", "1900 2224"));
+        arrayList.add(new cinema(R.drawable.hue, "Galaxy Huế", "Tầng 4 TTTM Aeon Mall Huế ", "1900 2224"));
+        arrayList.add(new cinema(R.drawable.danang, "Galaxy Đà Nẵng", "Tầng 3 Coop Mart, 478 Điện Biên Phủ, Quận Thanh Khê, Đà Nẵng ", "1900 2224"));
+        arrayList.add(new cinema(R.drawable.vinh, "Galaxy Vinh", "Lầu 5 Trung tâm HUB – số 1 Lê Hồng Phong, Tp. Vinh ", "1900 2224"));
+        arrayList.add(new cinema(R.drawable.haiphong, "Galaxy Hải Phòng", "04 Lương Khánh Thiện, TTTM Nguyễn Kim – Sài Gòn Mall ", "1900 2224"));
+        arrayList.add(new cinema(R.drawable.camau, "Galaxy Cà Mau", "Lầu 2 TTTM Sense City, số 09 Trần Hưng Đạo, P.5, Tp. Cà Mau", "1900 2224"));
         adapter = new AdapterCinema(getContext(),R.layout.layout_cinema,arrayList);
         lv.setAdapter(adapter);
 

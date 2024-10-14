@@ -23,22 +23,6 @@
         android:layout_marginTop="18dp"
         android:scaleType="centerCrop"
         android:src="@drawable/cam" />
-
-    <TextView
-        android:id="@+id/txtstar"
-        android:layout_width="54dp"
-        android:layout_height="30dp"
-        android:layout_below="@id/trallercinema"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="48dp"
-        android:layout_marginTop="27dp"
-        android:layout_marginEnd="212dp"
-        android:drawableLeft="@drawable/star"
-        android:gravity="center_vertical"
-        android:text="7.2"
-        android:textColor="#E2B220"
-        android:textSize="20dp" />
-
     <TextView
         android:id="@+id/txtMovieTitle"
         android:layout_width="wrap_content"
@@ -49,6 +33,22 @@
         android:text="Cám"
         android:textSize="24sp"
         android:textColor="@android:color/white"/>
+
+    <TextView
+        android:id="@+id/txtstar"
+        android:layout_width="54dp"
+        android:layout_height="30dp"
+        android:layout_below="@id/trallercinema"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="31dp"
+        android:layout_marginTop="27dp"
+        android:layout_marginEnd="212dp"
+        android:layout_toEndOf="@+id/imgcinema"
+        android:drawableLeft="@drawable/star"
+        android:gravity="center_vertical"
+        android:text="7.2"
+        android:textColor="#E2B220"
+        android:textSize="20dp" />
 
     <LinearLayout
         android:id="@+id/lninfo"

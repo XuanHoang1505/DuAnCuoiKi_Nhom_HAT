@@ -53,7 +53,6 @@ public class AdapterLichChieu extends BaseAdapter {
 
         TextView tenrap = view.findViewById(R.id.txttenrap);
         GridLayout layoutShowtimes = view.findViewById(R.id.giochieu);
-
         tenrap.setText(lc.getTenrp());
 
         for (String time : lc.getGiochieu()) {
