@@ -1,0 +1,97 @@
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <ImageView
+            android:id="@+id/img"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/image_cmt3" />
+
+        <TextView
+            android:id="@+id/namemovie"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Joker"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:paddingTop="8dp"/>
+
+        <TextView
+            android:id="@+id/movietype"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2D - SUB"
+            android:textSize="14sp"
+            android:paddingTop="4dp"
+            android:textColor="#FF6F00"/>
+
+        <TextView
+            android:id="@+id/cinema"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Galaxy Nguyễn Du - Rạp 1\nSuất 16:00 - Thứ 7, 28/09/2024"
+            android:textSize="14sp"
+            android:paddingTop="8dp"/>
+
+        <ImageView
+            android:id="@+id/qrcode"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/qr"
+            android:layout_gravity="center"
+            android:paddingTop="16dp"/>
+
+        <TextView
+            android:id="@+id/seat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ghế - H10"
+            android:textSize="16sp"
+            android:paddingTop="16dp"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/ticketcode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Mã vé: 764343"
+            android:textSize="14sp"
+            android:paddingTop="8dp"/>
+
+        <TextView
+            android:id="@+id/ticketstar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Điểm thưởn: 7"
+            android:textSize="14sp"
+            android:paddingTop="4dp"/>
+
+        <TextView
+            android:id="@+id/total"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tổng cộng: 70,000đ"
+            android:textSize="14sp"
+            android:paddingTop="4dp"
+            android:textStyle="bold"/>
+
+        <Button
+            android:id="@+id/btn_close"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Đóng"
+            android:layout_marginTop="16dp"
+            android:background="@color/orange"
+            android:textColor="@android:color/white"/>
+    </LinearLayout>
+</ScrollView>
