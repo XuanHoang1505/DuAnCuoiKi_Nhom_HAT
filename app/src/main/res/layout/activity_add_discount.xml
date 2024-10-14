@@ -1,0 +1,206 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activity.AddDiscountActivity"
+    android:background="@color/gray">
+
+    <RelativeLayout
+        android:id="@+id/heading"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:padding="5dp">
+
+        <ImageButton
+            android:id="@+id/btn_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:src="@drawable/ic_back"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="Khuyến mãi"
+            android:textSize="25sp"
+            android:textStyle="bold"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/EnterVouc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/heading"
+        android:layout_marginTop="1dp"
+        android:background="@color/white"
+        android:padding="7dp">
+
+        <EditText
+            android:id="@+id/vouc_eddittext"
+            android:layout_width="270dp"
+            android:layout_height="45dp"
+            android:layout_weight="1"
+            android:hint="Vui lòng nhập mã voucher"
+            android:paddingLeft="10dp"
+            android:background="@drawable/enter_vouc_eddittext"
+            android:textSize="15sp"
+            android:layout_marginLeft="15dp"
+            android:inputType="text"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/vouc_eddittext"
+            android:layout_marginLeft="15dp"
+            android:text="Thêm"
+            android:textColor="#A0000000"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/heading2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/EnterVouc"
+        android:background="#E2E1E1">
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Voucher Hệ Thống"
+            android:textSize="18sp"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="15dp"/>
+
+        <View
+            android:layout_width="70dp"
+            android:layout_height="1dp"
+            android:background="@color/black"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@id/title"/>
+
+        <View
+            android:layout_width="70dp"
+            android:layout_height="1dp"
+            android:background="@color/black"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/title"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/VcSysList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/heading2"
+        android:padding="20dp"
+        android:background="@color/white"
+        >
+
+        <RelativeLayout
+            android:layout_width="500dp"
+            android:layout_height="106dp"
+            android:padding="10dp"
+            android:background="@drawable/rounded_voucher"
+            >
+
+            <ImageView
+                android:id="@+id/imgVoc"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/voucher" />
+
+            <TextView
+                android:layout_width="175dp"
+                android:layout_height="42dp"
+                android:layout_marginLeft="20dp"
+                android:layout_toRightOf="@+id/imgVoc"
+                android:text="Bạn được giảm 50% khi mua 5 vé thường"
+                android:textColor="@color/black"
+                android:textSize="17dp"
+                android:textStyle="bold" />
+            <TextView
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_toRightOf="@+id/imgVoc"
+                android:text="#ABC001"
+                android:textColor="@color/white"
+                android:textSize="14dp"
+                android:textStyle="bold"
+                android:textAlignment="center"
+                android:background="@drawable/round_ege"
+                android:layout_marginTop="50dp"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="80dp"
+                android:layout_toRightOf="@+id/imgVoc"
+                android:text="Giảm 50000đ"
+                android:textColor="@color/gray"
+                android:textSize="14dp"
+                android:textStyle="bold"
+                android:textAlignment="center"
+                android:layout_marginTop="60dp"
+                />
+            <CheckBox
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                />
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/heading3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/VcSysList"
+        android:background="#E2E1E1">
+
+        <TextView
+            android:id="@+id/title2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Voucher của bạn"
+            android:textSize="18sp"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="15dp"/>
+
+        <View
+            android:layout_width="70dp"
+            android:layout_height="1dp"
+            android:background="@color/black"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@id/title2"/>
+
+        <View
+            android:layout_width="70dp"
+            android:layout_height="1dp"
+            android:background="@color/black"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/title2"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="500dp"
+        android:layout_below="@id/heading3"
+        android:background="@color/white">
+        <Button
+            android:id="@+id/btn_save"
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:text="Lưu"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="130dp"
+            android:background="@drawable/rounded_background"
+            android:textColor="#FFFFFF"/>
+    </RelativeLayout>
+
+</RelativeLayout>
