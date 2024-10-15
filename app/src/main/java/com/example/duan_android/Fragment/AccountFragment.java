@@ -9,10 +9,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.duan_android.Activity.DealActivity;
+import com.example.duan_android.Activity.GiftActivity;
 import com.example.duan_android.Activity.InformationActivity;
 import com.example.duan_android.R;
 
@@ -25,6 +28,9 @@ public class AccountFragment extends Fragment {
     private Button btnInfor;
     private View mView;
     private Button trade;
+    private ImageView gift;
+    private ImageView myGift;
+
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -74,6 +80,8 @@ public class AccountFragment extends Fragment {
         trade = mView.findViewById(R.id.trade);
         ProgressBar progressBar = mView.findViewById(R.id.progressBar);
         TextView currentSpend = mView.findViewById(R.id.tv_current_spend);
+        gift =  mView.findViewById(R.id.exchange_gift);
+        myGift = mView.findViewById(R.id.myGift);
 
         int currentSpendAmount = 1500000; // Ví dụ: 1.500.000đ
         int maxSpend = 4000000; // Mốc chi tiêu tối đa là 4.000.000đ
@@ -94,6 +102,24 @@ public class AccountFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), DealActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        gift.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent  intent = new Intent(getActivity(), GiftActivity.class);
+                intent.putExtra("selected_tab", 0);
+                startActivity(intent);
+            }
+        });
+
+        myGift.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), GiftActivity.class);
+                intent.putExtra("selected_tab", 1);
                 startActivity(intent);
             }
         });

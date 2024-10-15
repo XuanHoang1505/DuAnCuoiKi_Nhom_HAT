@@ -61,6 +61,5 @@
         <activity
             android:name=".Activity.GiftActivity"
             android:exported="true"/>
-
     </application>
 </manifest>

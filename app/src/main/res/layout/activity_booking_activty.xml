@@ -192,13 +192,13 @@
             />
         <Button
             android:id="@+id/soldBtn"
-            android:layout_width="17dp"
-            android:layout_height="20dp"
+            android:layout_width="20dp"
+            android:layout_height="25dp"
             android:layout_centerVertical="true"
             android:allowClickWhenDisabled="true"
-            android:backgroundTint="@color/gray"
+            android:backgroundTint="@color/black"
             android:layout_alignParentEnd="true"
-            android:layout_marginEnd="150dp"
+            android:layout_marginEnd="130dp"
             />
         <TextView
             android:layout_width="wrap_content"
