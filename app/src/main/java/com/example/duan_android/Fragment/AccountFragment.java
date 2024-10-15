@@ -1,5 +1,7 @@
 package com.example.duan_android.Fragment;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -17,6 +19,7 @@ import android.widget.TextView;
 import com.example.duan_android.Activity.DealActivity;
 import com.example.duan_android.Activity.GiftActivity;
 import com.example.duan_android.Activity.InformationActivity;
+import com.example.duan_android.Activity.LoginActivity;
 import com.example.duan_android.R;
 
 /**
@@ -30,6 +33,7 @@ public class AccountFragment extends Fragment {
     private Button trade;
     private ImageView gift;
     private ImageView myGift;
+    private Button btn_logout;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -82,6 +86,7 @@ public class AccountFragment extends Fragment {
         TextView currentSpend = mView.findViewById(R.id.tv_current_spend);
         gift =  mView.findViewById(R.id.exchange_gift);
         myGift = mView.findViewById(R.id.myGift);
+        btn_logout = mView.findViewById(R.id.logout);
 
         int currentSpendAmount = 1500000; // Ví dụ: 1.500.000đ
         int maxSpend = 4000000; // Mốc chi tiêu tối đa là 4.000.000đ
@@ -121,6 +126,38 @@ public class AccountFragment extends Fragment {
                 Intent intent = new Intent(getActivity(), GiftActivity.class);
                 intent.putExtra("selected_tab", 1);
                 startActivity(intent);
+            }
+        });
+        btn_logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Tạo dialog xác nhận
+                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                builder.setTitle("Xác nhận đăng xuất");
+                builder.setMessage("Bạn có chắc muốn đăng xuất?");
+
+                // Nút đồng ý
+                builder.setPositiveButton("Đồng ý", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        // Xử lý đăng xuất ở đây
+                        Intent intent = new Intent(getActivity(), LoginActivity.class);
+                        startActivity(intent);
+                    }
+                });
+
+                // Nút hủy bỏ
+                builder.setNegativeButton("Hủy bỏ", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        // Đóng dialog nếu người dùng chọn hủy bỏ
+                        dialogInterface.dismiss();
+                    }
+                });
+
+                // Hiển thị dialog
+                AlertDialog dialog = builder.create();
+                dialog.show();
             }
         });
         return mView;
