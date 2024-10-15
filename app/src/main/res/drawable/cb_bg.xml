@@ -1,20 +1,18 @@
-<?xml version="1.0" encoding="utf-8"?>
-<shape xmlns:android="http://schemas.android.com/apk/res/android">
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Trạng thái khi được chọn -->
+    <item android:state_checked="true">
+        <shape android:shape="oval">
+            <solid android:color="#FFA500"/> <!-- Màu nền khi được chọn -->
+            <size android:width="24dp" android:height="24dp" /> <!-- Kích thước checkbox -->
+        </shape>
+    </item>
 
-    <!-- Đặt màu nền cho Checkbox -->
-    <solid android:color="#FFFFFF"/> <!-- Màu nền trắng -->
-
-    <!-- Thiết lập viền cho Checkbox -->
-    <stroke
-        android:width="2dp"
-        android:color="#3b5998"/> <!-- Màu viền (màu Facebook) -->
-
-    <!-- Bo tròn các góc của Checkbox -->
-    <corners android:radius="24dp"/> <!-- Điều chỉnh bán kính để làm hình tròn -->
-
-    <!-- Kích thước CheckBox -->
-    <size
-        android:width="24dp"
-        android:height="24dp"/>
-
-</shape>
+    <!-- Trạng thái khi không được chọn -->
+    <item android:state_checked="false">
+        <shape android:shape="oval">
+            <solid android:color="#FFFFFF"/> <!-- Màu nền khi không được chọn -->
+            <stroke android:width="2dp" android:color="#FFA500"/> <!-- Viền màu cam -->
+            <size android:width="24dp" android:height="24dp" /> <!-- Kích thước checkbox -->
+        </shape>
+    </item>
+</selector>
