@@ -284,73 +284,18 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="4dp">
             </TextView>
-
-            <LinearLayout
+            <ListView
+                android:id="@+id/lv_pay"
+                android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:orientation="horizontal">
-
-                <ImageButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:background="@color/white"
-                    android:src="@drawable/ic_shopee" />
-
-                <TextView
-                    android:layout_width="200dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="10dp"
-                    android:text="Ví ShopeePay - Nhập mã: SPPCINE09 giảm 10k" />
-                <View
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1" />
-                <CheckBox
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="35dp" />
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:paddingBottom="10dp"
-                android:orientation="horizontal">
-
-                <ImageButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:background="@color/white"
-                    android:layout_gravity="start"
-                    android:src="@drawable/ic_momo" />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="10dp"
-                    android:gravity="center"
-                    android:text="Ví Momo" />
-                <View
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1" />
-                <CheckBox
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="end"
-                    android:layout_marginRight="33dp" />
-            </LinearLayout>
-
+                android:layout_height="190dp">
+            </ListView>
         </LinearLayout>
-
         <LinearLayout
             android:id="@+id/layout_6th"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/layout_5th"
-            android:layout_marginTop="10dp"
             android:orientation="horizontal">
 
             <TextView
