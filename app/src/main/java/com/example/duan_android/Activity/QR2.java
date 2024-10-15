@@ -19,8 +19,7 @@ public class QR2 extends AppCompatActivity {
         btnclose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(getApplication(), DealActivity.class);
-                startActivity(intent);
+                finish();
             }
         });
     }
