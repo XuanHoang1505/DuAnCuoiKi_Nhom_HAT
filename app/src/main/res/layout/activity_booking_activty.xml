@@ -177,46 +177,50 @@
         />
 
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="70dp"
         android:layout_above="@+id/purchase"
         >
-        <Button
-            android:id="@+id/availableBtn"
-            android:layout_width="17dp"
-            android:layout_height="17dp"
-            android:background="@drawable/seat_available"
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
             android:layout_marginLeft="50dp"
-            android:layout_centerVertical="true"
-            />
-        <Button
-            android:id="@+id/soldBtn"
-            android:layout_width="20dp"
-            android:layout_height="25dp"
-            android:layout_centerVertical="true"
-            android:allowClickWhenDisabled="true"
-            android:backgroundTint="@color/black"
-            android:layout_alignParentEnd="true"
-            android:layout_marginEnd="130dp"
-            />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="270dp"
-            android:text="Đã bán"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_toRightOf="@+id/availableBtn"
-            android:layout_marginLeft="10dp"
-            android:text="Trống"/>
-
-    </RelativeLayout>
-
+            android:orientation="horizontal">
+            <Button
+                android:id="@+id/availableBtn"
+                android:layout_width="17dp"
+                android:layout_height="17dp"
+                android:background="@drawable/seat_available"
+                android:layout_centerVertical="true"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="Trống"
+                android:textColor="@color/black"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+            <Button
+                android:id="@+id/soldBtn"
+                android:layout_width="17dp"
+                android:layout_height="17dp"
+                android:allowClickWhenDisabled="true"
+                android:background="@color/black"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="Đã bán"/>
+        </LinearLayout>
+    </LinearLayout>
     <RelativeLayout
         android:id="@+id/purchase"
         android:layout_width="match_parent"
