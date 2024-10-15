@@ -59,6 +59,10 @@
             android:name=".Activity.QR1"
             android:exported="true" />
         <activity
-            android:name=".Activity.QR2"/>
+            android:name=".Activity.QR2"
+            android:exported="true"/>
+        <activity
+            android:name=".Activity.GiftActivity"
+            android:exported="true"/>
     </application>
 </manifest>
