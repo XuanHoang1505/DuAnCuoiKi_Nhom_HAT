@@ -1,10 +1,12 @@
 package com.example.duan_android.Adapter;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -51,6 +53,27 @@ public class AdapterGift extends BaseAdapter {
         img.setImageResource(gf.getImggift());
         name.setText(gf.getNamegift());
         point.setText(String.valueOf(gf.getPoint()));
+
+        Button btnchange=view.findViewById(R.id.btn_change);
+        btnchange.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showDialog();
+            }
+        });
         return view;
+    }
+
+    private void showDialog() {
+        Dialog dialog=new Dialog(context);
+        dialog.setContentView((R.layout.dialog_change));
+        Button btnclose=dialog.findViewById(R.id.btn_close);
+        btnclose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+        dialog.show();
     }
 }

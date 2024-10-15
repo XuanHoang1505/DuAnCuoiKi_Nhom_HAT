@@ -54,9 +54,10 @@
         </LinearLayout>
 
         <Button
+            android:id="@+id/btn_change"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Nhận ngay"
+            android:text="Đổi ngay"
             android:backgroundTint="@color/orange"
             android:textColor="@android:color/white"
             android:layout_marginTop="8dp" />
