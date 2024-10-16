@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -11,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.DuAn_Android"
         tools:targetApi="31">
+        <activity
+            android:name=".Activity.LoginActivity"
+            android:exported="false" />
         <activity
             android:name=".Activity.ListMovieActivity"
             android:exported="false" />
@@ -39,10 +43,11 @@
             android:name=".Activity.SignUpActivity"
             android:exported="false" />
         <activity
-            android:name=".Activity.LoginActivity"
+            android:name=".Activity.LoadingActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -60,9 +65,10 @@
             android:exported="true" />
         <activity
             android:name=".Activity.QR2"
-            android:exported="true"/>
+            android:exported="true" />
         <activity
             android:name=".Activity.GiftActivity"
-            android:exported="true"/>
+            android:exported="true" />
     </application>
+
 </manifest>
