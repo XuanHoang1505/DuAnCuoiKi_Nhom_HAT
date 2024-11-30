@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.example.duan_android.Model.cinema;
 import com.example.duan_android.R;
 
+
 import java.util.List;
 
 public class AdapterCinema extends BaseAdapter {

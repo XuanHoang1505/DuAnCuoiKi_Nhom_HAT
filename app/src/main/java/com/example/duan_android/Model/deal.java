@@ -1,87 +1,70 @@
 package com.example.duan_android.Model;
 
+import java.sql.Time;
+import java.util.Date;
+
 public class deal {
-    private int img;
-    private String namemovie;
-    private String type;
-    private String code;
-    private String room;
-    private String namecinema;
-    private String time;
-    private String date;
+    private int hinhanh;
+    private String tenphim;
+    private String rapphim;
+    private String phongchieu;
+    private String giobatdau;
+    private String ngaychieu;
 
-    public deal(int img, String namemovie, String type, String code, String room, String namecinema, String time, String date) {
-        this.img = img;
-        this.namemovie = namemovie;
-        this.type = type;
-        this.code = code;
-        this.room = room;
-        this.namecinema = namecinema;
-        this.time = time;
-        this.date = date;
+    public deal(int hinhanh, String tenphim, String rapphim, String phongchieu, String giobatdau, String ngaychieu) {
+        this.hinhanh = hinhanh;
+        this.tenphim = tenphim;
+        this.rapphim = rapphim;
+        this.phongchieu = phongchieu;
+        this.giobatdau = giobatdau;
+        this.ngaychieu = ngaychieu;
     }
 
-    public int getImg() {
-        return img;
+    public int getHinhanh() {
+        return hinhanh;
     }
 
-    public void setImg(int img) {
-        this.img = img;
+    public void setHinhanh(int hinhanh) {
+        this.hinhanh = hinhanh;
     }
 
-    public String getNamemovie() {
-        return namemovie;
+    public String getTenphim() {
+        return tenphim;
     }
 
-    public void setNamemovie(String namemovie) {
-        this.namemovie = namemovie;
+    public void setTenphim(String tenphim) {
+        this.tenphim = tenphim;
     }
 
-    public String getType() {
-        return type;
+    public String getRapphim() {
+        return rapphim;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setRapphim(String rapphim) {
+        this.rapphim = rapphim;
     }
 
-    public String getCode() {
-        return code;
+    public String getPhongchieu() {
+        return phongchieu;
     }
 
-    public void setCode(String code) {
-        this.code = code;
+    public void setPhongchieu(String phongchieu) {
+        this.phongchieu = phongchieu;
     }
 
-    public String getRoom() {
-        return room;
+    public String getGiobatdau() {
+        return giobatdau;
     }
 
-    public void setRoom(String room) {
-        this.room = room;
+    public void setGiobatdau(String giobatdau) {
+        this.giobatdau = giobatdau;
     }
 
-    public String getNamecinema() {
-        return namecinema;
+    public String getNgaychieu() {
+        return ngaychieu;
     }
 
-    public void setNamecinema(String namecinema) {
-        this.namecinema = namecinema;
-    }
-
-    public String getTime() {
-        return time;
-    }
-
-    public void setTime(String time) {
-        this.time = time;
-    }
-
-    public String getDate() {
-        return date;
-    }
-
-    public void setDate(String date) {
-        this.date = date;
+    public void setNgaychieu(String ngaychieu) {
+        this.ngaychieu = ngaychieu;
     }
 }

@@ -19,6 +19,7 @@ public class DealAdapter extends BaseAdapter {
     private int layout;
     private List<deal> arraylist;
 
+    // Constructor
     public DealAdapter(Context context, int layout, List<deal> arraylist) {
         this.context = context;
         this.layout = layout;
@@ -27,42 +28,61 @@ public class DealAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return arraylist.size();
+        return arraylist.size(); // Trả về số lượng phần tử trong danh sách
     }
 
     @Override
-    public Object getItem(int i) {
-        return null;
+    public Object getItem(int position) {
+        return arraylist.get(position); // Trả về đối tượng deal tại vị trí position
     }
 
     @Override
-    public long getItemId(int i) {
-        return 0;
+    public long getItemId(int position) {
+        return position; // Trả về ID của item (thường là vị trí của item trong danh sách)
     }
 
     @Override
-    public View getView(int i, View view, ViewGroup viewGroup) {
-        LayoutInflater inflater=(LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        view=inflater.inflate(layout,null);
-        deal dl=arraylist.get(i);
-        ImageView img=view.findViewById(R.id.img);
-        TextView name=view.findViewById(R.id.namemovie);
-        TextView type=view.findViewById(R.id.movietype);
-        TextView code=view.findViewById(R.id.moviecode);
-        TextView room=view.findViewById(R.id.roomcinema);
-        TextView cinema=view.findViewById(R.id.namecinema);
-        TextView time=view.findViewById(R.id.timemovie);
-        TextView date=view.findViewById(R.id.datemovie);
+    public View getView(int position, View convertView, ViewGroup parent) {
 
-        img.setImageResource(dl.getImg());
-        name.setText(dl.getNamemovie());
-        type.setText(dl.getType());
-        code.setText(dl.getCode());
-        room.setText(dl.getRoom());
-        cinema.setText(dl.getNamecinema());
-        time.setText(dl.getTime());
-        date.setText(dl.getDate());
+        ViewHolder viewHolder;
 
-        return view;
+        if (convertView == null) {
+            LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            convertView = inflater.inflate(layout, null);
+
+            viewHolder = new ViewHolder();
+            viewHolder.img = convertView.findViewById(R.id.img);
+            viewHolder.name = convertView.findViewById(R.id.namemovie);
+            viewHolder.room = convertView.findViewById(R.id.roomcinema);
+            viewHolder.cinema = convertView.findViewById(R.id.namecinema);
+            viewHolder.time = convertView.findViewById(R.id.timemovie);
+            viewHolder.date = convertView.findViewById(R.id.datemovie);
+
+            convertView.setTag(viewHolder);
+        } else {
+            viewHolder = (ViewHolder) convertView.getTag();
+        }
+
+        deal dl = arraylist.get(position);
+
+        // Cập nhật các trường thông tin của deal
+        viewHolder.img.setImageResource(dl.getHinhanh());
+        viewHolder.name.setText(dl.getTenphim());
+        viewHolder.room.setText(dl.getPhongchieu()); // Gán giá trị cho trường phòng chiếu
+        viewHolder.cinema.setText(dl.getRapphim());
+        viewHolder.time.setText(dl.getGiobatdau());
+        viewHolder.date.setText(dl.getNgaychieu());
+
+        return convertView;
+    }
+
+    // Lớp ViewHolder để giữ các thành phần view của mỗi item trong ListView
+    static class ViewHolder {
+        ImageView img;
+        TextView name;
+        TextView room;
+        TextView cinema;
+        TextView time;
+        TextView date;
     }
 }

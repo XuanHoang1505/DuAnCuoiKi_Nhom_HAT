@@ -1,6 +1,8 @@
 package com.example.duan_android.Fragment;
 
 import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -13,75 +15,33 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.duan_android.Adapter.MovieAdapter;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.Volley;
+import com.example.duan_android.Activity.LC_TT_Activity;
+import com.example.duan_android.Adapter.DataMovieAdapter;
 import com.example.duan_android.Model.Movie;
 import com.example.duan_android.R;
+import com.example.duan_android.ultil.CheckConnection;
+import com.example.duan_android.ultil.Server;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link ViewMoreComingSoonFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class ViewMoreComingSoonFragment extends Fragment {
-    private RecyclerView rcvMovie;
-    private MovieAdapter mMovieAdapter;
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+public class ViewMoreComingSoonFragment extends Fragment implements DataMovieAdapter.OnItemClickListener {
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private RecyclerView rcvMovie;
+    private List<Movie> movieList;
+    private DataMovieAdapter adapter;
 
     public ViewMoreComingSoonFragment() {
         // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment ViewMoreComingSoonFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static ViewMoreComingSoonFragment newInstance(String param1, String param2) {
-        ViewMoreComingSoonFragment fragment = new ViewMoreComingSoonFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-    public List<Movie> getListMovie(){
-        List<Movie> list = new ArrayList<>();
-        list.add(new Movie("Qủy ăn tạng Phần 2",R.drawable.image_item10));
-        list.add(new Movie("Lối thoát cuối cùng",R.drawable.image_item11));
-        list.add(new Movie("Fantomat",R.drawable.image_item12));
-        list.add(new Movie("Cô dâu hào môn",R.drawable.image_item13));
-        list.add(new Movie("Đố anh còng được tôi",R.drawable.image_item14));
-        list.add(new Movie("Hẹn hò với sát nhân",R.drawable.image_item15));
-        list.add(new Movie("Elli Và Bí Ẩn Chiếc Tàu Ma",R.drawable.image_item19));
-        list.add(new Movie("Venom: Kèo cuối",R.drawable.image_item20));
-        list.add(new Movie("Võ sĩ giác đấu",R.drawable.image_item21));
-        list.add(new Movie("Hành trình của Moana 2",R.drawable.image_item22));
-        list.add(new Movie("Qủy ăn tạng Phần 2",R.drawable.image_item10));
-        list.add(new Movie("Lối thoát cuối cùng",R.drawable.image_item11));
-        list.add(new Movie("Fantomat",R.drawable.image_item12));
-        return list;
-    }
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
 
     @Override
@@ -90,20 +50,75 @@ public class ViewMoreComingSoonFragment extends Fragment {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_view_more_coming_soon, container, false);
     }
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         Context context = getContext();
-        rcvMovie = view.findViewById(R.id.vm_rcv_moive_CS);
-        mMovieAdapter = new MovieAdapter(context, new MovieAdapter.OnItemClickListener() {
-            @Override
-            public void onMovieClick(Movie movie) {
 
-            }
-        });
+        rcvMovie = view.findViewById(R.id.vm_rcv_moive_CS);
+        movieList = new ArrayList<>();
+
+        if (CheckConnection.haveNetworkConnection(context)) {
+            getMovie();
+        } else {
+            CheckConnection.ShowToast_Short(context, "Hãy kiểm tra lại kết nối của bạn");
+            getActivity().finish();
+        }
+
+        // Khởi tạo adapter và thiết lập RecyclerView
+        adapter = new DataMovieAdapter(context, movieList, this);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(context, 2);
         rcvMovie.setLayoutManager(gridLayoutManager);
-        mMovieAdapter.setData(getListMovie());
-        rcvMovie.setAdapter(mMovieAdapter);
+        rcvMovie.setAdapter(adapter);
+    }
+
+    private void getMovie() {
+        RequestQueue requestQueue = Volley.newRequestQueue(requireContext());
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Server.path_MovieViewMoreComingSoon, new Response.Listener<JSONArray>() {
+            @Override
+            public void onResponse(JSONArray response) {
+                if (response != null) {
+                    for (int i = 0; i < response.length(); i++) {
+                        try {
+                            JSONObject jsonObject = response.getJSONObject(i);
+                            int id = jsonObject.getInt("IDPhim");
+                            String movieName = jsonObject.getString("TenPhim");
+                            String resourceName = jsonObject.getString("HinhAnh");
+                            int resourceImage = getResources().getIdentifier(resourceName, "drawable", requireContext().getPackageName());
+
+                            // Thêm phim vào danh sách
+                            movieList.add(new Movie(id, movieName, resourceImage));
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    adapter.notifyDataSetChanged();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                // Xử lý lỗi kết nối
+            }
+        });
+        requestQueue.add(jsonArrayRequest);
+    }
+
+    @Override
+    public void onItemClick(Movie movie) {
+        // Lưu IDPhim vào SharedPreferences
+        saveIdPhim(movie.getId());
+
+        // Mở chi tiết của phim
+        Intent intent = new Intent(getActivity(), LC_TT_Activity.class);
+        startActivity(intent);
+    }
+
+    private void saveIdPhim(int id) {
+        SharedPreferences sharedPreferences = requireActivity().getSharedPreferences("ShareIdPhim", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putInt("IdPhim", id);
+        editor.apply();
     }
 }

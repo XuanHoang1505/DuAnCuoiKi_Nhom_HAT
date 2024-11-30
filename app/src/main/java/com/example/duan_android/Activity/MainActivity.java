@@ -28,7 +28,6 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
     private ViewPager2 view_pager;
     private BottomNavigationView bottom_nav;
-
     private ArrayList<Fragment> fragmentArrayList = new ArrayList<>();
     @SuppressLint("MissingInflatedId")
     @Override

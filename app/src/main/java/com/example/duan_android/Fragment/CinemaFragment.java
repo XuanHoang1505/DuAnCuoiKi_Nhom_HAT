@@ -5,8 +5,11 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import android.util.JsonReader;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,11 +17,24 @@ import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.duan_android.Activity.ListMovieActivity;
+import com.example.duan_android.ultil.CheckConnection;
 import com.example.duan_android.Model.cinema;
 import com.example.duan_android.Adapter.AdapterCinema;
 import com.example.duan_android.R;
+import com.example.duan_android.ultil.Server;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.sql.DatabaseMetaData;
 import java.util.ArrayList;
 
 /**
@@ -73,6 +89,9 @@ public class CinemaFragment extends Fragment {
         }
     }
 
+
+    public void rap(){
+    }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -80,18 +99,50 @@ public class CinemaFragment extends Fragment {
         View mview =inflater.inflate(R.layout.fragment_cinema, container, false);
         lv=mview.findViewById(R.id.lviewcinema);
         location=mview.findViewById(R.id.editTextText);
-        arrayList=new ArrayList<>();
-        arrayList.add(new cinema(R.drawable.nguyendu, "Galaxy Nguyễn Du", "116 Nguyễn Du, Quận 1, Tp.HCM", "1900 2224"));
-        arrayList.add(new cinema(R.drawable.sala, "Galaxy SaLa", "Tầng 3, Thiaso Mall SaLa", "1900 2224"));
-        arrayList.add(new cinema(R.drawable.tanbinh, "Galaxy Tân Bình", "246 Nguyễn Hồng Đào, Quận Tân Bình, Tp.HCM", "1900 2224"));
-        arrayList.add(new cinema(R.drawable.kdv, "Galaxy Kinh Dương Vương", "Galaxy Kinh Dương Vương", "1900 2224"));
-        arrayList.add(new cinema(R.drawable.quangtrung, "Galaxy Quang trung", "Lầu 3, TTTM CoopMart Foodcosa ", "1900 2224"));
-        arrayList.add(new cinema(R.drawable.hue, "Galaxy Huế", "Tầng 4 TTTM Aeon Mall Huế ", "1900 2224"));
-        arrayList.add(new cinema(R.drawable.danang, "Galaxy Đà Nẵng", "Tầng 3 Coop Mart, 478 Điện Biên Phủ, Quận Thanh Khê, Đà Nẵng ", "1900 2224"));
-        arrayList.add(new cinema(R.drawable.vinh, "Galaxy Vinh", "Lầu 5 Trung tâm HUB – số 1 Lê Hồng Phong, Tp. Vinh ", "1900 2224"));
-        arrayList.add(new cinema(R.drawable.haiphong, "Galaxy Hải Phòng", "04 Lương Khánh Thiện, TTTM Nguyễn Kim – Sài Gòn Mall ", "1900 2224"));
-        arrayList.add(new cinema(R.drawable.camau, "Galaxy Cà Mau", "Lầu 2 TTTM Sense City, số 09 Trần Hưng Đạo, P.5, Tp. Cà Mau", "1900 2224"));
-        adapter = new AdapterCinema(getContext(),R.layout.layout_cinema,arrayList);
+        arrayList = new ArrayList<>();
+        if (CheckConnection.haveNetworkConnection(getActivity().getApplicationContext())) {
+            Log.d("ConnectionStatus", "Network is connected.");
+            RequestQueue requestQueue = Volley.newRequestQueue(getActivity().getApplicationContext());
+            JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Server.rap, new Response.Listener<JSONArray>() {
+                @Override
+                public void onResponse(JSONArray response) {
+                    Log.d("Response", response.toString());
+                    if (response != null) {
+                        int ID,hinhanh;
+                        String tenhinh, tenrap, diachi, sdt;
+                        for (int i = 0; i < response.length(); i++) {
+                            try {
+                                JSONObject jsonObject = response.getJSONObject(i);
+                                ID = jsonObject.getInt("id");
+                                tenhinh = jsonObject.getString("hinhanh");
+                                hinhanh=getResources().getIdentifier(tenhinh,"drawable",getActivity().getPackageName());
+                                tenrap = jsonObject.getString("tenrap");
+                                diachi = jsonObject.getString("diachi");
+                                sdt = jsonObject.getString("sdt");
+
+                                arrayList.add(new cinema(ID, hinhanh, tenrap, diachi, sdt));
+                                adapter.notifyDataSetChanged();
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+                }
+            },
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            Log.e("VolleyError", error.toString());
+                            error.printStackTrace();
+                        }
+                    }
+            );
+            requestQueue.add(jsonArrayRequest);
+        } else {
+            Log.d("ConnectionStatus", "No network connection.");
+            CheckConnection.ShowToast_Short(getActivity().getApplicationContext(), "Bạn hãy kiểm tra lại kết nối");
+        }
+        adapter = new AdapterCinema(getContext(), R.layout.layout_cinema, arrayList);
         lv.setAdapter(adapter);
 
         location.setOnClickListener(new View.OnClickListener() {

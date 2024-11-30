@@ -16,7 +16,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:gravity="center"
-            android:text="Thứ 4, ngày 25 tháng 9" />
+            android:text="" />
 
         <View
             android:layout_width="match_parent"

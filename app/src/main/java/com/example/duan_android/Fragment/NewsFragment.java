@@ -13,10 +13,21 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.duan_android.Adapter.MovieAdapter;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.Volley;
+import com.example.duan_android.Adapter.CommentAdapter;
 import com.example.duan_android.Model.Comment;
 import com.example.duan_android.Model.Movie;
 import com.example.duan_android.R;
+import com.example.duan_android.ultil.CheckConnection;
+import com.example.duan_android.ultil.Server;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +39,9 @@ import java.util.List;
  */
 public class NewsFragment extends Fragment {
     private RecyclerView rcvNews;
-    private MovieAdapter mNewsAdapter;
+    private CommentAdapter mNewsAdapter;
+    private List<Comment> newstList;
+
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -80,31 +93,53 @@ public class NewsFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         Context context = getContext();
         rcvNews = view.findViewById(R.id.rcv_news);
-        mNewsAdapter = new MovieAdapter(context, new MovieAdapter.OnItemClickListener() {
-            @Override
-            public void onMovieClick(Movie movie) {
+        newstList = new ArrayList<>();
 
-            }
-        });
+        if (CheckConnection.haveNetworkConnection(requireContext())) {
+            getNews(); // Lấy dữ liệu từ server
+        } else {
+            CheckConnection.ShowToast_Short(requireContext(), "Hãy kiểm tra lại kết nối mạng.");
+        }
 
+
+        mNewsAdapter = new CommentAdapter(context, newstList);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(context,1);
 
         rcvNews.setLayoutManager(gridLayoutManager);
-
-        mNewsAdapter.setDataC(getListComment());
-
         rcvNews.setAdapter(mNewsAdapter);
 
 
 
     }
-    private List<Comment> getListComment() {
-        List<Comment> list = new ArrayList<>();
-        list.add(new Comment(R.drawable.image_news1,"Mufasa: The Lion King Tiết Lộ Hành Trình Mufasa Trở Thành Vua Sư Tử Vĩ Đại"));
-        list.add(new Comment(R.drawable.image_news2,"Đếm 500 Cameo Từ Deadpool & Wolverine"));
-        list.add(new Comment(R.drawable.image_news3,"Despicable Me 4: Chúng Ta Biết Được Bao Nhiêu Về Minions?"));
-        list.add(new Comment(R.drawable.image_news4,"Top 10 Phim Tình Cảm Hay Nhất 2024"));
-        list.add(new Comment(R.drawable.image_cmt1,"Venom Sẽ Chết?"));
-        return list;
+    private void getNews() {
+        RequestQueue requestQueue = Volley.newRequestQueue(requireContext());
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Server.path_news, new Response.Listener<JSONArray>() {
+            @Override
+            public void onResponse(JSONArray response) {
+                if (response != null) {
+                    for (int i = 0; i < response.length(); i++) {
+                        try {
+                            JSONObject jsonObject = response.getJSONObject(i);
+                            String preview = jsonObject.getString("NoiDung");
+                            String resourceName = jsonObject.getString("HinhAnh");
+                            int resourceImage = getResources().getIdentifier(resourceName, "drawable", requireContext().getPackageName());
+                            newstList.add(new Comment(resourceImage, preview));
+                            mNewsAdapter.notifyDataSetChanged();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                // Xử lý lỗi
+                CheckConnection.ShowToast_Short(requireContext(), "Lỗi khi tải bình luận.");
+            }
+        });
+
+        requestQueue.add(jsonArrayRequest);
     }
+
 }

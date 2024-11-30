@@ -3,6 +3,7 @@ package com.example.duan_android.Fragment;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -28,6 +29,8 @@ import com.example.duan_android.R;
  * create an instance of this fragment.
  */
 public class AccountFragment extends Fragment {
+    private TextView txtName;
+    private TextView txtPoint;
     private Button btnInfor;
     private View mView;
     private Button trade;
@@ -87,6 +90,8 @@ public class AccountFragment extends Fragment {
         gift =  mView.findViewById(R.id.exchange_gift);
         myGift = mView.findViewById(R.id.myGift);
         btn_logout = mView.findViewById(R.id.logout);
+        txtName = mView.findViewById(R.id.name);
+        txtPoint = mView.findViewById(R.id.point);
 
         int currentSpendAmount = 1500000; // Ví dụ: 1.500.000đ
         int maxSpend = 4000000; // Mốc chi tiêu tối đa là 4.000.000đ
@@ -160,6 +165,11 @@ public class AccountFragment extends Fragment {
                 dialog.show();
             }
         });
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("UserPrefs", getContext().MODE_PRIVATE);
+        String userName = sharedPreferences.getString("userName", null);
+        String diemThuong = sharedPreferences.getString("diemThuong", null);
+        txtName.setText(userName);
+        txtPoint.setText(diemThuong);
         return mView;
     }
 }
