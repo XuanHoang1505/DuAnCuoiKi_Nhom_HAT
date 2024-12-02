@@ -21,6 +21,7 @@ import com.example.duan_android.Activity.DealActivity;
 import com.example.duan_android.Activity.GiftActivity;
 import com.example.duan_android.Activity.InformationActivity;
 import com.example.duan_android.Activity.LoginActivity;
+import com.example.duan_android.Activity.ThongTinNhomActivity;
 import com.example.duan_android.R;
 
 /**
@@ -34,9 +35,10 @@ public class AccountFragment extends Fragment {
     private Button btnInfor;
     private View mView;
     private Button trade;
-    private ImageView gift;
+    private ImageView gift,thongTin;
     private ImageView myGift;
     private Button btn_logout;
+
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -92,7 +94,7 @@ public class AccountFragment extends Fragment {
         btn_logout = mView.findViewById(R.id.logout);
         txtName = mView.findViewById(R.id.name);
         txtPoint = mView.findViewById(R.id.point);
-
+        thongTin = mView.findViewById(R.id.thongTin);
         int currentSpendAmount = 1500000; // Ví dụ: 1.500.000đ
         int maxSpend = 4000000; // Mốc chi tiêu tối đa là 4.000.000đ
 
@@ -130,6 +132,13 @@ public class AccountFragment extends Fragment {
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), GiftActivity.class);
                 intent.putExtra("selected_tab", 1);
+                startActivity(intent);
+            }
+        });
+        thongTin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent  intent = new Intent(getActivity(), ThongTinNhomActivity.class);
                 startActivity(intent);
             }
         });

@@ -1,5 +1,8 @@
 package com.example.duan_android.Fragment;
 
+import static android.content.Context.MODE_PRIVATE;
+
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -21,6 +24,7 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.duan_android.Adapter.AdapterLichChieu;
 import com.example.duan_android.Adapter.DateAdapter;
+import com.example.duan_android.Model.NgayChieu;
 import com.example.duan_android.Model.cinema;
 import com.example.duan_android.Model.lichchieu;
 import com.example.duan_android.R;
@@ -49,6 +53,7 @@ public class LichChieuFragment extends Fragment {
     private TabLayout tab;
     private ViewPager viewPager;
     private DateAdapter adapter;
+    private List<NgayChieu> tabItems = new ArrayList<>();
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -105,37 +110,17 @@ public class LichChieuFragment extends Fragment {
         cinemas.add("Chọn rạp");
         // Lấy dữ liệu từ server
         getRap();
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("ShareIdPhim", MODE_PRIVATE);
+        int IdPhim = sharedPreferences.getInt("IdPhim", -1);
+
+        if (IdPhim != -1) {
+            IteamTab(IdPhim);
+        }
 
         // Thiết lập Adapter cho ViewPager và TabLayout
-        adapter = new DateAdapter(getChildFragmentManager(), FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT, false);
+        adapter = new DateAdapter(getChildFragmentManager(), FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
         viewPager.setAdapter(adapter);
         tab.setupWithViewPager(viewPager);
-
-        // Cài đặt custom tab
-        for (int i = 0; i < tab.getTabCount(); i++) {
-            TabLayout.Tab tablayout_date = tab.getTabAt(i);
-            if (tablayout_date != null) {
-                View customView = getLayoutInflater().inflate(R.layout.custom_tab, null);
-                TextView tabDate = customView.findViewById(R.id.tab_date);
-
-                switch (i) {
-                    case 0:
-                        tabDate.setText("25/09");
-                        break;
-                    case 1:
-                        tabDate.setText("26/09");
-                        break;
-                    case 2:
-                        tabDate.setText("27/09");
-                        break;
-                    case 3:
-                        tabDate.setText("28/09");
-                        break;
-                }
-
-                tablayout_date.setCustomView(customView);
-            }
-        }
 
         return mview;
     }
@@ -189,6 +174,62 @@ public class LichChieuFragment extends Fragment {
             Log.d("ConnectionStatus", "No network connection.");
             CheckConnection.ShowToast_Short(getActivity().getApplicationContext(), "Bạn hãy kiểm tra lại kết nối");
         }
+    }
+
+    private void IteamTab(int IdPhim) {
+        String url = Server.ngaychieu + IdPhim;
+        Log.d("ConnectionStatus", "Network is connected.");
+
+        // Tạo RequestQueue
+        RequestQueue requestQueue = Volley.newRequestQueue(getActivity().getApplicationContext());
+
+        // Tạo yêu cầu GET với JsonArrayRequest
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(url, new Response.Listener<JSONArray>() {
+            @Override
+            public void onResponse(JSONArray response) {
+                Log.d("Response", response.toString());
+                if (response != null) {
+                    // Lặp qua các giao dịch trong mảng JSON
+                    for (int i = 0; i < response.length(); i++) {
+                        try {
+                            // Lấy thông tin từ từng đối tượng JSON trong mảng
+                            JSONObject transaction = response.getJSONObject(i);
+                            String ngaychieu = transaction.getString("NgayChieu");
+                            // Thêm giao dịch vào arrayList
+                            tabItems.add(new NgayChieu(ngaychieu));
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    // Cập nhật adapter sau khi dữ liệu đã được thêm vào
+                    adapter.setTabItems(tabItems);
+                    adapter.notifyDataSetChanged(); // Cập nhật dữ liệu cho ViewPager
+                    for (int i = 0; i < tab.getTabCount(); i++) {
+                        TabLayout.Tab tabItem = tab.getTabAt(i);
+                        if (tabItem != null) {
+                            View customView = LayoutInflater.from(getContext()).inflate(R.layout.custom_tab, null);
+                            TextView tabText = customView.findViewById(R.id.tab_date);
+                            if (i < tabItems.size()) {
+                                tabText.setText(tabItems.get(i).getNgaychieu());
+                                tabItem.setCustomView(customView);
+                                Log.d("CustomTab", "Tab " + i + " custom view set: " + tabItems.get(i).getNgaychieu());
+                            }
+                        }
+                    }
+                }
+            }
+        },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.e("VolleyError", error.toString());
+                        error.printStackTrace();
+                    }
+                });
+
+        // Thêm yêu cầu vào hàng đợi
+        requestQueue.add(jsonArrayRequest);
     }
 
 }

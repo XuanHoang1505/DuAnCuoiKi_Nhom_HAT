@@ -1,22 +1,34 @@
 package com.example.duan_android.Fragment;
 
+import static android.content.Context.MODE_PRIVATE;
+
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Spinner;
 
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.duan_android.Adapter.AdapterLichChieu;
+import com.example.duan_android.Model.cinema;
 import com.example.duan_android.Model.lichchieu;
 import com.example.duan_android.R;
+import com.example.duan_android.ultil.Server;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -76,15 +88,75 @@ public class Date1Fragment extends Fragment {
         // Inflate the layout for this fragment
         View mview = inflater.inflate(R.layout.fragment_date1, container, false);
         lv = mview.findViewById(R.id.lvgiochieu);
-
         lichChieuList = new ArrayList<>();
-        lichChieuList.add(new lichchieu("Galaxy Nguyễn Du", Arrays.asList("10:00", "12:00", "14:00")));
-        lichChieuList.add(new lichchieu("Galaxy Sala", Arrays.asList("11:00", "13:00", "15:00", "16:30")));
-        lichChieuList.add(new lichchieu("Galaxy Tân Bình", Arrays.asList("09:30", "11:30", "13:30")));
+        if (getArguments() != null) {
+            String ngaychieu = getArguments().getString("NgayChieu");
 
+            // Hiển thị idGioChieu trong log
+            Log.d("nc", "nc: " + ngaychieu);
+
+            // Tiếp tục gọi API hoặc xử lý theo idGioChieu
+            SharedPreferences sharedPreferences = getActivity().getSharedPreferences("ShareIdPhim", MODE_PRIVATE);
+            int IdPhim = sharedPreferences.getInt("IdPhim", -1);
+            Log.d("SharedPreferences", "IdPhim: " + IdPhim);
+            if (IdPhim != -1) {
+                getgiochieu(IdPhim, ngaychieu);
+            }
+        }
         adapter = new AdapterLichChieu(getContext(), R.layout.layout_lichchieu, lichChieuList);
         lv.setAdapter(adapter);
 
+
         return mview;
+    }
+    private void getgiochieu(int idPhim, String ngaychieu) {
+        String url = Server.giochieu + "idPhim=" + idPhim + "&" + "ngayChieu=" + ngaychieu; // Tạo URL yêu cầu
+        RequestQueue requestQueue = Volley.newRequestQueue(getActivity().getApplicationContext());
+
+        // Tạo yêu cầu GET với JsonArrayRequest
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(url, new Response.Listener<JSONArray>() {
+            @Override
+            public void onResponse(JSONArray response) {
+                Log.d("Response", response.toString());
+                if (response != null) {
+                    lichChieuList.clear(); // Xóa dữ liệu cũ (nếu có)
+                    for (int i = 0; i < response.length(); i++) {
+                        try {
+                            // Lấy dữ liệu từ JSON object
+                            JSONObject jsonObject = response.getJSONObject(i);
+                            String tenrap = jsonObject.getString("tenRap");
+
+                            JSONArray gioChieuArray = jsonObject.getJSONArray("gioChieu");
+                            List<String> giochieulist = new ArrayList<>();
+                            for (int j = 0; j < gioChieuArray.length(); j++) {
+                                giochieulist.add(gioChieuArray.getString(j));
+                            }
+
+                            JSONArray lcArray = jsonObject.getJSONArray("idLichChieu");
+                            List<Integer> lclist = new ArrayList<>();
+                            for (int j = 0; j < lcArray.length(); j++) {
+                                lclist.add(lcArray.getInt(j));
+                            }
+
+                            lichchieu lc = new lichchieu(tenrap,giochieulist,lclist);
+                            lichChieuList.add(lc);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    // Cập nhật dữ liệu trong adapter
+                    adapter.notifyDataSetChanged();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e("VolleyError", error.toString());
+                error.printStackTrace();
+            }
+        });
+
+        // Thêm yêu cầu vào hàng đợi
+        requestQueue.add(jsonArrayRequest);
     }
 }

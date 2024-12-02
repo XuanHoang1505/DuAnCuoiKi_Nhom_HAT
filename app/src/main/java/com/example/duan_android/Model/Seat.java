@@ -1,19 +1,31 @@
 package com.example.duan_android.Model;
 
 public class Seat {
-    private String seatName;
+    private String name;
     private boolean isAvailable;
+    private boolean isSelected; // Trạng thái ghế có được chọn hay không
 
-    public Seat(String seatName, boolean isAvailable) {
-        this.seatName = seatName;
+    // Constructor, getter và setter
+    public Seat(String name, boolean isAvailable) {
+        this.name = name;
         this.isAvailable = isAvailable;
+        this.isSelected = false;
     }
 
-    public String getSeatName() {
-        return seatName;
+    public String getName() {
+        return name;
     }
 
     public boolean isAvailable() {
         return isAvailable;
     }
+
+    public boolean isSelected() {
+        return isSelected;
+    }
+
+    public void setSelected(boolean selected) {
+        isSelected = selected;
+    }
 }
+

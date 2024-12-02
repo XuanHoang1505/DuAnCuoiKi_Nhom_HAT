@@ -15,4 +15,10 @@ public class Server {
     public static String path_VoucherCustomer = "http://" + localhost + "/server/getVoucherCustomer.php";
     public static String path_VoucherDaDung = "http://" + localhost + "/server/getVoucherDaDung.php";
     public static String path_getMovieById = "http://" + localhost + "/server/getMovieById.php?idPhim=";
+    public static String ngaychieu = "http://" + localhost + "/server/getngaychieu.php?idPhim=";
+    public static String giochieu = "http://" + localhost + "/server/getgiochieu.php?";
+    public static String getGhe = "http://" + localhost + "/server/getGhe.php";
+    public static String dangky = "http://" + localhost + "/server/getdangky.php";
+    public static String detail = "http://" + localhost + "/server/getct.php?IDHoaDon=";
+    public static String combo = "http://" + localhost + "/server/getcombo.php";
 }

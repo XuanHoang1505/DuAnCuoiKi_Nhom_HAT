@@ -46,37 +46,37 @@ public class ListMovieActivity extends AppCompatActivity {
                 finish();
             }
         });
-        adapter = new DateAdapter(getSupportFragmentManager(), FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT, true);
-        viewPager.setAdapter(adapter);
-        tab.setupWithViewPager(viewPager);
-        for (int i = 0; i < tab.getTabCount(); i++) {
-            TabLayout.Tab tablayout_date = tab.getTabAt(i);
-            if (tablayout_date != null) {
-                View customView = getLayoutInflater().inflate(R.layout.custom_tab, null);
-                TextView tabTitle = customView.findViewById(R.id.tab_title);
-                TextView tabDate = customView.findViewById(R.id.tab_date);
-
-                switch (i) {
-                    case 0:
-                        tabTitle.setText("Thứ 4");
-                        tabDate.setText("25/09");
-                        break;
-                    case 1:
-                        tabTitle.setText("Thứ 5");
-                        tabDate.setText("26/09");
-                        break;
-                    case 2:
-                        tabTitle.setText("Thứ 6");
-                        tabDate.setText("27/09");
-                        break;
-                    case 3:
-                        tabTitle.setText("Thứ 7");
-                        tabDate.setText("28/09");
-                        break;
-                }
-                tablayout_date.setCustomView(customView);
-            }
-        }
+//        adapter = new DateAdapter(getSupportFragmentManager(), FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT, true);
+//        viewPager.setAdapter(adapter);
+//        tab.setupWithViewPager(viewPager);
+//        for (int i = 0; i < tab.getTabCount(); i++) {
+//            TabLayout.Tab tablayout_date = tab.getTabAt(i);
+//            if (tablayout_date != null) {
+//                View customView = getLayoutInflater().inflate(R.layout.custom_tab, null);
+//                TextView tabTitle = customView.findViewById(R.id.tab_title);
+//                TextView tabDate = customView.findViewById(R.id.tab_date);
+//
+//                switch (i) {
+//                    case 0:
+//                        tabTitle.setText("Thứ 4");
+//                        tabDate.setText("25/09");
+//                        break;
+//                    case 1:
+//                        tabTitle.setText("Thứ 5");
+//                        tabDate.setText("26/09");
+//                        break;
+//                    case 2:
+//                        tabTitle.setText("Thứ 6");
+//                        tabDate.setText("27/09");
+//                        break;
+//                    case 3:
+//                        tabTitle.setText("Thứ 7");
+//                        tabDate.setText("28/09");
+//                        break;
+//                }
+//                tablayout_date.setCustomView(customView);
+//            }
+//        }
 
     }
 }

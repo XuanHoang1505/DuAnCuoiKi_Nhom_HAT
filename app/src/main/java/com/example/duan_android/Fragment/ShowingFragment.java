@@ -121,17 +121,18 @@ public class ShowingFragment extends Fragment implements DataMovieAdapter.OnItem
     @Override
     public void onItemClick(Movie movie) {
         // Lưu thông tin movie vào SharedPreferences hoặc xử lý theo ý muốn
-        saveIdPhim(movie.getId());
+        saveIdPhim(movie.getId(), movie.getName());
 
         // Ví dụ: Mở chi tiết của phim khi click vào item
         Intent intent = new Intent(getActivity(), LC_TT_Activity.class);
         startActivity(intent);
     }
 
-    private void saveIdPhim(int id) {
+    private void saveIdPhim(int id,String TenPhim) {
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences("ShareIdPhim", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putInt("IdPhim", id);
+        editor.putString("TenPhim", TenPhim);
         editor.apply();
     }
 }

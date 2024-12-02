@@ -12,7 +12,6 @@ import android.widget.TextView;
 
 import com.example.duan_android.Activity.BookingActivty;
 import com.example.duan_android.Model.lichchieu;
-
 import com.example.duan_android.R;
 
 import java.util.List;
@@ -54,21 +53,28 @@ public class AdapterLichChieu extends BaseAdapter {
         GridLayout layoutShowtimes = view.findViewById(R.id.giochieu);
         tenrap.setText(lc.getTenrp());
 
-        for (String time : lc.getGiochieu()) {
+        for (int j = 0; j < lc.getGiochieu().size(); j++) {
+            String time = lc.getGiochieu().get(j);
+            int idLichChieu = lc.getIdlc().get(j); // Lấy ID lịch chiếu
+
             Button btntime = new Button(context);
             btntime.setText(time);
             btntime.setPadding(16, 8, 16, 8);
-
             btntime.setBackgroundResource(R.drawable.btn_giochieu);
 
             btntime.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    // Truyền tên rạp, giờ chiếu và ID lịch chiếu qua Intent
                     Intent intent = new Intent(context, BookingActivty.class);
+                    intent.putExtra("tenRap", lc.getTenrp());
+                    intent.putExtra("gioChieu", time);
+                    intent.putExtra("idLichChieu", idLichChieu);
                     context.startActivity(intent);
                 }
             });
 
+            // Đặt LayoutParams cho Button
             GridLayout.LayoutParams params = new GridLayout.LayoutParams();
             params.width = 0;
             params.columnSpec = GridLayout.spec(GridLayout.UNDEFINED, 1f);
@@ -77,8 +83,7 @@ public class AdapterLichChieu extends BaseAdapter {
             btntime.setLayoutParams(params);
             layoutShowtimes.addView(btntime);
         }
+
         return view;
     }
-
-
 }
