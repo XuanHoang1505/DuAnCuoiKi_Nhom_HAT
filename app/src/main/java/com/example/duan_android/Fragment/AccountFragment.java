@@ -154,9 +154,16 @@ public class AccountFragment extends Fragment {
                 builder.setPositiveButton("Đồng ý", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        // Xử lý đăng xuất ở đây
+                        // Xóa tất cả dữ liệu SharedPreferences
+                        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("UserPrefs", getContext().MODE_PRIVATE);
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                        editor.clear(); // Xóa tất cả dữ liệu
+                        editor.apply(); // Áp dụng thay đổi
+
+                        // Chuyển sang màn hình đăng nhập
                         Intent intent = new Intent(getActivity(), LoginActivity.class);
                         startActivity(intent);
+                        getActivity().finish(); // Đóng màn hình hiện tại
                     }
                 });
 
@@ -174,6 +181,7 @@ public class AccountFragment extends Fragment {
                 dialog.show();
             }
         });
+
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences("UserPrefs", getContext().MODE_PRIVATE);
         String userName = sharedPreferences.getString("userName", null);
         String diemThuong = sharedPreferences.getString("diemThuong", null);

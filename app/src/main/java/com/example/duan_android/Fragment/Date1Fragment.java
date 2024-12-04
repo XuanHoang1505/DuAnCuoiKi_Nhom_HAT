@@ -124,6 +124,7 @@ public class Date1Fragment extends Fragment {
                         try {
                             // Lấy dữ liệu từ JSON object
                             JSONObject jsonObject = response.getJSONObject(i);
+                            int idrap = jsonObject.getInt("idRap");
                             String tenrap = jsonObject.getString("tenRap");
 
                             JSONArray gioChieuArray = jsonObject.getJSONArray("gioChieu");
@@ -138,7 +139,7 @@ public class Date1Fragment extends Fragment {
                                 lclist.add(lcArray.getInt(j));
                             }
 
-                            lichchieu lc = new lichchieu(tenrap,giochieulist,lclist);
+                            lichchieu lc = new lichchieu(idrap,tenrap,giochieulist,lclist);
                             lichChieuList.add(lc);
                         } catch (JSONException e) {
                             e.printStackTrace();

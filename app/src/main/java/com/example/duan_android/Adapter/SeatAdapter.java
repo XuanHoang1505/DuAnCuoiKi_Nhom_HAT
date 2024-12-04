@@ -18,7 +18,7 @@ public class SeatAdapter extends RecyclerView.Adapter<SeatAdapter.SeatViewHolder
     private OnSeatSelectedListener onSeatSelectedListener;
 
     public interface OnSeatSelectedListener {
-        void onSeatSelected(int priceChange, boolean isSelected, String seatName); // Thêm tên ghế vào phương thức
+        void onSeatSelected(int priceChange, boolean isSelected,int seatId, String seatName); // Thêm tên ghế vào phương thức
     }
 
     public SeatAdapter(Context context, List<Seat> seatList, OnSeatSelectedListener listener) {
@@ -49,7 +49,7 @@ public class SeatAdapter extends RecyclerView.Adapter<SeatAdapter.SeatViewHolder
 
                 if (onSeatSelectedListener != null) {
                     int priceChange = holder.isSelected ? 60000 : -60000;
-                    onSeatSelectedListener.onSeatSelected(priceChange, holder.isSelected, seat.getName()); // Truyền tên ghế
+                    onSeatSelectedListener.onSeatSelected(priceChange, holder.isSelected, seat.getIdghe(),seat.getName()); // Truyền tên ghế
                 }
             }
         });

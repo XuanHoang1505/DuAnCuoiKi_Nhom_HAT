@@ -2,18 +2,23 @@ package com.example.duan_android.Activity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.duan_android.Adapter.AdapterCombo;
 import com.example.duan_android.ultil.CheckConnection;
@@ -26,6 +31,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class ComboActivity extends AppCompatActivity {
     private ListView lv;
@@ -50,6 +57,9 @@ public class ComboActivity extends AppCompatActivity {
         ttcombo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                SharedPreferences sharedPreferences=getSharedPreferences("saveidve",MODE_PRIVATE);
+                int idVe=sharedPreferences.getInt("IDVe",-1);
+                deleteve(idVe);
                 finish();
             }
         });
@@ -57,6 +67,50 @@ public class ComboActivity extends AppCompatActivity {
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                // Xóa thông tin idVoucher khỏi SharedPreferences
+                SharedPreferences sharedPreferences = getSharedPreferences("VoucherPrefs", MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.remove("SelectedVoucherId"); // Xóa idVoucher
+
+                // Chuỗi tổng hợp chỉ chứa tên combo
+                StringBuilder comboNamesBuilder = new StringBuilder();
+                // Chuỗi tổng hợp tên combo và số lượng
+                StringBuilder comboDetailsBuilder = new StringBuilder();
+                // Chuỗi lưu số lượng combo
+                StringBuilder comboQuantitiesBuilder = new StringBuilder();
+
+                for (combo cb : arrayList) {
+                    if (cb.getSoluong() > 0) {
+                        // Lưu tên combo vào comboNamesBuilder
+                        comboNamesBuilder.append(cb.getTitle())
+                                .append("\n");
+
+                        // Lưu tên combo và số lượng vào comboDetailsBuilder
+                        comboDetailsBuilder.append(cb.getTitle())
+                                .append(" x")
+                                .append(cb.getSoluong())
+                                .append("\n");
+
+                        // Lưu số lượng combo vào comboQuantitiesBuilder
+                        comboQuantitiesBuilder.append(cb.getSoluong())
+                                .append("\n");
+                    }
+                }
+
+                // In log các chuỗi trước khi lưu vào SharedPreferences
+                Log.d("ComboActivity", "Combo Names: " + comboNamesBuilder.toString());
+                Log.d("ComboActivity", "Combo Details: " + comboDetailsBuilder.toString());
+                Log.d("ComboActivity", "Combo Quantities: " + comboQuantitiesBuilder.toString());
+                Log.d("ComboActivity", "Total Price: " + totalPrice.getText().toString());
+
+                // Lưu cả ba chuỗi vào SharedPreferences
+                editor.putString("ComboNames", comboNamesBuilder.toString());
+                editor.putString("ComboDetails", comboDetailsBuilder.toString());
+                editor.putString("ComboQuantities", comboQuantitiesBuilder.toString()); // Lưu số lượng combo
+                editor.putString("TotalPrice", totalPrice.getText().toString());
+                editor.apply();
+
+                // Chuyển sang PayActivity
                 Intent intent = new Intent(ComboActivity.this, PayActivity.class);
                 startActivity(intent);
             }
@@ -118,5 +172,22 @@ public class ComboActivity extends AppCompatActivity {
     public void updateTotalPrice(double total) {
         totalPrice.setText(""+total);
     }
+    private void deleteve(int idVe){
+        String url=Server.deleteve;
+        RequestQueue requestQueue=Volley.newRequestQueue(getApplication());
+        StringRequest request = new StringRequest(Request.Method.POST, url,
+                response -> {
 
+                },
+                error -> Toast.makeText(getApplication(), "Lỗi kết nối", Toast.LENGTH_SHORT).show()
+        ) {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<>();
+                params.put("IDVe", String.valueOf(idVe));
+                return params;
+            }
+        };
+        requestQueue.add(request);
+    }
 }

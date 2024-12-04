@@ -1,7 +1,10 @@
 package com.example.duan_android.Adapter;
 
+import static android.content.Context.MODE_PRIVATE;
+
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -67,6 +70,7 @@ public class AdapterLichChieu extends BaseAdapter {
                 public void onClick(View view) {
                     // Truyền tên rạp, giờ chiếu và ID lịch chiếu qua Intent
                     Intent intent = new Intent(context, BookingActivty.class);
+                    intent.putExtra("idRap", lc.getIdrap());
                     intent.putExtra("tenRap", lc.getTenrp());
                     intent.putExtra("gioChieu", time);
                     intent.putExtra("idLichChieu", idLichChieu);

@@ -21,4 +21,17 @@ public class Server {
     public static String dangky = "http://" + localhost + "/server/getdangky.php";
     public static String detail = "http://" + localhost + "/server/getct.php?IDHoaDon=";
     public static String combo = "http://" + localhost + "/server/getcombo.php";
+    public static String postve = "http://" + localhost + "/server/postve.php";
+    public static String path_MyVoucher = "http://" + localhost + "/server/getMyVoucher.php";
+    public static String getThongTin = "http://" + localhost + "/server/getThongTinVe.php?";
+    public static String path_getCinemaById = "http://" + localhost + "/server/getCinemaById.php?idRap=";
+    public static String deleteve = "http://" + localhost + "/server/deleteve.php?";
+    public static String ngaychieuCinema = "http://" + localhost + "/server/getngaychieuCinema.php?idRap=";
+    public static String giochieuCinema = "http://" + localhost + "/server/getgiochieuCinema.php?";
+    public static String getSoTienGiam = "http://" + localhost + "/server/getSoTienGiam.php?";
+    public static String postvc = "http://" + localhost + "/server/postvc.php";
+    public static String getdiemthuong = "http://" + localhost + "/server/getdiemthuong.php?IDKhachHang=";
+    public static String posthd = "http://" + localhost + "/server/posthd.php";
+    public static String getIdComboByname = "http://" + localhost + "/server/getIdComboByname.php?tenCombo=";
+
 }

@@ -42,17 +42,18 @@
             android:layout_marginTop="10dp">
 
             <!-- ImageView nằm bên trái -->
+
+            <!-- TextView đầu tiên (Tên phim) nằm bên phải của ImageView -->
             <ImageView
                 android:id="@+id/image_movie"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/image_cam"
+                android:layout_width="120dp"
+                android:layout_height="150dp"
+                android:paddingLeft="30dp"
                 android:paddingTop="20dp"
                 android:paddingRight="10dp"
                 android:paddingBottom="20dp"
-                android:paddingLeft="30dp" />
+                android:src="@drawable/image_cam" />
 
-            <!-- TextView đầu tiên (Tên phim) nằm bên phải của ImageView -->
             <TextView
                 android:id="@+id/text_movie"
                 android:layout_width="wrap_content"
@@ -152,6 +153,7 @@
                 android:orientation="horizontal"
                 android:paddingTop="10dp">
                 <TextView
+                    android:id="@+id/tenGhe"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="2x người lớn - Member - D1,D2"
@@ -163,6 +165,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1" />
                 <TextView
+                    android:id="@+id/giaVe"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="120,000đ"
@@ -185,6 +188,7 @@
                 android:orientation="horizontal"
                 android:paddingTop="10dp">
                 <TextView
+                    android:id="@+id/tenCombo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="1x iCombo 1 Big Extra STD"
@@ -196,6 +200,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1" />
                 <TextView
+                    android:id="@+id/giaCombo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="109,000đ"
@@ -240,6 +245,7 @@
                 </TextView>
 
                 <TextView
+                    android:id="@+id/totalPrice_hoaDon1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="20dp"
@@ -292,7 +298,7 @@
             android:id="@+id/layout_7th"
             android:layout_below="@+id/layout_6th"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="100dp"
             android:background="@color/white"
             android:paddingTop="30dp"
             android:paddingBottom="30dp"
@@ -304,6 +310,7 @@
                 android:textSize="18dp"
                 android:layout_marginLeft="20dp"/>
             <TextView
+                android:id="@+id/totalPrice_hoaDon2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="229,000đ"

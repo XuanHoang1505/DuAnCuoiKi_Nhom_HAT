@@ -17,11 +17,10 @@ import com.example.duan_android.R;
 
 import java.util.List;
 
-public class AdapterDateShow  extends BaseAdapter {
+public class AdapterDateShow extends BaseAdapter {
     private Context context;
     private int layout;
     private List<Movie> listMovie;
-    private ImageView movie_poster;
 
     public AdapterDateShow(Context context, List<Movie> arraylist, int layout) {
         this.context = context;
@@ -30,8 +29,6 @@ public class AdapterDateShow  extends BaseAdapter {
     }
 
     @Override
-
-
     public int getCount() {
         return listMovie.size();
     }
@@ -50,41 +47,55 @@ public class AdapterDateShow  extends BaseAdapter {
     public View getView(int i, View view, ViewGroup viewGroup) {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         view = inflater.inflate(layout, null);
+
         Movie movie = listMovie.get(i);
 
+        // Ánh xạ các view
+        TextView movieTitle = view.findViewById(R.id.movie_title);
+        TextView movieDuration = view.findViewById(R.id.movie_duration);
+        TextView movieDate = view.findViewById(R.id.movie_date);
+        ImageView moviePoster = view.findViewById(R.id.movie_poster);
+        GridLayout timeLayout = view.findViewById(R.id.time);
 
-        TextView movie_title = view.findViewById(R.id.movie_title);
-        TextView movie_duration= view.findViewById(R.id.movie_duration);
-        TextView movie_date = (TextView)view.findViewById(R.id.movie_date);
-        movie_poster = view.findViewById(R.id.movie_poster);
-        GridLayout time = view.findViewById(R.id.time);
+        // Thiết lập dữ liệu cho các view
+        moviePoster.setImageResource(movie.getResourceImage());
+        movieTitle.setText(movie.getName());
+        movieDuration.setText(movie.getTime() + " phút");
+        movieDate.setText(movie.getDate());
 
-        movie_poster.setImageResource(movie.getResourceImage());
-        movie_title.setText(movie.getName());
-        movie_duration.setText(movie.getTime()+"");
-        movie_date.setText(movie.getDate());
+        // Tạo các nút giờ chiếu
+        for (int j = 0; j < movie.getShowTime().size(); j++) {
+            String showtime = movie.getShowTime().get(j);
 
-        for (String Showtime: movie.getShowTime()) {
-            Button btntime = new Button(context);
-            btntime.setText(Showtime);
-            btntime.setPadding(16, 8, 16, 8);
-            btntime.setBackgroundResource(R.drawable.btn_dateshow);
+            // Tạo nút Button cho mỗi giờ chiếu
+            Button btnShowtime = new Button(context);
+            btnShowtime.setText(showtime);
+            btnShowtime.setPadding(16, 8, 16, 8);
+            btnShowtime.setBackgroundResource(R.drawable.btn_dateshow);
 
-            btntime.setOnClickListener(new View.OnClickListener() {
+            // Gắn sự kiện click cho nút Button
+            btnShowtime.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    // Truyền thông tin qua Intent
                     Intent intent = new Intent(context, BookingActivty.class);
+                    intent.putExtra("movieId", movie.getId());
+                    intent.putExtra("movieName", movie.getName());
+                    intent.putExtra("showtime", showtime);
                     context.startActivity(intent);
                 }
             });
+
+            // Đặt LayoutParams cho Button
             GridLayout.LayoutParams params = new GridLayout.LayoutParams();
             params.width = 0;
             params.columnSpec = GridLayout.spec(GridLayout.UNDEFINED, 1f);
             params.setMargins(8, 8, 8, 8);
 
-            btntime.setLayoutParams(params);
-            time.addView(btntime);
+            btnShowtime.setLayoutParams(params);
+            timeLayout.addView(btnShowtime);
         }
+
         return view;
     }
 }
