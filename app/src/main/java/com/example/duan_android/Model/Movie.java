@@ -15,9 +15,37 @@ public class Movie {
     private double soSao;
     private String trangThai;
     private String ngayKhoiChieu;
-
     private List<String> showTime;
-    public Movie(int id,String name, int resourceImage) {
+    private List<Integer> idlc;
+
+    public Movie(int id, String name, int resourceImage, double soSao, String ngayKhoiChieu, int time, List<Integer> idlc, List<String> showTime) {
+        this.id = id;
+        this.name = name;
+        this.resourceImage = resourceImage;
+        this.soSao = soSao;
+        this.ngayKhoiChieu = ngayKhoiChieu;
+        this.time = time;
+        this.idlc = idlc;
+        this.showTime = showTime;
+    }
+
+    public String getNgayKhoiChieu() {
+        return ngayKhoiChieu;
+    }
+
+    public void setNgayKhoiChieu(String ngayKhoiChieu) {
+        this.ngayKhoiChieu = ngayKhoiChieu;
+    }
+
+    public List<Integer> getIdlc() {
+        return idlc;
+    }
+
+    public void setIdlc(List<Integer> idlc) {
+        this.idlc = idlc;
+    }
+
+    public Movie(int id, String name, int resourceImage) {
         this.id =id;
         this.name = name;
         this.resourceImage = resourceImage;

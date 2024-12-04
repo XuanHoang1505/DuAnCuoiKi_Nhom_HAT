@@ -34,13 +34,42 @@
             android:paddingTop="4dp"
             android:textColor="#FF6F00"/>
 
-        <TextView
-            android:id="@+id/cinema"
-            android:layout_width="wrap_content"
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Galaxy Nguyễn Du - Rạp 2\nSuất 11:00 - Thứ 5, 26/09/2024"
-            android:textSize="14sp"
-            android:paddingTop="8dp"/>
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/cinema"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="8dp"
+                android:text="Galaxy Nguyễn Du"
+                android:textSize="14sp" />
+            <TextView
+                android:id="@+id/room"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="8dp"
+                android:text="Rạp 2"
+                android:textSize="14sp" />
+            <TextView
+                android:id="@+id/giochieu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="8dp"
+                android:text="11:00"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/ngaychieu"
+                android:layout_width="101dp"
+                android:layout_height="wrap_content"
+                android:paddingTop="8dp"
+                android:text="26/09/2024"
+                android:textSize="14sp" />
+        </LinearLayout>
 
         <ImageView
             android:id="@+id/qrcode"
@@ -51,14 +80,27 @@
             android:layout_gravity="center"
             android:paddingTop="16dp"/>
 
-        <TextView
-            android:id="@+id/seat"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Ghế - H10,H11"
-            android:textSize="16sp"
-            android:paddingTop="16dp"
-            android:textStyle="bold"/>
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ghế: "
+                android:textSize="16sp"
+                android:paddingTop="16dp"
+                android:textStyle="bold"/>
+            <TextView
+                android:id="@+id/seat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="H10,H11"
+                android:textSize="16sp"
+                android:paddingTop="16dp"
+                android:textStyle="bold"/>
+        </LinearLayout>
+
 
         <TextView
             android:id="@+id/combo"
@@ -69,30 +111,66 @@
             android:paddingTop="8dp"
             android:textStyle="bold"/>
 
-        <TextView
-            android:id="@+id/ticketcode"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Mã vé: 764341"
-            android:textSize="14sp"
-            android:paddingTop="8dp"/>
 
-        <TextView
-            android:id="@+id/ticketstar"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Điểm thưởng: 20"
-            android:textSize="14sp"
-            android:paddingTop="4dp"/>
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Mã vé: "
+                android:textSize="14sp"
+                android:paddingTop="8dp"/>
+            <TextView
+                android:id="@+id/ticketcode"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" 764341"
+                android:textSize="14sp"
+                android:paddingTop="8dp"/>
+        </LinearLayout>
 
-        <TextView
-            android:id="@+id/total"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Tổng cộng: 219,000đ"
-            android:textSize="14sp"
-            android:paddingTop="4dp"
-            android:textStyle="bold"/>
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Điểm thưởng: "
+                android:textSize="14sp"
+                android:paddingTop="4dp"/>
+            <TextView
+                android:id="@+id/ticketstar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="20"
+                android:textSize="14sp"
+                android:paddingTop="4dp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tổng cộng: "
+                android:textSize="14sp"
+                android:paddingTop="4dp"
+                android:textStyle="bold"/>
+            <TextView
+                android:id="@+id/total"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="219,000"
+                android:textSize="14sp"
+                android:paddingTop="4dp"
+                android:textStyle="bold"/>
+        </LinearLayout>
+
 
         <Button
             android:id="@+id/btn_close"

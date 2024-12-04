@@ -33,5 +33,5 @@ public class Server {
     public static String getdiemthuong = "http://" + localhost + "/server/getdiemthuong.php?IDKhachHang=";
     public static String posthd = "http://" + localhost + "/server/posthd.php";
     public static String getIdComboByname = "http://" + localhost + "/server/getIdComboByname.php?tenCombo=";
-
+    public static String gettongtien = "http://" + localhost + "/server/gettongtien.php?IDKhachHang=";
 }

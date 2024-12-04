@@ -1,7 +1,10 @@
 package com.example.duan_android.Adapter;
 
+import static android.content.Context.MODE_PRIVATE;
+
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -51,6 +54,7 @@ public class AdapterDateShow extends BaseAdapter {
         Movie movie = listMovie.get(i);
 
         // Ánh xạ các view
+        TextView movie_rating= view.findViewById(R.id.movie_rating);
         TextView movieTitle = view.findViewById(R.id.movie_title);
         TextView movieDuration = view.findViewById(R.id.movie_duration);
         TextView movieDate = view.findViewById(R.id.movie_date);
@@ -62,11 +66,12 @@ public class AdapterDateShow extends BaseAdapter {
         movieTitle.setText(movie.getName());
         movieDuration.setText(movie.getTime() + " phút");
         movieDate.setText(movie.getDate());
+        movie_rating.setText(movie.getSoSao()+"");
 
         // Tạo các nút giờ chiếu
         for (int j = 0; j < movie.getShowTime().size(); j++) {
             String showtime = movie.getShowTime().get(j);
-
+            int idLichChieu = movie.getIdlc().get(j);
             // Tạo nút Button cho mỗi giờ chiếu
             Button btnShowtime = new Button(context);
             btnShowtime.setText(showtime);
@@ -79,9 +84,13 @@ public class AdapterDateShow extends BaseAdapter {
                 public void onClick(View view) {
                     // Truyền thông tin qua Intent
                     Intent intent = new Intent(context, BookingActivty.class);
-                    intent.putExtra("movieId", movie.getId());
-                    intent.putExtra("movieName", movie.getName());
-                    intent.putExtra("showtime", showtime);
+                    intent.putExtra("gioChieu", showtime);
+                    intent.putExtra("idLichChieu",idLichChieu);
+                    SharedPreferences sharedPreferences = context.getSharedPreferences("ShareIdPhim", MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putInt("IdPhim", movie.getId());
+                    editor.putString("TenPhim", movie.getName());
+                    editor.apply();
                     context.startActivity(intent);
                 }
             });

@@ -1,9 +1,11 @@
 package com.example.duan_android.Activity;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import androidx.appcompat.app.AppCompatActivity;
@@ -80,6 +82,7 @@ public class DealActivity extends AppCompatActivity {
                             try {
                                 // Lấy thông tin từ từng đối tượng JSON trong mảng
                                 JSONObject transaction = response.getJSONObject(i);
+                                int IDHD=transaction.getInt("IDHoaDon");
                                 String tenhinh = transaction.getString("HinhAnh");
                                 int hinh=getResources().getIdentifier(tenhinh,"drawable",getPackageName());
                                 String tenphim = transaction.getString("TenPhim");
@@ -88,9 +91,7 @@ public class DealActivity extends AppCompatActivity {
                                 String giochieu = transaction.getString("GioChieu");
                                 String ngaychieu = transaction.getString("NgayChieu");
 
-
-                                // Thêm giao dịch vào arrayList
-                                arrayList.add(new deal(hinh,tenphim,rap,phongchieu,giochieu,ngaychieu));
+                                arrayList.add(new deal(IDHD,hinh,tenphim,rap,phongchieu,giochieu,ngaychieu));
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
@@ -115,5 +116,21 @@ public class DealActivity extends AppCompatActivity {
             Log.d("ConnectionStatus", "No network connection.");
             CheckConnection.ShowToast_Short(getApplicationContext(), "Bạn hãy kiểm tra lại kết nối");
         }
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                // Lấy đối tượng 'deal' từ arrayList tại vị trí người dùng chọn
+                deal selectedDeal = arrayList.get(position);
+
+                // Lấy ID hóa đơn của giao dịch được chọn
+                int idHoaDon = selectedDeal.getIdhd();
+
+                // Mở một activity mới và truyền ID hóa đơn để lấy chi tiết giao dịch
+                Intent intent = new Intent(DealActivity.this, QR.class);
+                intent.putExtra("IDHoaDon", idHoaDon);
+                startActivity(intent);
+            }
+        });
+
     }
 }

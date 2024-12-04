@@ -1,6 +1,7 @@
 package com.example.duan_android.Fragment;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -8,6 +9,7 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,13 +18,25 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.duan_android.Activity.DealActivity;
 import com.example.duan_android.Activity.GiftActivity;
 import com.example.duan_android.Activity.InformationActivity;
 import com.example.duan_android.Activity.LoginActivity;
 import com.example.duan_android.Activity.ThongTinNhomActivity;
 import com.example.duan_android.R;
+import com.example.duan_android.ultil.Server;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -31,13 +45,15 @@ import com.example.duan_android.R;
  */
 public class AccountFragment extends Fragment {
     private TextView txtName;
-    private TextView txtPoint;
+    private TextView txtPoint, currentSpend;
     private Button btnInfor;
     private View mView;
     private Button trade;
     private ImageView gift,thongTin;
     private ImageView myGift;
     private Button btn_logout;
+    private int currentSpendAmount = 0;
+    private ProgressBar progressBar;
 
 
     // TODO: Rename parameter arguments, choose names that match
@@ -87,21 +103,28 @@ public class AccountFragment extends Fragment {
         mView = inflater.inflate(R.layout.fragment_account, container, false);
         btnInfor =mView.findViewById(R.id.btnInfor);
         trade = mView.findViewById(R.id.trade);
-        ProgressBar progressBar = mView.findViewById(R.id.progressBar);
-        TextView currentSpend = mView.findViewById(R.id.tv_current_spend);
+        progressBar = mView.findViewById(R.id.progressBar);
+        currentSpend = mView.findViewById(R.id.tv_current_spend);
         gift =  mView.findViewById(R.id.exchange_gift);
         myGift = mView.findViewById(R.id.myGift);
         btn_logout = mView.findViewById(R.id.logout);
         txtName = mView.findViewById(R.id.name);
         txtPoint = mView.findViewById(R.id.point);
         thongTin = mView.findViewById(R.id.thongTin);
-        int currentSpendAmount = 1500000; // Ví dụ: 1.500.000đ
-        int maxSpend = 4000000; // Mốc chi tiêu tối đa là 4.000.000đ
 
-
+        int maxSpend = 4000000;
         progressBar.setMax(maxSpend);
-        progressBar.setProgress(currentSpendAmount);
-        currentSpend.setText(currentSpendAmount + "đ");
+        SharedPreferences spkh = getActivity().getSharedPreferences("UserPrefs", Context.MODE_PRIVATE);
+        String idkh = spkh.getString("userId", null);
+        if (idkh != null) {
+            diemthuong(idkh);
+            tongtien(idkh);
+        } else {
+            Toast.makeText(getActivity().getApplicationContext(), "ID khách hàng không hợp lệ", Toast.LENGTH_SHORT).show();
+        }
+
+
+
 
         btnInfor.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -154,16 +177,9 @@ public class AccountFragment extends Fragment {
                 builder.setPositiveButton("Đồng ý", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        // Xóa tất cả dữ liệu SharedPreferences
-                        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("UserPrefs", getContext().MODE_PRIVATE);
-                        SharedPreferences.Editor editor = sharedPreferences.edit();
-                        editor.clear(); // Xóa tất cả dữ liệu
-                        editor.apply(); // Áp dụng thay đổi
-
-                        // Chuyển sang màn hình đăng nhập
+                        // Xử lý đăng xuất ở đây
                         Intent intent = new Intent(getActivity(), LoginActivity.class);
                         startActivity(intent);
-                        getActivity().finish(); // Đóng màn hình hiện tại
                     }
                 });
 
@@ -181,12 +197,69 @@ public class AccountFragment extends Fragment {
                 dialog.show();
             }
         });
-
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences("UserPrefs", getContext().MODE_PRIVATE);
         String userName = sharedPreferences.getString("userName", null);
-        String diemThuong = sharedPreferences.getString("diemThuong", null);
         txtName.setText(userName);
-        txtPoint.setText(diemThuong);
         return mView;
+    }
+    private void diemthuong(String idkh){
+        String url = Server.getdiemthuong + idkh;
+        RequestQueue requestQueue = Volley.newRequestQueue(getActivity().getApplicationContext());
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONArray jsonArray = new JSONArray(response);
+                    if (jsonArray.length() > 0) {
+                        JSONObject jsonObject = jsonArray.getJSONObject(0); // Lấy đối tượng đầu tiên trong mảng
+                        if (jsonObject.has("DiemThuong")) {
+                            String diemThuong = jsonObject.getString("DiemThuong");
+                            txtPoint.setText(diemThuong);
+
+                        }
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    Toast.makeText(getActivity().getApplicationContext(), "Lỗi khi xử lý dữ liệu", Toast.LENGTH_SHORT).show();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getActivity().getApplicationContext(), "Lỗi kết nối với server", Toast.LENGTH_SHORT).show();
+            }
+        });
+        requestQueue.add(stringRequest);
+    }
+
+    private void tongtien(String idkh){
+        String url = Server.gettongtien + idkh;
+        RequestQueue requestQueue = Volley.newRequestQueue(getActivity().getApplicationContext());
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONArray jsonArray = new JSONArray(response);
+                    if (jsonArray.length() > 0) {
+                        JSONObject jsonObject = jsonArray.getJSONObject(0); // Lấy đối tượng đầu tiên trong mảng
+                        if (jsonObject.has("TongTien")) {
+                            int tongtien = jsonObject.getInt("TongTien");
+                            currentSpendAmount=tongtien;
+                            progressBar.setProgress(currentSpendAmount);
+                            currentSpend.setText(currentSpendAmount + "đ");
+                        }
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    Toast.makeText(getActivity().getApplicationContext(), "Lỗi khi xử lý dữ liệu", Toast.LENGTH_SHORT).show();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getActivity().getApplicationContext(), "Lỗi kết nối với server", Toast.LENGTH_SHORT).show();
+            }
+        });
+        requestQueue.add(stringRequest);
     }
 }

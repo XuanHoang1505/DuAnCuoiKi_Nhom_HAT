@@ -48,7 +48,10 @@ public class PayActivity extends AppCompatActivity {
     private ImageView img;
     private ArrayList<Pay> payList;
     private int soTienGiam = 0;
-    private int IDCombo = -1;
+    private int IDCombo = 0;
+    int soLuong=0;
+    double tongTien=0;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,17 +106,18 @@ public class PayActivity extends AppCompatActivity {
         }
 
         SharedPreferences sharedPreferencesb = getSharedPreferences("VoucherPrefs", MODE_PRIVATE);
-        int selectedVoucherId = sharedPreferencesb.getInt("SelectedVoucherId", -1);
+        int selectedVoucherId = sharedPreferencesb.getInt("SelectedVoucherId", 0);
 
         SharedPreferences sharedTenCombo = getSharedPreferences("VoucherPrefs", MODE_PRIVATE);
-        String  tenCombo = sharedTenCombo.getString("ComboNames", "");
+        String  tenCombo = sharedTenCombo.getString("ComboNames", null);
 
         SharedPreferences sharedSoLuong = getSharedPreferences("VoucherPrefs", MODE_PRIVATE);
-        String  soLuongstr = sharedSoLuong.getString("ComboQuantities", "");
+        String  soLuongstr = sharedSoLuong.getString("ComboQuantities", null);
 
-        String cleanedQuantity = soLuongstr.trim();
-        int soLuong = Integer.parseInt(cleanedQuantity);
-
+        if (!soLuongstr.isEmpty()){
+            String cleanedQuantity = soLuongstr.trim();
+            soLuong = Integer.parseInt(cleanedQuantity);
+        }
 
         getIDCombo(tenCombo, new IDComboCallback() {
             @Override
@@ -133,13 +137,36 @@ public class PayActivity extends AppCompatActivity {
         if (selectedVoucherId != -1) {
             loadDiscountAmount(selectedVoucherId);
         }
-        double tongTien = Double.parseDouble(totalPrice_hoaDon2.getText().toString());
+
+
         btnPay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                // Log thông tin trước khi gọi createhd
+                Log.d("PayActivity", "Thông tin thanh toán: ");
+                Log.d("PayActivity", "ID Khách hàng: " + idKh);
+                Log.d("PayActivity", "Selected Voucher ID: " + selectedVoucherId);
+                Log.d("PayActivity", "ID Vé: " + idVe);
+                Log.d("PayActivity", "ID Combo: " + IDCombo);
+                Log.d("PayActivity", "Số lượng: " + soLuong);
+                Log.d("PayActivity", "Tổng tiền: " + tongTien);
+
+                // Gọi phương thức createhd
                 createhd(idKh, selectedVoucherId, idVe, IDCombo, soLuong, tongTien);
+
+                // Hiển thị thông báo
+                Toast.makeText(PayActivity.this, "Đặt vé thành công!", Toast.LENGTH_SHORT).show();
+
+                // Chuyển sang MainActivity
+                Intent intent = new Intent(PayActivity.this, MainActivity.class);
+                startActivity(intent);
+
+                // Kết thúc activity hiện tại
+                finish();
             }
         });
+
+
     }
 
     private void getThongTin(int idVe, int idLichChieu) {
@@ -193,13 +220,13 @@ public class PayActivity extends AppCompatActivity {
                                     giaCombo.setText("");
                                 }
 
-                                double totalPriceCombo = 0.0;
+                                double totalPriceCombo = 0;
                                 if (totalPriceComboStr != null && !totalPriceComboStr.isEmpty()) {
                                     try {
                                         totalPriceCombo = Double.parseDouble(totalPriceComboStr);
                                     } catch (NumberFormatException e) {
                                         giaCombo.setText("0 VND");
-                                        totalPriceCombo = 0.0;
+                                        totalPriceCombo = 0;
                                     }
                                 }
 
@@ -208,6 +235,15 @@ public class PayActivity extends AppCompatActivity {
                                 
                                 totalPrice_hoaDon1.setText(totalPrice + " VND");
                                 totalPrice_hoaDon2.setText(totalPrice + " VND");
+                                String rawPrice = totalPrice_hoaDon2.getText().toString(); // Chuỗi gốc
+                                Log.d("PRICE_LOG", "Raw Price: " + rawPrice); // Log chuỗi gốc
+
+                                String sanitizedPrice = rawPrice.replace("d", "").replace("VND","");
+                                Log.d("PRICE_LOG", "Sanitized Price: " + sanitizedPrice); // Log chuỗi đã làm sạch
+
+                                tongTien = Double.parseDouble(sanitizedPrice); // Chuyển đổi sang kiểu double
+                                Log.d("PRICE_LOG", "Total Price (double): " + tongTien); // Log giá trị tổng tiền
+
                             }
 
                             // Lấy tên ghế
@@ -287,7 +323,6 @@ public class PayActivity extends AppCompatActivity {
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
                 response -> {
-                    // Xử lý phản hồi từ server
                     Toast.makeText(PayActivity.this, response, Toast.LENGTH_SHORT).show();
                     if (response.contains("Mua Thanh Cong")) {
                         Intent intent = new Intent(PayActivity.this, DealActivity.class);
@@ -297,7 +332,7 @@ public class PayActivity extends AppCompatActivity {
                 error -> {
                     // Xử lý lỗi
                     Log.e("VolleyError", error.toString());
-                    Toast.makeText(PayActivity.this, "Lỗi kết nối", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(PayActivity.this, ",,,,,,,,,,,", Toast.LENGTH_SHORT).show();
                 }) {
             @Override
             protected Map<String, String> getParams() {
@@ -306,9 +341,10 @@ public class PayActivity extends AppCompatActivity {
                 params.put("IDKhachHang", idkh);
                 params.put("IDVoucher", String.valueOf(idvc));
                 params.put("IDVe", String.valueOf(idve));
-                params.put("IDComBo", String.valueOf(idcb));
-                params.put("SoLuongComBo", String.valueOf(slcb));
+                params.put("IDCombo", String.valueOf(idcb));
+                params.put("SoLuongCombo", String.valueOf(slcb));
                 params.put("TongTien", String.valueOf(tongtien));
+                Log.d("Params", "IDKhachHang: " + idkh + ", IDVoucher: " + idvc + ", IDVe: " + idve + ", IDCombo: " + idcb + ", SoLuongCombo: " + slcb + ", TongTien: " + tongtien);
                 return params;
             }
         };
@@ -361,7 +397,9 @@ public class PayActivity extends AppCompatActivity {
 
         totalPrice_hoaDon1.setText(finalPrice + " VND");
         totalPrice_hoaDon2.setText(finalPrice + " VND");
-
+        String rawPrice = totalPrice_hoaDon2.getText().toString(); // Chuỗi gốc
+        String sanitizedPrice = rawPrice.replaceAll("[^\\d]", "");
+        tongTien = Double.parseDouble(sanitizedPrice);
         // Show a toast confirming the discount was applied
         Toast.makeText(PayActivity.this, "Đã giảm: " + soTienGiam + " VND", Toast.LENGTH_SHORT).show();
     }

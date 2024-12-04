@@ -92,10 +92,7 @@ public class Date1Fragment extends Fragment {
         if (getArguments() != null) {
             String ngaychieu = getArguments().getString("NgayChieu");
 
-            // Hiển thị idGioChieu trong log
             Log.d("nc", "nc: " + ngaychieu);
-
-            // Tiếp tục gọi API hoặc xử lý theo idGioChieu
             SharedPreferences sharedPreferences = getActivity().getSharedPreferences("ShareIdPhim", MODE_PRIVATE);
             int IdPhim = sharedPreferences.getInt("IdPhim", -1);
             Log.d("SharedPreferences", "IdPhim: " + IdPhim);

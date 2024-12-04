@@ -249,7 +249,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="20dp"
-                    android:text="229,000đ"
+                    android:text=""
                     android:textColor="@color/orange"
                     android:textSize="15dp">
                 </TextView>
@@ -313,7 +313,7 @@
                 android:id="@+id/totalPrice_hoaDon2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="229,000đ"
+                android:text=""
                 android:textSize="18dp"
                 android:textColor="@color/orange"
                 android:layout_marginLeft="20dp"/>

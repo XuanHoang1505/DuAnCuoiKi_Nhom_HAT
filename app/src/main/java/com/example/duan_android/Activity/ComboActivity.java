@@ -79,11 +79,17 @@ public class ComboActivity extends AppCompatActivity {
                 // Chuỗi lưu số lượng combo
                 StringBuilder comboQuantitiesBuilder = new StringBuilder();
 
+                // Kiểm tra danh sách combo trước khi xử lý
+                if (arrayList == null || arrayList.isEmpty()) {
+                    Log.e("ComboActivity", "Danh sách combo rỗng hoặc null!");
+                    return; // Dừng nếu danh sách rỗng
+                }
+
+                // Tổng hợp dữ liệu cho từng combo
                 for (combo cb : arrayList) {
                     if (cb.getSoluong() > 0) {
                         // Lưu tên combo vào comboNamesBuilder
-                        comboNamesBuilder.append(cb.getTitle())
-                                .append("\n");
+                        comboNamesBuilder.append(cb.getTitle()).append("\n");
 
                         // Lưu tên combo và số lượng vào comboDetailsBuilder
                         comboDetailsBuilder.append(cb.getTitle())
@@ -92,22 +98,27 @@ public class ComboActivity extends AppCompatActivity {
                                 .append("\n");
 
                         // Lưu số lượng combo vào comboQuantitiesBuilder
-                        comboQuantitiesBuilder.append(cb.getSoluong())
-                                .append("\n");
+                        comboQuantitiesBuilder.append(cb.getSoluong()).append("\n");
                     }
+                }
+
+                // Kiểm tra giá trị tổng giá tiền (đảm bảo không trống)
+                String totalPriceString = totalPrice.getText().toString();
+                if (totalPriceString == null || totalPriceString.isEmpty()) {
+                    totalPriceString = "0"; // Gán giá trị mặc định
                 }
 
                 // In log các chuỗi trước khi lưu vào SharedPreferences
                 Log.d("ComboActivity", "Combo Names: " + comboNamesBuilder.toString());
                 Log.d("ComboActivity", "Combo Details: " + comboDetailsBuilder.toString());
                 Log.d("ComboActivity", "Combo Quantities: " + comboQuantitiesBuilder.toString());
-                Log.d("ComboActivity", "Total Price: " + totalPrice.getText().toString());
+                Log.d("ComboActivity", "Total Price: " + totalPriceString);
 
                 // Lưu cả ba chuỗi vào SharedPreferences
                 editor.putString("ComboNames", comboNamesBuilder.toString());
                 editor.putString("ComboDetails", comboDetailsBuilder.toString());
                 editor.putString("ComboQuantities", comboQuantitiesBuilder.toString()); // Lưu số lượng combo
-                editor.putString("TotalPrice", totalPrice.getText().toString());
+                editor.putString("TotalPrice", totalPriceString); // Lưu tổng giá
                 editor.apply();
 
                 // Chuyển sang PayActivity
@@ -115,7 +126,6 @@ public class ComboActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
         if (CheckConnection.haveNetworkConnection(getApplication())) {
             RequestQueue requestQueue = Volley.newRequestQueue(getApplication());
             JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Server.combo, new Response.Listener<JSONArray>() {

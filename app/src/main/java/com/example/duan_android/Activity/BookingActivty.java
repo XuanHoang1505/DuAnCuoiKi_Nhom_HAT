@@ -46,7 +46,7 @@ public class BookingActivty extends AppCompatActivity {
     private ImageView btn_back;
     private TextView txtcountSeat, txtseatName, txt_movieName, movie_name;
     private Button continueButton, giochieu;
-    private List<String> selectedSeats = new ArrayList<>();  // Biến để lưu tên các ghế đã chọn
+    private List<String> selectedSeats = new ArrayList<>();
     private List<Integer> selectedSeatIds = new ArrayList<>();
 
     @SuppressLint("MissingInflatedId")
@@ -99,10 +99,12 @@ public class BookingActivty extends AppCompatActivity {
         txt_movieName.setText(TenPhim);
         movie_name.setText(TenPhim);
         seatList = new ArrayList<>();
-        int idRap=getIntent().getIntExtra("idRap",-1);
+        SharedPreferences sharedIDRap = getSharedPreferences("CinemaPrefs", MODE_PRIVATE);
+        int idRap = sharedIDRap.getInt("cinema_id", -1);
+        Log.d("Booking","idrap = " +idRap);
         String tenRap = getIntent().getStringExtra("tenRap");
         String gioChieu = getIntent().getStringExtra("gioChieu");
-        int idLichChieu = getIntent().getIntExtra("idLichChieu", -1); // Mặc định là -1 nếu không có ID
+        int idLichChieu = getIntent().getIntExtra("idLichChieu", -1);
         giochieu.setText(gioChieu);
 
         // Kiểm tra kết nối mạng trước khi gọi API
@@ -163,7 +165,7 @@ public class BookingActivty extends AppCompatActivity {
                                 JSONObject seatObject = response.getJSONObject(i);
                                 int idghe=seatObject.getInt("idghe");
                                 String name = seatObject.getString("tenghe");
-                                boolean isAvailable = seatObject.getInt("trangthai") == 1; // If there's no idve, it's available
+                                boolean isAvailable = seatObject.getInt("trangthai") == 1;
 
                                 // Add the seat to the list
                                 seatList.add(new Seat(idghe,name, isAvailable));

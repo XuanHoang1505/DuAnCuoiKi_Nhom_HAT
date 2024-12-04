@@ -43,46 +43,24 @@ public class DealAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-
-        ViewHolder viewHolder;
-
-        if (convertView == null) {
-            LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = inflater.inflate(layout, null);
-
-            viewHolder = new ViewHolder();
-            viewHolder.img = convertView.findViewById(R.id.img);
-            viewHolder.name = convertView.findViewById(R.id.namemovie);
-            viewHolder.room = convertView.findViewById(R.id.roomcinema);
-            viewHolder.cinema = convertView.findViewById(R.id.namecinema);
-            viewHolder.time = convertView.findViewById(R.id.timemovie);
-            viewHolder.date = convertView.findViewById(R.id.datemovie);
-
-            convertView.setTag(viewHolder);
-        } else {
-            viewHolder = (ViewHolder) convertView.getTag();
-        }
-
+        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        convertView = inflater.inflate(layout, null);
         deal dl = arraylist.get(position);
 
-        // Cập nhật các trường thông tin của deal
-        viewHolder.img.setImageResource(dl.getHinhanh());
-        viewHolder.name.setText(dl.getTenphim());
-        viewHolder.room.setText(dl.getPhongchieu()); // Gán giá trị cho trường phòng chiếu
-        viewHolder.cinema.setText(dl.getRapphim());
-        viewHolder.time.setText(dl.getGiobatdau());
-        viewHolder.date.setText(dl.getNgaychieu());
-
+        ImageView img = convertView.findViewById(R.id.img);
+        TextView name = convertView.findViewById(R.id.namemovie);
+        TextView room = convertView.findViewById(R.id.roomcinema);
+        TextView cinema = convertView.findViewById(R.id.namecinema);
+        TextView time = convertView.findViewById(R.id.timemovie);
+        TextView date = convertView.findViewById(R.id.datemovie);
+        img.setImageResource(dl.getHinhanh());
+        name.setText(dl.getTenphim());
+        room.setText(dl.getPhongchieu());
+        cinema.setText(dl.getRapphim());
+        time.setText(dl.getGiobatdau());
+        date.setText(dl.getNgaychieu());
         return convertView;
     }
 
-    // Lớp ViewHolder để giữ các thành phần view của mỗi item trong ListView
-    static class ViewHolder {
-        ImageView img;
-        TextView name;
-        TextView room;
-        TextView cinema;
-        TextView time;
-        TextView date;
-    }
+
 }

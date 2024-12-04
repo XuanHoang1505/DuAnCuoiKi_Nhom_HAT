@@ -5,6 +5,7 @@ import static android.content.Context.MODE_PRIVATE;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -68,13 +69,18 @@ public class AdapterLichChieu extends BaseAdapter {
             btntime.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    // Truyền tên rạp, giờ chiếu và ID lịch chiếu qua Intent
+
                     Intent intent = new Intent(context, BookingActivty.class);
                     intent.putExtra("idRap", lc.getIdrap());
                     intent.putExtra("tenRap", lc.getTenrp());
                     intent.putExtra("gioChieu", time);
                     intent.putExtra("idLichChieu", idLichChieu);
                     context.startActivity(intent);
+                    SharedPreferences sharedPreferences = context.getSharedPreferences("CinemaPrefs", MODE_PRIVATE);
+                    Log.d("AdapterLichChieu","put idrap = "+lc.getIdrap());
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putInt("cinema_id", lc.getIdrap());
+                    editor.apply();
                 }
             });
 

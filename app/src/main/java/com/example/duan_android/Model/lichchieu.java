@@ -8,6 +8,7 @@ public class lichchieu {
     private List<String> giochieu;
     private List<Integer> idlc;
 
+
     public lichchieu(int idrap, String tenrp, List<String> giochieu, List<Integer> idlc) {
         this.idrap = idrap;
         this.tenrp = tenrp;
