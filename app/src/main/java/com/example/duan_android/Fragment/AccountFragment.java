@@ -24,6 +24,7 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.duan_android.Activity.DealActivity;
@@ -116,15 +117,14 @@ public class AccountFragment extends Fragment {
         progressBar.setMax(maxSpend);
         SharedPreferences spkh = getActivity().getSharedPreferences("UserPrefs", Context.MODE_PRIVATE);
         String idkh = spkh.getString("userId", null);
+        int id = Integer.parseInt(idkh);
+        fetchUserDetails(id);
         if (idkh != null) {
             diemthuong(idkh);
             tongtien(idkh);
         } else {
             Toast.makeText(getActivity().getApplicationContext(), "ID khách hàng không hợp lệ", Toast.LENGTH_SHORT).show();
         }
-
-
-
 
         btnInfor.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -197,9 +197,6 @@ public class AccountFragment extends Fragment {
                 dialog.show();
             }
         });
-        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("UserPrefs", getContext().MODE_PRIVATE);
-        String userName = sharedPreferences.getString("userName", null);
-        txtName.setText(userName);
         return mView;
     }
     private void diemthuong(String idkh){
@@ -261,5 +258,29 @@ public class AccountFragment extends Fragment {
             }
         });
         requestQueue.add(stringRequest);
+    }
+    private void fetchUserDetails(int idUser) {
+        String url = Server.path_getUserById + idUser;
+
+        RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(url, null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                try {
+                    // Lấy dữ liệu từ JSON Object
+                    String tenKhachHang = response.getString("TenKhachHang");
+                    txtName.setText(tenKhachHang);
+                } catch (Exception e) {
+                    Log.e("FetchUserDetails", "Error parsing user details", e);
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e("FetchUserDetails", "Error fetching user details", error);
+            }
+        });
+
+        requestQueue.add(jsonObjectRequest);
     }
 }

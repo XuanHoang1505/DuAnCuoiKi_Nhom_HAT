@@ -15,7 +15,6 @@ import androidx.viewpager.widget.ViewPager;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.duan_android.Adapter.LC_TT_ViewPageApdapter;
@@ -27,7 +26,6 @@ import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
 
 public class LC_TT_Activity extends AppCompatActivity {
@@ -95,7 +93,7 @@ public class LC_TT_Activity extends AppCompatActivity {
                     // Cập nhật giao diện
                     txtMovieTitle.setText(movie.getName());
                     txtDuration.setText(String.valueOf(movie.getTime()) + " phút");
-                    txtstar.setText(String.valueOf(movie.getSoSao()) + " sao");
+                    txtstar.setText(String.valueOf(movie.getSoSao()));
                     txtDate.setText(movie.getngayKhoiChieu());
                     imgcinema.setImageResource(movie.getResourceImage());
                     // Trong phương thức onResponse
