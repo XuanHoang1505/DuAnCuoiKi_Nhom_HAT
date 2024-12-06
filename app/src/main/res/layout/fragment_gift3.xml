@@ -5,7 +5,14 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".Fragment.Gift3Fragment">
-
+    <TextView
+        android:id="@+id/txtThongBao"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:visibility="gone"
+        android:layout_gravity="center_horizontal">
+    </TextView>
     <ListView
         android:id="@+id/lvgift"
         android:layout_width="match_parent"

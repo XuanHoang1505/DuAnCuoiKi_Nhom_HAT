@@ -101,60 +101,11 @@
         android:background="@color/white"
         >
 
-        <RelativeLayout
-            android:layout_width="500dp"
-            android:layout_height="106dp"
-            android:padding="10dp"
-            android:background="@drawable/rounded_voucher"
-            >
-
-            <ImageView
-                android:id="@+id/imgVoc"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:src="@drawable/voucher" />
-
-            <TextView
-                android:layout_width="175dp"
-                android:layout_height="42dp"
-                android:layout_marginLeft="20dp"
-                android:layout_toRightOf="@+id/imgVoc"
-                android:text="Bạn được giảm 50% khi mua 5 vé thường"
-                android:textColor="@color/black"
-                android:textSize="17dp"
-                android:textStyle="bold" />
-            <TextView
-                android:layout_width="50dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_toRightOf="@+id/imgVoc"
-                android:text="#ABC001"
-                android:textColor="@color/white"
-                android:textSize="14dp"
-                android:textStyle="bold"
-                android:textAlignment="center"
-                android:background="@drawable/round_ege"
-                android:layout_marginTop="50dp"
-                />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="80dp"
-                android:layout_toRightOf="@+id/imgVoc"
-                android:text="Giảm 50000đ"
-                android:textColor="@color/gray"
-                android:textSize="14dp"
-                android:textStyle="bold"
-                android:textAlignment="center"
-                android:layout_marginTop="60dp"
-                />
-            <CheckBox
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_alignParentEnd="true"
-                android:layout_centerVertical="true"
-                />
-        </RelativeLayout>
+        <ListView
+            android:id="@+id/lv_voucher"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </ListView>
     </RelativeLayout>
 
     <RelativeLayout

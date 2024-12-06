@@ -1,154 +1,145 @@
 package com.example.duan_android.Fragment;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
 
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.duan_android.Activity.ListMovieActivity;
-import com.example.duan_android.Model.cinema;
 import com.example.duan_android.Adapter.AdapterCinema;
+import com.example.duan_android.Model.cinema;
 import com.example.duan_android.R;
+import com.example.duan_android.ultil.CheckConnection;
+import com.example.duan_android.ultil.Server;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link CinemaFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class CinemaFragment extends Fragment {
     private EditText location;
     private ListView lv;
     private ArrayList<cinema> arrayList;
     private AdapterCinema adapter;
     private String selectedLocation = "Toàn quốc";
-
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private RequestQueue requestQueue;
 
     public CinemaFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment CinemaFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static CinemaFragment newInstance(String param1, String param2) {
-        CinemaFragment fragment = new CinemaFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View mview = inflater.inflate(R.layout.fragment_cinema, container, false);
+
+        lv = mview.findViewById(R.id.lviewcinema);
+        location = mview.findViewById(R.id.editTextText);
+        arrayList = new ArrayList<>();
+
+        requestQueue = Volley.newRequestQueue(requireContext()); // Sử dụng requireContext() thay vì getActivity()
+
+        if (CheckConnection.haveNetworkConnection(requireContext())) {
+            Log.d("ConnectionStatus", "Network is connected.");
+            fetchCinemaData();
+        } else {
+            Log.d("ConnectionStatus", "No network connection.");
+            CheckConnection.ShowToast_Short(requireContext(), "Bạn hãy kiểm tra lại kết nối");
         }
-    }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View mview =inflater.inflate(R.layout.fragment_cinema, container, false);
-        lv=mview.findViewById(R.id.lviewcinema);
-        location=mview.findViewById(R.id.editTextText);
-        arrayList=new ArrayList<>();
-        arrayList.add(new cinema(R.drawable.nguyendu, "Galaxy Nguyễn Du", "116 Nguyễn Du, Quận 1, Tp.HCM", "1900 2224"));
-        arrayList.add(new cinema(R.drawable.sala, "Galaxy SaLa", "Tầng 3, Thiaso Mall SaLa", "1900 2224"));
-        arrayList.add(new cinema(R.drawable.tanbinh, "Galaxy Tân Bình", "246 Nguyễn Hồng Đào, Quận Tân Bình, Tp.HCM", "1900 2224"));
-        arrayList.add(new cinema(R.drawable.kdv, "Galaxy Kinh Dương Vương", "Galaxy Kinh Dương Vương", "1900 2224"));
-        arrayList.add(new cinema(R.drawable.quangtrung, "Galaxy Quang trung", "Lầu 3, TTTM CoopMart Foodcosa ", "1900 2224"));
-        arrayList.add(new cinema(R.drawable.hue, "Galaxy Huế", "Tầng 4 TTTM Aeon Mall Huế ", "1900 2224"));
-        arrayList.add(new cinema(R.drawable.danang, "Galaxy Đà Nẵng", "Tầng 3 Coop Mart, 478 Điện Biên Phủ, Quận Thanh Khê, Đà Nẵng ", "1900 2224"));
-        arrayList.add(new cinema(R.drawable.vinh, "Galaxy Vinh", "Lầu 5 Trung tâm HUB – số 1 Lê Hồng Phong, Tp. Vinh ", "1900 2224"));
-        arrayList.add(new cinema(R.drawable.haiphong, "Galaxy Hải Phòng", "04 Lương Khánh Thiện, TTTM Nguyễn Kim – Sài Gòn Mall ", "1900 2224"));
-        arrayList.add(new cinema(R.drawable.camau, "Galaxy Cà Mau", "Lầu 2 TTTM Sense City, số 09 Trần Hưng Đạo, P.5, Tp. Cà Mau", "1900 2224"));
-        adapter = new AdapterCinema(getContext(),R.layout.layout_cinema,arrayList);
+        adapter = new AdapterCinema(requireContext(), R.layout.layout_cinema, arrayList, cinema -> {
+            saveCinemaIdToPreferences(cinema.getId());
+            Intent intent = new Intent(getActivity(), ListMovieActivity.class);
+            intent.putExtra("cinemaID", cinema.getId());
+            startActivity(intent);
+        });
         lv.setAdapter(adapter);
 
-        location.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showLocationDialog();
-            }
-        });
-        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Intent intent = new Intent(getActivity(), ListMovieActivity.class);
-                startActivity(intent);
-            }
-        });
+        location.setOnClickListener(v -> showLocationDialog());
+
         return mview;
     }
+
+    private void fetchCinemaData() {
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Server.rap, response -> {
+            if (!isAdded()) {
+                Log.e("CinemaFragment", "Fragment not attached, ignoring response.");
+                return;
+            }
+
+            Log.d("Response", response.toString());
+            if (response != null) {
+                for (int i = 0; i < response.length(); i++) {
+                    try {
+                        JSONObject jsonObject = response.getJSONObject(i);
+                        int ID = jsonObject.getInt("id");
+                        String tenhinh = jsonObject.getString("hinhanh");
+                        int hinhanh = getResources().getIdentifier(tenhinh, "drawable", requireActivity().getPackageName());
+                        String tenrap = jsonObject.getString("tenrap");
+                        String diachi = jsonObject.getString("diachi");
+                        String sdt = jsonObject.getString("sdt");
+
+                        arrayList.add(new cinema(ID, hinhanh, tenrap, diachi, sdt));
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+                adapter.notifyDataSetChanged();
+            }
+        }, error -> {
+            Log.e("VolleyError", error.toString());
+            error.printStackTrace();
+        });
+
+        requestQueue.add(jsonArrayRequest);
+    }
+
+    private void saveCinemaIdToPreferences(int cinemaId) {
+        SharedPreferences sharedPreferences = requireActivity().getSharedPreferences("CinemaPrefs", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putInt("cinema_id", cinemaId);
+        editor.apply();
+    }
+
     private void showLocationDialog() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        if (!isAdded()) {
+            Log.e("CinemaFragment", "Fragment not attached, cannot show dialog.");
+            return;
+        }
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
         builder.setTitle("Vị trí");
+        String[] locations = {"Toàn quốc", "TP Hồ Chí Minh", "Hà Nội", "Đà Nẵng", "An Giang", "Bà Rịa - Vũng Tàu", "Bến Tre", "Cà Mau", "Đắk Lắk", "Hải Phòng", "Khánh Hòa", "Nghệ An"};
+        int checkedItem = -1;
 
-        // Tạo danh sách các địa điểm
-        String[] locations = {"Toàn quốc", "TP Hồ Chí Minh", "Hà Nội", "Đà Nẵng", "An Giang",
-                "Bà Rịa - Vũng Tàu", "Bến Tre", "Cà Mau", "Đắk Lắk", "Hải Phòng",
-                "Khánh Hòa", "Nghệ An"};
+        builder.setSingleChoiceItems(locations, checkedItem, (dialog, which) -> selectedLocation = locations[which]);
 
-        // Mảng boolean lưu trạng thái chọn
-        int checkedItem = -1; // Không có lựa chọn mặc định
+        builder.setPositiveButton("Xác nhận", (dialog, which) -> location.setText(selectedLocation));
+        builder.setNegativeButton("Đóng", (dialog, which) -> dialog.dismiss());
 
-        // Set danh sách radio button
-        builder.setSingleChoiceItems(locations, checkedItem, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                // Lưu vị trí được chọn vào biến selectedLocation
-                selectedLocation = locations[which];
-            }
-        });
+        builder.create().show();
+    }
 
-        // Thêm nút Xác nhận
-        builder.setPositiveButton("Xác nhận", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                // Cập nhật TextView với địa điểm đã chọn
-                location.setText(selectedLocation);
-            }
-        });
-
-        // Thêm nút Đóng
-        builder.setNegativeButton("Đóng", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-            }
-        });
-
-        // Hiển thị dialog
-        AlertDialog dialog = builder.create();
-        dialog.show();
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        if (requestQueue != null) {
+            requestQueue.cancelAll(tag -> true);
+        }
     }
 }

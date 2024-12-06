@@ -1,7 +1,6 @@
 package com.example.duan_android.Fragment;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -14,30 +13,32 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.duan_android.Activity.ViewMoreActivity;
-import com.example.duan_android.Adapter.MovieAdapter;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.Volley;
+import com.example.duan_android.Adapter.CommentAdapter;
 import com.example.duan_android.Model.Comment;
-import com.example.duan_android.Model.Movie;
 import com.example.duan_android.R;
+import com.example.duan_android.ultil.CheckConnection;
+import com.example.duan_android.ultil.Server;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link CommentFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class CommentFragment extends Fragment {
     private RecyclerView rcvComment;
-    private MovieAdapter mCommentAdapter;
+    private CommentAdapter commentAdapter;
+    private List<Comment> commentList;
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+    // Các tham số truyền vào Fragment (nếu cần)
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
 
@@ -45,15 +46,6 @@ public class CommentFragment extends Fragment {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment CommentFragment.
-     */
-    // TODO: Rename and change types and number of parameters
     public static CommentFragment newInstance(String param1, String param2) {
         CommentFragment fragment = new CommentFragment();
         Bundle args = new Bundle();
@@ -75,39 +67,61 @@ public class CommentFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+        // Inflate layout cho fragment
         return inflater.inflate(R.layout.fragment_comment, container, false);
     }
 
+    @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
         Context context = getContext();
         rcvComment = view.findViewById(R.id.rcv_comment);
-        mCommentAdapter = new MovieAdapter(context, new MovieAdapter.OnItemClickListener() {
-            @Override
-            public void onMovieClick(Movie movie) {
+        commentList = new ArrayList<>();
 
+        if (CheckConnection.haveNetworkConnection(requireContext())) {
+            getComments(); // Lấy dữ liệu từ server
+        } else {
+            CheckConnection.ShowToast_Short(requireContext(), "Hãy kiểm tra lại kết nối mạng.");
+        }
+
+        // Khởi tạo adapter
+        commentAdapter = new CommentAdapter(context, commentList);
+
+        // Thiết lập RecyclerView với GridLayoutManager
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(context, 1);
+        rcvComment.setLayoutManager(gridLayoutManager);
+        rcvComment.setAdapter(commentAdapter);
+    }
+
+    private void getComments() {
+        RequestQueue requestQueue = Volley.newRequestQueue(requireContext());
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Server.path_Comment, new Response.Listener<JSONArray>() {
+            @Override
+            public void onResponse(JSONArray response) {
+                if (response != null) {
+                    for (int i = 0; i < response.length(); i++) {
+                        try {
+                            JSONObject jsonObject = response.getJSONObject(i);
+                            String preview = jsonObject.getString("NoiDung");
+                            String resourceName = jsonObject.getString("HinhAnh");
+                            int resourceImage = getResources().getIdentifier(resourceName, "drawable", requireContext().getPackageName());
+                            commentList.add(new Comment(resourceImage, preview));
+                            commentAdapter.notifyDataSetChanged();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                // Xử lý lỗi
+                CheckConnection.ShowToast_Short(requireContext(), "Lỗi khi tải bình luận.");
             }
         });
 
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(context,1);
-
-        rcvComment.setLayoutManager(gridLayoutManager);
-
-        mCommentAdapter.setDataC(getListComment());
-
-        rcvComment.setAdapter(mCommentAdapter);
-
-
-
-    }
-    private List<Comment> getListComment() {
-        List<Comment> list = new ArrayList<>();
-        list.add(new Comment(R.drawable.image_cmt1,"[Preview] Venom The Last Dance: Sony Có Lấy Lại Lòng Tin Sau Morbius & Madame Web?"));
-        list.add(new Comment(R.drawable.image_cmt2,"[Review] Transformers One: Xuất Sắc Ngoài Mong Đợi"));
-        list.add(new Comment(R.drawable.image_cmt3,"[Review] Joker Folie À Deux: Gã Hề Hay Hoàng Tử Tội Phạm?"));
-        list.add(new Comment(R.drawable.image_cmt4,"[Review] Cám: Phiên Bản Lạnh Gáy Chưa Từng Có Từ Cổ Tích Quen Thuộc!/"));
-        list.add(new Comment(R.drawable.image_cmt5,"[Preview] Joker: Folie à Deux: Có Chấn Động Thế Giới Như Phần Trước?"));
-        return list;
+        requestQueue.add(jsonArrayRequest);
     }
 }

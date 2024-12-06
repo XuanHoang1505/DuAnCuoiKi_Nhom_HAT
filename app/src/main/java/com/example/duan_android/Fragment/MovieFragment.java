@@ -10,7 +10,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.duan_android.Adapter.MovieAdapter;
 import com.example.duan_android.Adapter.MovieViewPagerAdapter;
 import com.example.duan_android.R;
 import com.example.duan_android.Widget.CustomViewPager;

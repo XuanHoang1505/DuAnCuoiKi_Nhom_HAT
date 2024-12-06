@@ -1,38 +1,46 @@
 package com.example.duan_android.Fragment;
 
+import static android.content.Context.MODE_PRIVATE;
+
 import android.annotation.SuppressLint;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.duan_android.Adapter.AdapterDateShow;
+import com.example.duan_android.Adapter.AdapterLichChieu;
 import com.example.duan_android.Model.Movie;
+import com.example.duan_android.Model.lichchieu;
 import com.example.duan_android.R;
+import com.example.duan_android.ultil.Server;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link FirstDateFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class FirstDateFragment extends Fragment {
     private ListView lv;
     private AdapterDateShow adapter;
-    private List<Movie> listMovie;
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+    private List<Movie> lichChieuList;
+
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
 
@@ -40,15 +48,6 @@ public class FirstDateFragment extends Fragment {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment FirstDateFragment.
-     */
-    // TODO: Rename and change types and number of parameters
     public static FirstDateFragment newInstance(String param1, String param2) {
         FirstDateFragment fragment = new FirstDateFragment();
         Bundle args = new Bundle();
@@ -71,19 +70,79 @@ public class FirstDateFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View mview = inflater.inflate(R.layout.fragment_first_date, container, false);
         lv = mview.findViewById(R.id.lvMovie);
+        lichChieuList = new ArrayList<>();
 
-        listMovie = new ArrayList<>();
-        listMovie.add(new Movie(R.drawable.image_item1, "Cám", "10/10/2024", 111, Arrays.asList("19:30","22:00", "22:30")));
-        listMovie.add(new Movie(R.drawable.image_item4, "ODDITY", "03/10/2024", 101, Arrays.asList("23:00", "23:30")));
-        listMovie.add(new Movie(R.drawable.image_item8, "làm giàu với ma", "15/10/2024", 120, Arrays.asList("19:30","20:00", "20:30")));
-        listMovie.add(new Movie(R.drawable.image_item10, "Quỷ ăn tạng 2", "20/10/2024", 130, Arrays.asList("19:30","21:00", "21:30")));
+        if (getArguments() != null) {
+            String ngaychieu = getArguments().getString("NgayChieu");
+            Log.d("nc", "nc: " + ngaychieu);
 
-        adapter = new AdapterDateShow(getContext(),listMovie,R.layout.item_movie_cinema);
+            SharedPreferences sharedPreferences = getActivity().getSharedPreferences("CinemaPrefs", MODE_PRIVATE);
+            int IdRap = sharedPreferences.getInt("cinema_id", -1);
+            Log.d("SharedPreferences", "IdRap: " + IdRap);
+            if (IdRap != -1) {
+                getgiochieu(IdRap, ngaychieu);
+            }
+        }
+
+        adapter = new AdapterDateShow(getContext(), lichChieuList,R.layout.item_movie_cinema);
         lv.setAdapter(adapter);
         return mview;
+    }
 
+    private void getgiochieu(int idRap, String ngaychieu) {
+        String url = Server.giochieuCinema + "idRap=" + idRap + "&ngayChieu=" + ngaychieu; // URL API
+        RequestQueue requestQueue = Volley.newRequestQueue(requireContext());
+
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(url, new Response.Listener<JSONArray>() {
+            @Override
+            public void onResponse(JSONArray response) {
+                Log.d("Response", response.toString());
+                if (response != null) {
+                    lichChieuList.clear(); // Xóa dữ liệu cũ
+
+                    for (int i = 0; i < response.length(); i++) {
+                        try {
+                            JSONObject movieObject = response.getJSONObject(i);
+
+                            int idPhim = movieObject.getInt("idPhim");
+                            String tenPhim = movieObject.getString("tenPhim");
+                            String hinhAnh = movieObject.getString("hinhAnh");
+                            int Anh = getResources().getIdentifier(hinhAnh,"drawable", getContext().getPackageName());
+                            double soSao = movieObject.getDouble("soSao");
+                            String ngayKhoiChieu = movieObject.getString("ngayKhoiChieu");
+                            int thoiGianPhim = movieObject.getInt("thoiGianPhim");
+
+                            JSONArray gioChieuArray = movieObject.getJSONArray("gioChieu");
+                            List<String> gioChieuList = new ArrayList<>();
+                            for (int j = 0; j < gioChieuArray.length(); j++) {
+                                gioChieuList.add(gioChieuArray.getString(j));
+                            }
+
+                            JSONArray idLichChieuArray = movieObject.getJSONArray("idLichChieu");
+                            List<Integer> idLichChieuList = new ArrayList<>();
+                            for (int j = 0; j < idLichChieuArray.length(); j++) {
+                                idLichChieuList.add(idLichChieuArray.getInt(j));
+                            }
+
+                            // Tạo đối tượng lichchieu
+                            Movie movie = new Movie(idPhim, tenPhim, Anh, soSao, ngayKhoiChieu, thoiGianPhim, idLichChieuList, gioChieuList);
+                            lichChieuList.add(movie);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    adapter.notifyDataSetChanged(); // Cập nhật ListView
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e("VolleyError", error.toString());
+            }
+        });
+
+        requestQueue.add(jsonArrayRequest);
     }
 }

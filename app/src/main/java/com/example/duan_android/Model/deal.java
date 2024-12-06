@@ -1,87 +1,140 @@
 package com.example.duan_android.Model;
 
+import java.sql.Time;
+import java.util.Date;
+
 public class deal {
-    private int img;
-    private String namemovie;
-    private String type;
-    private String code;
-    private String room;
-    private String namecinema;
-    private String time;
-    private String date;
+    private int idhd;
+    private int hinhanh;
+    private String tenphim;
+    private String rapphim;
+    private String phongchieu;
+    private String giobatdau;
+    private String ngaychieu;
+    private String ghe;
+    private String tencombo;
+    private int idve;
+    private int diemthuong;
+    private double tongtien;
 
-    public deal(int img, String namemovie, String type, String code, String room, String namecinema, String time, String date) {
-        this.img = img;
-        this.namemovie = namemovie;
-        this.type = type;
-        this.code = code;
-        this.room = room;
-        this.namecinema = namecinema;
-        this.time = time;
-        this.date = date;
+    public deal(int idhd, int hinhanh, String tenphim, String rapphim, String phongchieu, String giobatdau, String ngaychieu) {
+        this.idhd = idhd;
+        this.hinhanh = hinhanh;
+        this.tenphim = tenphim;
+        this.rapphim = rapphim;
+        this.phongchieu = phongchieu;
+        this.giobatdau = giobatdau;
+        this.ngaychieu = ngaychieu;
     }
 
-    public int getImg() {
-        return img;
+    public deal(int hinhanh, String tenphim, String rapphim, String phongchieu, String giobatdau, String ngaychieu, String ghe, String tencombo,int idve,int diemthuong,double tongtien) {
+        this.hinhanh = hinhanh;
+        this.tenphim = tenphim;
+        this.rapphim = rapphim;
+        this.phongchieu = phongchieu;
+        this.giobatdau = giobatdau;
+        this.ngaychieu = ngaychieu;
+        this.ghe = ghe;
+        this.tencombo = tencombo;
+        this.idve=idve;
+        this.diemthuong=diemthuong;
+        this.tongtien = tongtien;
     }
 
-    public void setImg(int img) {
-        this.img = img;
+
+    public int getIdhd() {
+        return idhd;
     }
 
-    public String getNamemovie() {
-        return namemovie;
+    public void setIdhd(int idhd) {
+        this.idhd = idhd;
     }
 
-    public void setNamemovie(String namemovie) {
-        this.namemovie = namemovie;
+    public int getHinhanh() {
+        return hinhanh;
     }
 
-    public String getType() {
-        return type;
+    public void setHinhanh(int hinhanh) {
+        this.hinhanh = hinhanh;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public String getTenphim() {
+        return tenphim;
     }
 
-    public String getCode() {
-        return code;
+    public void setTenphim(String tenphim) {
+        this.tenphim = tenphim;
     }
 
-    public void setCode(String code) {
-        this.code = code;
+    public String getRapphim() {
+        return rapphim;
     }
 
-    public String getRoom() {
-        return room;
+    public void setRapphim(String rapphim) {
+        this.rapphim = rapphim;
     }
 
-    public void setRoom(String room) {
-        this.room = room;
+    public String getPhongchieu() {
+        return phongchieu;
     }
 
-    public String getNamecinema() {
-        return namecinema;
+    public void setPhongchieu(String phongchieu) {
+        this.phongchieu = phongchieu;
     }
 
-    public void setNamecinema(String namecinema) {
-        this.namecinema = namecinema;
+    public String getGiobatdau() {
+        return giobatdau;
     }
 
-    public String getTime() {
-        return time;
+    public void setGiobatdau(String giobatdau) {
+        this.giobatdau = giobatdau;
     }
 
-    public void setTime(String time) {
-        this.time = time;
+    public String getNgaychieu() {
+        return ngaychieu;
     }
 
-    public String getDate() {
-        return date;
+    public void setNgaychieu(String ngaychieu) {
+        this.ngaychieu = ngaychieu;
     }
 
-    public void setDate(String date) {
-        this.date = date;
+    public String getGhe() {
+        return ghe;
+    }
+
+    public void setGhe(String ghe) {
+        this.ghe = ghe;
+    }
+
+    public String getTencombo() {
+        return tencombo;
+    }
+
+    public void setTencombo(String tencombo) {
+        this.tencombo = tencombo;
+    }
+
+    public int getIdve() {
+        return idve;
+    }
+
+    public void setIdve(int idve) {
+        this.idve = idve;
+    }
+
+    public int getDiemthuong() {
+        return diemthuong;
+    }
+
+    public void setDiemthuong(int diemthuong) {
+        this.diemthuong = diemthuong;
+    }
+
+    public double getTongtien() {
+        return tongtien;
+    }
+
+    public void setTongtien(double tongtien) {
+        this.tongtien = tongtien;
     }
 }

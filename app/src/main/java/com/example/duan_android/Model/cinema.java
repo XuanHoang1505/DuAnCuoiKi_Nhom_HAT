@@ -1,16 +1,26 @@
 package com.example.duan_android.Model;
 
 public class cinema {
+    private int id;
     private int hinh;
     private String tenrap;
     private String diachi;
     private String sdt;
 
-    public cinema(int hinh, String tenrap, String diachi, String sdt) {
+    public cinema(int id, int hinh, String tenrap, String diachi, String sdt) {
+        this.id = id;
         this.hinh = hinh;
         this.tenrap = tenrap;
         this.diachi = diachi;
         this.sdt = sdt;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public int getHinh() {

@@ -1,47 +1,47 @@
 package com.example.duan_android.Model;
 
 public class combo {
-    private int image;
+    private int ID;
     private String title;
     private String info;
+    private int image;
     private double price;
+    private int soluong;
 
-    public combo(int image, String title, String info, double price) {
-        this.image = image;
+    public combo(int ID, String title, String info, int image, double price) {
+        this.ID = ID;
         this.title = title;
         this.info = info;
-        this.price = price;
-    }
-
-    public int getImage() {
-        return image;
-    }
-
-    public void setImage(int image) {
         this.image = image;
+        this.price = price;
+        this.soluong = 0; // Mặc định số lượng là 0
+    }
+
+    public int getID() {
+        return ID;
     }
 
     public String getTitle() {
         return title;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
     public String getInfo() {
         return info;
     }
 
-    public void setInfo(String info) {
-        this.info = info;
+    public int getImage() {
+        return image;
     }
 
     public double getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
-        this.price = price;
+    public int getSoluong() {
+        return soluong;
+    }
+
+    public void setSoluong(int soluong) {
+        this.soluong = soluong;
     }
 }

@@ -26,7 +26,7 @@
 
         </ImageButton>
         <TextView
-            android:id="@+id/txt_pay"
+            android:id="@+id/txt_movieName"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_marginLeft="15dp"
@@ -41,29 +41,10 @@
 
 
     <RelativeLayout
-        android:id="@+id/seathold"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/layout_1st"
-        android:gravity="center"
-        android:background="#FF6F00"
-        android:padding="10dp"
-        >
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Thời gian dữ ghế: 6:11"
-            android:textColor="@color/white"
-            android:textSize="16dp"
-            android:textStyle="bold"/>
-    </RelativeLayout>
-
-    <RelativeLayout
         android:id="@+id/option"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/seathold"
+        android:layout_below="@+id/layout_1st"
         android:background="@color/white"
         android:padding="7dp"
         >
@@ -88,28 +69,15 @@
             android:textColor="@color/gray"
             />
 
-        <TextView
-            android:id="@+id/age"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:layout_toRightOf="@+id/dimention"
-            android:text="T18"
-            android:textSize="16dp"
-            android:layout_marginLeft="15dp"
-            android:textStyle="bold"
-            android:background="#FF6F00"
-            android:padding="5dp"
-            android:textColor="@color/white"
-            />
+
         <Button
+            android:id="@+id/giochieu"
             android:layout_width="wrap_content"
             android:layout_height="50dp"
             android:backgroundTint="@color/gray"
             android:layout_alignParentEnd="true"
             android:text="21:25"
             android:textColor="@color/black"
-            android:drawableRight="@drawable/baseline_arrow_drop_down_24"
             android:padding="5dp"
 
             />
@@ -236,7 +204,7 @@
             android:id="@+id/countSeat"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="x2"
+            android:text=""
             android:textSize="16sp"
             android:textStyle="bold"
 
@@ -254,10 +222,10 @@
             />
 
         <TextView
-            android:id="@+id/seatid"
+            android:id="@+id/seatName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="J1,J2..."
+            android:text=""
             android:textSize="16sp"
             android:textStyle="bold"
             android:layout_toRightOf="@id/seat"
@@ -279,7 +247,7 @@
             android:id="@+id/totalPrice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="120,000đ"
+            android:text="0"
             android:textSize="16sp"
             android:textStyle="bold"
             android:layout_toRightOf="@id/price"

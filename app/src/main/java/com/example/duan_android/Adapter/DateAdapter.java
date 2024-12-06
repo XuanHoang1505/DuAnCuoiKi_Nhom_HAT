@@ -1,61 +1,49 @@
 package com.example.duan_android.Adapter;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
+import android.os.Bundle;
+
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 
 import com.example.duan_android.Fragment.Date1Fragment;
-import com.example.duan_android.Fragment.Date2Fragment;
-import com.example.duan_android.Fragment.Date3Fragment;
-import com.example.duan_android.Fragment.Date4Fragment;
-import com.example.duan_android.Fragment.FirstDateFragment;
-import com.example.duan_android.Fragment.FourthDateFragment;
-import com.example.duan_android.Fragment.SecondDateFragment;
-import com.example.duan_android.Fragment.ThirdDateFragment;
+import com.example.duan_android.Model.NgayChieu;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class DateAdapter extends FragmentStatePagerAdapter {
-    private boolean isForListMovie;
-    public DateAdapter(@NonNull FragmentManager fm, int behavior, boolean isForListMovie) {
+    private List<NgayChieu> tabItems=new ArrayList<>();
+
+    public DateAdapter(FragmentManager fm, int behavior) {
         super(fm, behavior);
-        this.isForListMovie =isForListMovie;
     }
 
-    @NonNull
+    public void setTabItems(List<NgayChieu> tabItems) {
+        this.tabItems = tabItems;
+        notifyDataSetChanged();
+    }
+
     @Override
     public Fragment getItem(int position) {
-        if (isForListMovie) {
-            switch (position) {
-                case 0:
-                    return new FirstDateFragment();
-                case 1:
-                    return new SecondDateFragment();
-                case 2:
-                    return new ThirdDateFragment();
-                case 3:
-                    return new FourthDateFragment();
-                default:
-                    return new FirstDateFragment();
-            }
-        } else {
-            switch (position) {
-                case 0:
-                    return new Date1Fragment();
-                case 1:
-                    return new Date2Fragment();
-                case 2:
-                    return new Date3Fragment();
-                case 3:
-                    return new Date4Fragment();
-                default:
-                    return new Date1Fragment();
-            }
-        }
+        String ngaychieu = tabItems.get(position).getNgaychieu();
+
+        // Khởi tạo Date1Fragment và truyền IDGioChieu vào qua Bundle
+        Date1Fragment fragment = new Date1Fragment();
+        Bundle bundle = new Bundle();
+        bundle.putString("NgayChieu", ngaychieu);
+        fragment.setArguments(bundle);  // Truyền dữ liệu vào Fragment thông qua setArguments
+
+        return fragment;  // Trả về fragment với dữ liệu đã được truyền
     }
 
     @Override
     public int getCount() {
-        return 4;
+        return tabItems.size();
+    }
+
+    @Override
+    public CharSequence getPageTitle(int position) {
+        return tabItems.get(position).getNgaychieu();
     }
 }

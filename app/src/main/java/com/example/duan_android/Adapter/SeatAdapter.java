@@ -7,10 +7,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.example.duan_android.Model.Seat;
 import com.example.duan_android.R;
-
 import java.util.List;
 
 public class SeatAdapter extends RecyclerView.Adapter<SeatAdapter.SeatViewHolder> {
@@ -19,9 +17,8 @@ public class SeatAdapter extends RecyclerView.Adapter<SeatAdapter.SeatViewHolder
     private Context context;
     private OnSeatSelectedListener onSeatSelectedListener;
 
-    // Giao diện để xử lý sự kiện chọn ghế
     public interface OnSeatSelectedListener {
-        void onSeatSelected(int priceChange);
+        void onSeatSelected(int priceChange, boolean isSelected,int seatId, String seatName); // Thêm tên ghế vào phương thức
     }
 
     public SeatAdapter(Context context, List<Seat> seatList, OnSeatSelectedListener listener) {
@@ -40,37 +37,33 @@ public class SeatAdapter extends RecyclerView.Adapter<SeatAdapter.SeatViewHolder
     @Override
     public void onBindViewHolder(@NonNull final SeatViewHolder holder, int position) {
         final Seat seat = seatList.get(position);
+        holder.updateSeatAppearance(seat.isAvailable());
 
-        if (!seat.isAvailable()) {
-            // Nếu ghế đã bán, hiển thị ghế màu đen và không cho phép chọn
-            holder.seatButton.setBackgroundResource(R.drawable.seat_sold);
-            holder.seatButton.setEnabled(false);
-        } else {
-            // Nếu ghế trống, hiển thị ghế màu trắng và viền đen
-            holder.seatButton.setBackgroundResource(R.drawable.seat_available);
-            holder.seatButton.setEnabled(true );
+        holder.seatButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!seat.isAvailable()) return;
 
-            holder.seatButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (holder.isSelected) {
-                        holder.seatButton.setBackgroundResource(R.drawable.seat_available); // Trở lại ghế trống
-                        holder.isSelected = false   ;
-                        onSeatSelectedListener.onSeatSelected(-60000); // Trừ tiền khi bỏ chọn
-                    } else {
-                        holder.seatButton.setBackgroundResource(R.drawable.seat_selected); // Đổi thành màu cam khi chọn
-                        holder.isSelected = true;
-                        onSeatSelectedListener.onSeatSelected(60000); // Tăng tiền khi chọn ghế
-                    }
+                holder.isSelected = !holder.isSelected;
+                holder.updateSeatAppearance(seat.isAvailable());
+
+                if (onSeatSelectedListener != null) {
+                    int priceChange = holder.isSelected ? 60000 : -60000;
+                    onSeatSelectedListener.onSeatSelected(priceChange, holder.isSelected, seat.getIdghe(),seat.getName()); // Truyền tên ghế
                 }
-            });
-        }
+            }
+        });
     }
-
 
     @Override
     public int getItemCount() {
         return seatList.size();
+    }
+
+    public void updateSeatList(List<Seat> newSeatList) {
+        this.seatList.clear();
+        this.seatList.addAll(newSeatList);
+        notifyDataSetChanged();
     }
 
     public static class SeatViewHolder extends RecyclerView.ViewHolder {
@@ -80,6 +73,19 @@ public class SeatAdapter extends RecyclerView.Adapter<SeatAdapter.SeatViewHolder
         public SeatViewHolder(@NonNull View itemView) {
             super(itemView);
             seatButton = itemView.findViewById(R.id.seatButton);
+        }
+
+        public void updateSeatAppearance(boolean isAvailable) {
+            if (!isAvailable) {
+                seatButton.setBackgroundResource(R.drawable.seat_sold);
+                seatButton.setEnabled(false);
+            } else if (isSelected) {
+                seatButton.setBackgroundResource(R.drawable.seat_selected);
+                seatButton.setEnabled(true);
+            } else {
+                seatButton.setBackgroundResource(R.drawable.seat_available);
+                seatButton.setEnabled(true);
+            }
         }
     }
 }
