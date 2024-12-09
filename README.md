@@ -12,3 +12,5 @@
 3. Hồ Trọng Ân  
 - MSSV: 2215053122201
 - Lớp: 124LTTD01
+
+Giai đoạn làm database nhóm em đi cafe làm chung nên gửi code cho nhau để commit trên 1 máy nên chỉ có 1 tài khoản git push lên 
